@@ -1,19 +1,25 @@
 section {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    gap: 1rem;
+    align-items: center;
     padding: 1rem;
+    gap: 1rem;
 
-    div:first-child {
-        width: 30rem;
+    form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 40rem;
     }
 
     mat-form-field {
-        width: 100%
+        width: 100%;
     }
-
+    
     button {
-        margin-bottom: 1rem;
+        margin-top: -1rem;
     }
 }
