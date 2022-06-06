@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { YoutubeService } from '../services/youtube.service';
 
 @Component({
   selector: 'app-input',
@@ -8,12 +9,12 @@ import { NgForm } from '@angular/forms';
 })
 export class InputComponent implements OnInit {
 
-  constructor() { }
+  constructor(private youtube: YoutubeService) { }
 
   ngOnInit(): void {
   }
 
   onAddVideo(form: NgForm){
-    console.log(form.value.video);
+    this.youtube.fetchVideo(form.form.value.video)
   }
 }

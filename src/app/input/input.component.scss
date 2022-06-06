@@ -4,7 +4,6 @@ section {
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    gap: 1rem;
 
     form {
         display: flex;
@@ -20,6 +19,7 @@ section {
     }
     
     button {
+        flex-shrink: 0;
         margin-top: -1rem;
     }
 }
