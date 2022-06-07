@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './input/input.component';
 import { VideoListComponent } from './video-list/video-list.component';
+import { MenuComponent } from './video-list/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
-    VideoListComponent
+    VideoListComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
