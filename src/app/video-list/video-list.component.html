@@ -1,0 +1,9 @@
+<mat-grid-list cols="1" rowHeight="7rem">
+    <mat-grid-tile *ngFor="let video of videos">
+        <img src="{{ video.items[0].snippet.thumbnails.default.url }}">
+        {{ video.items[0].snippet.title }} <br>
+        {{ video.items[0].statistics.viewCount }} <br>
+        <mat-icon>favorite</mat-icon>
+        <mat-icon>delete</mat-icon>
+    </mat-grid-tile>
+</mat-grid-list>

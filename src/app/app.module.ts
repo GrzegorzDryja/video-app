@@ -8,11 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './input/input.component';
+import { VideoListComponent } from './video-list/video-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputComponent
+    InputComponent,
+    VideoListComponent
   ],
   imports: [
     BrowserModule,
