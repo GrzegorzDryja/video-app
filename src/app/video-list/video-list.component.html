@@ -3,7 +3,7 @@
     <mat-grid-list cols="1" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">          
             <!-- Don't like this undefined workaround -->
-            <!-- <img src="{{ video.snippet.thumbnails?.default?.url }}"> -->
+            <img src="{{ video.snippet.thumbnails?.default?.url }}">
             {{ video.snippet?.title }} <br>
             <!-- {{ video.statistics?.viewCount }} <br> -->
             <mat-icon>favorite</mat-icon>
