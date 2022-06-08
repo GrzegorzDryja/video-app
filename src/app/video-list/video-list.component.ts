@@ -15,7 +15,7 @@ export class VideoListComponent implements OnInit {
   pagedList: Video[] = [];
   length = this.videosList.length;
   pageSize = 5;
-  pageSizeOptions = [5, 10, 20];
+  pageSizeOptions = [5, 10, 20]; //This could by dynamaic depending on grid layout and videos, issue: on grid list 3, 5 items dosn't look to good
 
   constructor() { }
 

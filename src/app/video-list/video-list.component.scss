@@ -1,9 +1,46 @@
 section {
+    margin: auto;
     max-width: 100rem;
-    min-width: fit-content;
-}
 
-app-menu {
-    width: 100%;
-    align-content: right;
+    app-menu {
+        background-color: #424242; //Can I find this as a variable?
+        display: flex; //this is not DRY
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 1rem 0 1rem 0;
+        width: 100rem;
+    }
+
+    mat-grid-tile {
+        background: #272727;
+
+        img {
+            padding: 0 1rem 0 1rem;
+        }
+
+        mat-icon {
+            padding-left: 1rem;
+            height: fit-content;
+            width: fit-content;
+            cursor: pointer; //DRY
+        }
+
+        mat-grid-tile-header {
+            flex: 1;            
+        }
+
+        mat-grid-tile-header, mat-grid-tile-footer {
+            background: inherit;
+            position: relative;
+        }
+
+        mat-grid-tile-footer {     
+            font-size: 24px;
+        }
+
+        // Works, but ::ng-deep is deprecated
+        // ::ng-deep.mat-grid-tile-content {
+        //     justify-content: left;
+        // }
+    }
 }
