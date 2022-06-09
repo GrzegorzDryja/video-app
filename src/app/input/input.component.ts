@@ -12,7 +12,8 @@ export class InputComponent implements OnInit {
 
   constructor(
     private youtube: YoutubeService, 
-    private userInput: UserInputService) { }
+    private userInput: UserInputService
+  ){}
 
   ngOnInit(): void {
   }
