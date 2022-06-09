@@ -19,11 +19,11 @@ export class InputComponent implements OnInit {
 
   onAddVideo(form: NgForm){
     //Logic for validation returning object with api source and video ID -- WATCH OUT IF/IF/ELSE !!!
-    if (this.userInput.validate(form.form.value.video)){
+    if (this.userInput.validatePath(form.form.value.video)){
       let dataToFetch = this.userInput.separate(form.form.value.video)
 
-      if (dataToFetch.id?.input){
-        this.youtube.fetchVideo(dataToFetch.id.input)
+      if (dataToFetch.id){
+        this.youtube.fetchVideo(dataToFetch.id)
       }
 
     } else {
