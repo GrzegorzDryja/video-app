@@ -1,6 +1,6 @@
-const YOUTUBE_FULL_PATH =  new RegExp (/^(https\:\/\/www\.youtube\.com\/watch\?v\=)+([a-zA-Z0-9_.-]{11})$/)   //for include use string "https://www.youtube.com/watch?v=" 
-const YOUTUBE_SHORT_PATH = new RegExp (/^(https\:\/\/www\.youtu\.be\/)+([a-zA-Z0-9_.-]{11})$/);               //for include use string "https://www.youtu.be/" 
-const VIMEO_FULL_PATH = new RegExp (/^(https\:\/\/www\.vimeo\.com\/)+([a-zA-Z0-9_.-]{9})$/);                  //for include use string "https://vimeo.com/"
+const YOUTUBE_FULL_PATH = "https://www.youtube.com/watch?v="        // new RegExp (/^(https\:\/\/www\.youtube\.com\/watch\?v\=)+([a-zA-Z0-9_.-]{11})$/)   //for include use string "https://www.youtube.com/watch?v=" 
+const YOUTUBE_SHORT_PATH = "https://www.youtu.be/"                  // new RegExp (/^(https\:\/\/www\.youtu\.be\/)+([a-zA-Z0-9_.-]{11})$/);               //for include use string "https://www.youtu.be/" 
+const VIMEO_FULL_PATH = "https://vimeo.com/"                        // new RegExp (/^(https\:\/\/www\.vimeo\.com\/)+([a-zA-Z0-9_.-]{9})$/);                  //for include use string "
 
 export const MAX_LINK_LENGTH = "https://www.youtube.com/watch?v=3bR4gly5PSE".length; //Check this video ;)
 export const ID_LENGTH = "3bR4gly5PSE".length;

@@ -19,11 +19,19 @@ export class InputComponent implements OnInit {
 
   onAddVideo(form: NgForm){
     //Logic for validation returning object with api source and video ID -- WATCH OUT IF/IF/ELSE !!!
+    //And there is too much place to configure new link!!! Work on this!
     if (this.userInput.validatePath(form.form.value.video)){
-      let dataToFetch = this.userInput.separate(form.form.value.video)
+      let dataToFetch = {
+        platform: this.userInput.extractPlatform(form.form.value.video),
+        id: this.userInput.extractId(form.form.value.video)
+      }
 
-      if (dataToFetch.id){
+      if (dataToFetch.platform == "youtube"){
         this.youtube.fetchVideo(dataToFetch.id)
+      }
+
+      if (dataToFetch.platform == "vimeo"){
+        console.log("Wysyłem GET request do Vimeo")
       }
 
     } else {

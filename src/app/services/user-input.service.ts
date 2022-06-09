@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { platformBrowser } from '@angular/platform-browser';
 
 import { SUPPORTED_PATHS, YOUTUBE_ID, VIMEO_ID, MAX_LINK_LENGTH, ID_LENGTH } from '../models/validation.model'
 
@@ -13,12 +14,8 @@ export class UserInputService {
     let result = false;
 
     for (let i = 0; i < SUPPORTED_PATHS.length; i++){
-        //Hmm, can I improve this logic?
-        if(
-          data.length <= MAX_LINK_LENGTH && data.match(SUPPORTED_PATHS[i]
-          ||  //MAGIC!!
-          data.length == ID_LENGTH && data.match(YOUTUBE_ID)
-        )){          
+        if( data.length <= MAX_LINK_LENGTH && data.includes(SUPPORTED_PATHS[i]) || data.length == ID_LENGTH && data.match(/^[a-zA-Z0-9_.-]{11}$/) ){         //Hmm, can I improve this logic? data.length == ID_LENGTH && data.match(YOUTUBE_ID
+          console.log(data)
           result = true;
           break;
         }
@@ -26,9 +23,23 @@ export class UserInputService {
     return result;
   }
 
-  separate(data: string): { platform: string, id: string } {    
+  extractId(data: string): any {
+    console.log(data)
     let id = data.match(YOUTUBE_ID);
 
-    return { platform: "youtube", id: "3bR4gly5PSE" }
+    // console.log(id![0]) //null
+
+    return id
+  }
+
+  extractPlatform(data: string): string {
+    let platform = "youtube";
+    
+    //This could be more central managment
+    if (data.includes("vimeo")){
+      platform = "vimeo"
+    }
+
+    return platform;
   }
 }
