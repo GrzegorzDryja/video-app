@@ -24,10 +24,7 @@ export class UserInputService {
   }
 
   extractId(data: string): any {
-    console.log(data)
     let id = data.match(YOUTUBE_ID);
-
-    // console.log(id![0]) //null
 
     return id
   }

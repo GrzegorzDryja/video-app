@@ -1,16 +1,22 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
+import { Video, Videos } from '../models/youtube.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  userVideosList: any;
+  userVideosList: Videos = [];
+  subject = new Subject<Videos>();
+
+  constructor() { 
+  }
   
-  constructor() { }
-  
-  onAddVideo(videoResp: {}){
-    //dodanie daty do obiektu
-    this.userVideosList.push(videoResp)
+  onAddVideo(videoResp: Video){
+    //Pamiętaj o dodanie daty do obiektu
+    this.userVideosList.push(videoResp);
+    this.subject.next(this.userVideosList)
   }
   
   onDeleteVideo(videoId: {}){
@@ -18,4 +24,7 @@ export class DataService {
     this.userVideosList.splice(+videoId)
   }
 
+  loadVideos(): Observable<Videos> {
+    return this.subject.asObservable();
+  }
 }

@@ -3,9 +3,9 @@
     <mat-grid-list cols="1" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">
             <!-- Don't like this undefined workaround -->
-            <img src="{{ video.snippet.thumbnails?.default?.url }}">
+            <img src="{{ video.items[0].snippet.thumbnails?.default?.url }}">
             <mat-grid-tile-header>
-                {{ video.snippet?.title }}
+                {{ video.items[0].snippet?.title }}
             </mat-grid-tile-header> 
             <!-- {{ video.statistics?.viewCount }} <br> -->
             <mat-grid-tile-footer>
