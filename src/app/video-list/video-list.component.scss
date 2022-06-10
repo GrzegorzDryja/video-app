@@ -3,12 +3,12 @@ section {
     max-width: 100rem;
 
     app-menu {
-        background-color: #424242; //Can I find this as a variable?
+        background-color: #424242; //where can I find this as a variable?
         display: flex; //this is not DRY
         flex-direction: row;
         justify-content: flex-end;
         padding: 1rem 0 1rem 0;
-        width: 100rem;
+        width: 100%;
     }
 
     mat-grid-tile {
@@ -26,7 +26,20 @@ section {
         }
 
         mat-grid-tile-header {
-            flex: 1;            
+            flex: 1;
+            display: block;
+            
+            div {
+                display: block;
+            }
+            mat-icon {
+                margin-top: -0.5rem;
+                padding-right: 0.2rem;
+            }
+            div, mat-icon {    
+                opacity: 0.8;            
+                font-size: 0.8rem;
+            }
         }
 
         mat-grid-tile-header, mat-grid-tile-footer {
@@ -35,12 +48,7 @@ section {
         }
 
         mat-grid-tile-footer {     
-            font-size: 24px;
+            font-size: 1.5rem;
         }
-
-        // Works, but ::ng-deep is deprecated
-        // ::ng-deep.mat-grid-tile-content {
-        //     justify-content: left;
-        // }
     }
 }

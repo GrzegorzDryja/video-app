@@ -7,25 +7,30 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  dateSortSwitch = true;
   gridChangeSwitch = true;
   favoriteSortSwith = true;
-  dateSortSwitch = true;
+  
+  gridSwitch = "reorder";
+  favoriteSwitch = "favorite_outlined"
 
-  gridStyle = "reorder";
   sortDirection = "arrow_upward"
   viewStyle = 1;
-
+  
   constructor(private data: DataService) { }
-
+  
   ngOnInit(): void {
   }
-
+  
   onGridChange(){
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridStyle = this.gridChangeSwitch ? "reorder" : "grid_on";
+    this.gridSwitch = this.gridChangeSwitch ? "reorder" : "grid_on";
   }
-
+  
   onFavoriteSort(){
+    this.favoriteSortSwith = !this.favoriteSortSwith;
+    this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
+
     //Wywołanie funkcji sortującej
   }
 

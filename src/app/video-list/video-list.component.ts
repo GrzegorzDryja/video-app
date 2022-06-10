@@ -1,8 +1,7 @@
-import { AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
-import { DEMO_VIDEOS } from '../models/demo.model';
 import { Video, Videos } from '../models/youtube.model';
 import { DataService } from '../services/data.service';
 
