@@ -1,6 +1,6 @@
 <section>
-    <app-menu></app-menu>
-    <mat-grid-list cols="viewStyle" rowHeight="7rem">
+    <app-menu (colsNumber)="onChangeGridStyle($event)"></app-menu>
+    <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">
             <img src="{{ video.items[0].snippet.thumbnails.default.url }}">
             <mat-grid-tile-header>

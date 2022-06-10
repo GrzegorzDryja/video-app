@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
@@ -11,12 +11,14 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./video-list.component.scss']
 })
 export class VideoListComponent implements OnInit {  
+  
+  colsNumber = 1;
   subscription!: Subscription;
   videosList!: Videos;
   pagedList!: Videos;
   length!: number;
-  pageSize = 5;
-  pageSizeOptions = [5, 10, 20]; //This could by dynamaic depending on grid layout and videos, issue: on grid list 3, 5 items dosn't look to good
+  pageSize = 8;
+  pageSizeOptions = [8, 16, 24]; //This could by dynamaic depending on grid layout and videos, issue: on grid list 3, 5 items dosn't look to good
   listHeart = "favorite";
   listBucket = "delete_forever"
 
@@ -30,6 +32,10 @@ export class VideoListComponent implements OnInit {
         this.pagedList = this.videosList.slice(0, this.pageSize);
         this.length = this.videosList.length;
       })
+  }
+
+  onChangeGridStyle(colsNum: number){
+    this.colsNumber = colsNum;
   }
 
   onFavoriteClick(id: string){

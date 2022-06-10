@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,11 +7,13 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  @Output() colsNumber = new EventEmitter<number>;
+
   dateSortSwitch = true;
   gridChangeSwitch = true;
   favoriteSortSwith = true;
   
-  gridSwitch = "reorder";
+  gridSwitch = "grid_on";
   favoriteSwitch = "favorite_outlined"
 
   sortDirection = "arrow_upward"
@@ -24,7 +26,8 @@ export class MenuComponent implements OnInit {
   
   onGridChange(){
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? "reorder" : "grid_on";
+    this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
+    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 4) //Magic numbers, and should by responsive
   }
   
   onFavoriteSort(){
