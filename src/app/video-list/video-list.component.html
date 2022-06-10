@@ -1,6 +1,6 @@
 <section>
     <app-menu></app-menu>
-    <mat-grid-list cols="1" rowHeight="7rem">
+    <mat-grid-list cols="viewStyle" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">
             <!-- Don't like this undefined workaround -->
             <img src="{{ video.items[0].snippet.thumbnails?.default?.url }}">
@@ -9,8 +9,9 @@
             </mat-grid-tile-header> 
             <!-- {{ video.statistics?.viewCount }} <br> -->
             <mat-grid-tile-footer>
-                <mat-icon>favorite</mat-icon>
-                <mat-icon>delete</mat-icon>
+                Dodano: {{ video.userSetting?.date}}
+                <mat-icon onClick="onFavoriteClick($event)">favorite</mat-icon>
+                <mat-icon onClick="onDeleteClick($event)">delete</mat-icon>
             </mat-grid-tile-footer>
         </mat-grid-tile>
     </mat-grid-list>
@@ -18,6 +19,6 @@
         [length]="length"
         [pageSize]="pageSize"
         [pageSizeOptions]="pageSizeOptions"
-        (page)="OnPageChange($event)"
+        (page)="onPageChange($event)"
     ></mat-paginator>
 </section>

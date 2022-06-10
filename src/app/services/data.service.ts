@@ -13,15 +13,10 @@ export class DataService {
   constructor() { 
   }
   
-  onAddVideo(videoResp: Video){
-    //Pamiętaj o dodanie daty do obiektu
+  addVideo(videoResp: Video){
+    videoResp.userSetting!.date = new Date();
     this.userVideosList.push(videoResp);
     this.subject.next(this.userVideosList)
-  }
-  
-  onDeleteVideo(videoId: {}){
-    //find index of videoId
-    this.userVideosList.splice(+videoId)
   }
 
   loadVideos(): Observable<Videos> {

@@ -51,6 +51,11 @@ export type Video = {
     totalResults: 1,
     resultsPerPage: number
   }
+  userSetting?: {
+    favorite: boolean;
+    date: Date
+
+  }
 }
 
 export type Videos = Video[];
