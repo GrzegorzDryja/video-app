@@ -14,7 +14,6 @@ export class DataService {
   }
   
   addVideo(resp: Video){
-
     this.userVideosList.push(
       {
         ...resp,
@@ -29,22 +28,22 @@ export class DataService {
   
   loveVideo(id: string){
     let lovedVideo = this.userVideosList.find(i => i.items[0].id == id);
-    lovedVideo!.userSetting.favorite = true
-    this.subject.next(this.userVideosList)
+        lovedVideo!.userSetting.favorite = true
+    this.subject.next(this.userVideosList);
   }
 
   showFavorite(){
     console.log("Pokazuję tylko ulubione")
   }
   
-  deleteVideo(video: Video){
-    console.log("Usuwam film" + video)
-    //find index of videoId
-    //this.userVideosList.splice(0)
+  deleteVideo(id: string){
+    this.userVideosList = this.userVideosList.filter(i => i.items[0].id != id);
+    this.subject.next(this.userVideosList);
   }
 
   deleteVideos(){
     this.userVideosList = [];
+    this.subject.next(this.userVideosList); //I call this in every function, can I improve this?
   }
 
   loadVideos(): Observable<Videos> {

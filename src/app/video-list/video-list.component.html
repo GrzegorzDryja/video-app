@@ -12,7 +12,7 @@
             </mat-grid-tile-header> 
             <mat-grid-tile-footer>
                 <mat-icon (click)="onFavoriteClick(video.items[0].id)">{{ video.userSetting.favorite ? "favorite" : "favorite_outline" }}</mat-icon>
-                <mat-icon (click)="onDeleteClick(video)">delete_forever</mat-icon>
+                <mat-icon (click)="onDeleteClick(video.items[0].id)">delete_forever</mat-icon>
             </mat-grid-tile-footer>
         </mat-grid-tile>
     </mat-grid-list>

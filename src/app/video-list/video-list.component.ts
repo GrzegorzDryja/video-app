@@ -36,8 +36,8 @@ export class VideoListComponent implements OnInit {
     this.data.loveVideo(id)
   }
 
-  onDeleteClick(video: Video){
-    this.data.deleteVideo(video)
+  onDeleteClick(id: string){
+    this.data.deleteVideo(id)
   }
 
   onPageChange(pageEvent: PageEvent){
