@@ -3,15 +3,15 @@
     <mat-grid-list cols="viewStyle" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">
             <!-- Don't like this undefined workaround -->
-            <img src="{{ video.items[0].snippet.thumbnails?.default?.url }}">
+            <!-- <img src="{{ video.items[0].snippet.thumbnails?.default?.url }}"> -->
             <mat-grid-tile-header>
                 {{ video.items[0].snippet?.title }}
+                Dodano: {{ video.userSetting?.date}}
             </mat-grid-tile-header> 
             <!-- {{ video.statistics?.viewCount }} <br> -->
             <mat-grid-tile-footer>
-                Dodano: {{ video.userSetting?.date}}
-                <mat-icon onClick="onFavoriteClick($event)">favorite</mat-icon>
-                <mat-icon onClick="onDeleteClick($event)">delete</mat-icon>
+                <mat-icon (click)="onFavoriteClick(video.items[0].id)">{{ video.userSetting.favorite ? "favorite" : "favorite_outline" }}</mat-icon>
+                <mat-icon (click)="onDeleteClick(video)">delete_forever</mat-icon>
             </mat-grid-tile-footer>
         </mat-grid-tile>
     </mat-grid-list>

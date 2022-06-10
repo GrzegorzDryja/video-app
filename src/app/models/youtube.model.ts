@@ -51,10 +51,9 @@ export type Video = {
     totalResults: 1,
     resultsPerPage: number
   }
-  userSetting?: {
+  userSetting: {
     favorite: boolean;
     date: Date
-
   }
 }
 

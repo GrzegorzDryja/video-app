@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,31 +7,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  gridStyleSwitch = true;
-  gridStyle = "reorder";
-  sortDateSwith = true;
-  sortDirection = "arrow_upward"
+  gridChangeSwitch = true;
+  favoriteSortSwith = true;
+  dateSortSwitch = true;
 
-  constructor() { }
+  gridStyle = "reorder";
+  sortDirection = "arrow_upward"
+  viewStyle = 1;
+
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
   }
 
   onGridChange(){
-    this.gridStyleSwitch = !this.gridStyleSwitch;
-    this.gridStyle = this.gridStyleSwitch ? "reorder" : "grid_on";
+    this.gridChangeSwitch = !this.gridChangeSwitch;
+    this.gridStyle = this.gridChangeSwitch ? "reorder" : "grid_on";
   }
 
   onFavoriteSort(){
-    console.log("Pokazuję ulubione");
+    //Wywołanie funkcji sortującej
   }
 
   onDateSort(){
-    this.sortDateSwith = !this.sortDateSwith;
-    this.sortDirection = this.sortDateSwith ? "arrow_upward" : "arrow_downward"
+    this.dateSortSwitch = !this.dateSortSwitch;
+    this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
+    console.log("Sortuję po dacie dodania filmu do ulubionych")
   }
 
   onDeleteList(){
-    console.log("Usuwam listę z pamięci");
+    this.data.deleteVideos();
   }
 }

@@ -20,6 +20,6 @@ export class YoutubeService {
 
     return this.http
       .get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${YOUTUBE_API_KEY}&part=snippet,statistics`)
-      .subscribe(resp => this.data.onAddVideo(<Video>resp));
+      .subscribe(resp => this.data.addVideo(<Video>resp)); //JSON.parse(JSON.stringify(<Video>resp)))
   }
 }

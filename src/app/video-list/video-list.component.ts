@@ -18,6 +18,8 @@ export class VideoListComponent implements OnInit {
   length!: number;
   pageSize = 5;
   pageSizeOptions = [5, 10, 20]; //This could by dynamaic depending on grid layout and videos, issue: on grid list 3, 5 items dosn't look to good
+  listHeart = "favorite";
+  listBucket = "delete_forever"
 
   constructor(private data: DataService) {
   }
@@ -31,7 +33,15 @@ export class VideoListComponent implements OnInit {
       })
   }
 
-  OnPageChange(pageEvent: PageEvent){
+  onFavoriteClick(id: string){
+    this.data.loveVideo(id)
+  }
+
+  onDeleteClick(video: Video){
+    this.data.deleteVideo(video)
+  }
+
+  onPageChange(pageEvent: PageEvent){
     let startIndex = pageEvent.pageIndex * pageEvent.pageSize;
     let endIndex = startIndex + pageEvent.pageSize;
     if(endIndex > this.length){
