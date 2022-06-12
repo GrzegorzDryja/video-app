@@ -9,6 +9,7 @@ import { Video, Videos } from '../models/youtube.model';
 export class DataService {
   userVideosList: Videos = [];
   subject = new Subject<Videos>();
+  love = false;
 
   constructor() { 
   }
@@ -34,7 +35,9 @@ export class DataService {
   }
 
   showFavorite(){
-    console.log("Pokazuję tylko ulubione")
+    this.love = !this.love;
+    let lovedVideos = this.userVideosList.filter(video => video.userSetting.favorite === true);
+    this.subject.next(this.love ? lovedVideos : this.userVideosList)
   }
   
   deleteVideo(id: string){

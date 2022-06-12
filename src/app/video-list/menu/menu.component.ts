@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
 
-    //Wywołanie funkcji sortującej
+    this.data.showFavorite();
   }
 
   onDateSort(){
