@@ -40,7 +40,8 @@ export class MenuComponent implements OnInit {
   onDateSort(){
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
-    console.log("Sortuję po dacie dodania filmu do ulubionych")
+
+    this.data.sortByDate();
   }
 
   onDeleteList(){

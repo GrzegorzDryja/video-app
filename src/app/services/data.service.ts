@@ -1,3 +1,4 @@
+import { compileDeclareClassMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -48,6 +49,14 @@ export class DataService {
   deleteVideos(){
     this.userVideosList = [];
     this.subject.next(this.userVideosList); //I call this in every function, can I improve this?
+  }
+
+  sortByDate(){
+    function compare(a: Date, b: Date){
+      return (a < b ? -1 : 1)
+    }
+    let sortedByDateVideos = this.userVideosList.sort((a, b) => compare(a.userSetting.date, b.userSetting.date));
+    this.subject.next(sortedByDateVideos)
   }
 
   loadVideos(): Observable<Videos> {
