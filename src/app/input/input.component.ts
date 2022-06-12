@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserInputService } from '../services/user-input.service';
 import { YoutubeService } from '../services/youtube.service';
-
+import { VimeoService } from '../services/vimeo.service'
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
@@ -12,7 +12,8 @@ export class InputComponent implements OnInit {
 
   constructor(
     private youtube: YoutubeService, 
-    private userInput: UserInputService
+    private userInput: UserInputService,
+    private vimeo: VimeoService
   ){}
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class InputComponent implements OnInit {
       }
 
       if (dataToFetch.platform == "vimeo"){
-        console.log("Wysyłem GET request do Vimeo")
+        this.vimeo.fetchVideo(dataToFetch.id)
       }
 
     } else {

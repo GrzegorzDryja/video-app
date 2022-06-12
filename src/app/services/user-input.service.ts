@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { platformBrowser } from '@angular/platform-browser';
 
 import { SUPPORTED_PATHS, YOUTUBE_ID, VIMEO_ID, MAX_LINK_LENGTH, ID_LENGTH } from '../models/validation.model'
 
@@ -24,15 +23,17 @@ export class UserInputService {
   }
 
   extractId(data: string): any {
-    let id = data.match(YOUTUBE_ID);
-
-    return id
+    if(data.match(YOUTUBE_ID)){
+      return data.match(YOUTUBE_ID)
+    };
+    if(data.match(VIMEO_ID)){
+      return data.match(VIMEO_ID)
+    }
   }
 
   extractPlatform(data: string): string {
     let platform = "youtube";
     
-    //This could be more central managment
     if (data.includes("vimeo")){
       platform = "vimeo"
     }
