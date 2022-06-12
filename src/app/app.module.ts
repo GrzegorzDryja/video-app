@@ -10,13 +10,15 @@ import { MaterialModule } from './material.module';
 import { InputComponent } from './input/input.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { MenuComponent } from './video-list/menu/menu.component';
+import { PlayerComponent } from './video-list/player/player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     VideoListComponent,
-    MenuComponent
+    MenuComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { MenuComponent } from './video-list/menu/menu.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PlayerComponent]
 })
 export class AppModule { }

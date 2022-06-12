@@ -24,6 +24,7 @@ export class DataService {
       }
     );
     this.subject.next(this.userVideosList)
+    localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
   }
   
   loveVideo(id: string){
@@ -48,5 +49,13 @@ export class DataService {
 
   loadVideos(): Observable<Videos> {
     return this.subject.asObservable();
+  }
+
+  getLocalStorage() {
+    const local = localStorage.getItem("video-app");
+    if (local){
+      this.userVideosList = JSON.parse(local);
+    }
+    this.subject.next(this.userVideosList);
   }
 }

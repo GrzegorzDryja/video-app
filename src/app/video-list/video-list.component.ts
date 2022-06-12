@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog'
 import { Subscription } from 'rxjs';
 
 import { Video, Videos } from '../models/youtube.model';
 import { DataService } from '../services/data.service';
+import { PlayerComponent } from './player/player.component';
 
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss']
 })
-export class VideoListComponent implements OnInit {  
+export class VideoListComponent implements OnInit, AfterContentInit {  
   
   colsNumber = 1;
   subscription!: Subscription;
@@ -22,16 +24,20 @@ export class VideoListComponent implements OnInit {
   listHeart = "favorite";
   listBucket = "delete_forever"
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private dialog: MatDialog) {
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
     this.subscription = this.data.loadVideos().subscribe(
       videos => {
         this.videosList = videos;
         this.pagedList = this.videosList.slice(0, this.pageSize);
         this.length = this.videosList.length;
       })
+  }
+
+  ngAfterContentInit(): void {
+    this.data.getLocalStorage();
   }
 
   onChangeGridStyle(colsNum: number){
@@ -44,6 +50,10 @@ export class VideoListComponent implements OnInit {
 
   onDeleteClick(id: string){
     this.data.deleteVideo(id)
+  }
+
+  play(id: string){
+    this.dialog.open(PlayerComponent, {data: {id: id}})
   }
 
   onPageChange(pageEvent: PageEvent){

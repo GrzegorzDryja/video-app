@@ -2,7 +2,9 @@
     <app-menu (colsNumber)="onChangeGridStyle($event)"></app-menu>
     <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
         <mat-grid-tile *ngFor="let video of pagedList">
-            <img src="{{ video.items[0].snippet.thumbnails.default.url }}">
+            <img
+                src="{{ video.items[0].snippet.thumbnails.default.url }}"
+                (click)="play(video.items[0].id)">
             <mat-grid-tile-header>
                 {{ video.items[0].snippet.title }}
                 <div>
@@ -11,7 +13,9 @@
                 </div>
             </mat-grid-tile-header> 
             <mat-grid-tile-footer>
-                <mat-icon (click)="onFavoriteClick(video.items[0].id)">{{ video.userSetting.favorite ? "favorite" : "favorite_outline" }}</mat-icon>
+                <mat-icon (click)="onFavoriteClick(video.items[0].id)">
+                    {{ video.userSetting.favorite ? "favorite" : "favorite_outline" }}
+                </mat-icon>
                 <mat-icon (click)="onDeleteClick(video.items[0].id)">delete_forever</mat-icon>
             </mat-grid-tile-footer>
         </mat-grid-tile>
