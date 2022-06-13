@@ -17,6 +17,10 @@ OS: linux x64
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## Work with YouTube API
+
+You need to paste key in src/app/credentials/youtube.model.ts - remeber to not to push it to public repo. More on API documnetation - https://developers.google.com/youtube/v3/getting-started
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

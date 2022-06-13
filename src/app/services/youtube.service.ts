@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { YOUTUBE_API_KEY } from '../credentials/youtubekey.model';
-import { Video } from '../models/youtube.model';
+import { YouTubeResponse } from '../models/youtube.model';
 import { DataService } from './data.service';
 
 
@@ -20,6 +20,6 @@ export class YoutubeService {
 
     return this.http
       .get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${YOUTUBE_API_KEY}&part=snippet,statistics`)
-      .subscribe(resp => this.data.addVideo(<Video>resp)); //JSON.parse(JSON.stringify(<Video>resp)))
+      .subscribe(resp => this.data.addYouTubeVideo(<YouTubeResponse>resp)); //JSON.parse(JSON.stringify(<Video>resp)))
   }
 }

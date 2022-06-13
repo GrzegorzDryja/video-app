@@ -13,8 +13,7 @@ export class UserInputService {
     let result = false;
 
     for (let i = 0; i < SUPPORTED_PATHS.length; i++){
-        if( data.length <= MAX_LINK_LENGTH && data.includes(SUPPORTED_PATHS[i]) || data.length == ID_LENGTH && data.match(/^[a-zA-Z0-9_.-]{11}$/) ){         //Hmm, can I improve this logic? data.length == ID_LENGTH && data.match(YOUTUBE_ID
-          console.log(data)
+        if( data.length <= MAX_LINK_LENGTH && data.includes(SUPPORTED_PATHS[i]) || data.length == ID_LENGTH && data.match(/^[a-zA-Z0-9_.-]{11}$/) ){
           result = true;
           break;
         }

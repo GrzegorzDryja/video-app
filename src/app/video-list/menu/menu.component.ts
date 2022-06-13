@@ -23,11 +23,15 @@ export class MenuComponent implements OnInit {
   
   ngOnInit(): void {
   }
+
+  loadDemo(){
+    this.data.demoVideos();
+  }
   
   onGridChange(){
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
-    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 4) //Magic numbers, and should by responsive
+    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
   }
   
   onFavoriteSort(){

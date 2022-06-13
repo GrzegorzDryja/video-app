@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { DataService } from './data.service';
-import { VIMEO_API_KEY } from '../credentials/vimeokey.model';
+import { VimeoResponse } from '../models/vimeo.model'
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class VimeoService {
   fetchVideo(videoId: string) {
 
     return this.http
-      .get(`https://api.vimeo.com/${videoId}/?access_token={${VIMEO_API_KEY}}&token_type=bearer&scope=public`) 
-      .subscribe(resp => this.data.addVideo(<any>resp)); //JSON.parse(JSON.stringify(<Video>resp)))
+      .get(`https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}`) 
+      .subscribe(resp => this.data.addVimeoVideo(<VimeoResponse>resp));
   }
 }

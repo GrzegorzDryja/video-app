@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog'
 import { Subscription } from 'rxjs';
 
-import { Video, Videos } from '../models/youtube.model';
+import { Videos } from '../models/video.model';
 import { DataService } from '../services/data.service';
 import { PlayerComponent } from './player/player.component';
 
@@ -44,15 +44,15 @@ export class VideoListComponent implements OnInit, AfterContentInit {
     this.colsNumber = colsNum;
   }
 
-  onFavoriteClick(id: string){
+  onFavoriteClick(id: number){
     this.data.loveVideo(id)
   }
 
-  onDeleteClick(id: string){
+  onDeleteClick(id: number){
     this.data.deleteVideo(id)
   }
 
-  play(id: string){
+  play(id: number){
     this.dialog.open(PlayerComponent, {data: {id: id}})
   }
 
