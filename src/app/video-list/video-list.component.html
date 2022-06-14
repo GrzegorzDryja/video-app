@@ -1,0 +1,55 @@
+<section>
+    <app-menu (colsNumber)="onChangeGridStyle($event)"></app-menu>
+    <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
+        <mat-grid-tile *ngFor="let video of pagedList">
+
+            <div *ngIf="video.appData.platform === 'youtube'">
+                <img
+                    src="{{ video.video.items[0].snippet.thumbnails.default.url }}"
+                    (click)="play(video.video.items[0].id)">
+                <mat-grid-tile-header>
+                    <div class="title">
+                        {{ video.video.items[0].snippet.title }}   
+                    </div>
+                    <div class="info">
+                        <mat-icon>calendar_month</mat-icon>{{ video.appData.date }}
+                        <mat-icon>visibility</mat-icon>{{ video.video.items[0].statistics.viewCount }}
+                    </div>
+                </mat-grid-tile-header>
+                <mat-grid-tile-footer>
+                    <mat-icon (click)="onFavoriteClick(video.appData.id)">
+                        {{ video.appData.favorite ? "favorite" : "favorite_outline" }}
+                    </mat-icon>
+                    <mat-icon (click)="onDeleteClick(video.appData.id)">delete_forever</mat-icon>
+                </mat-grid-tile-footer>
+            </div>
+
+            <div *ngIf="video.appData.platform === 'vimeo'">
+                <img
+                    src="{{ video.video.thumbnail_url }}"
+                    >
+                <mat-grid-tile-header>
+                <div class="tittle">
+                    {{ video.video.title }}
+                </div>
+                <div class="info">
+                    <mat-icon>calendar_month</mat-icon>{{ video.appData.date }}
+                </div>
+                </mat-grid-tile-header>
+                <mat-grid-tile-footer>
+                    <mat-icon (click)="onFavoriteClick(video.appData.id)">
+                        {{ video.appData.favorite ? "favorite" : "favorite_outline" }}
+                    </mat-icon>
+                    <mat-icon (click)="onDeleteClick(video.appData.id)">delete_forever</mat-icon>
+                </mat-grid-tile-footer>
+            </div>
+
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-paginator
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPageChange($event)"
+    ></mat-paginator>
+</section>
