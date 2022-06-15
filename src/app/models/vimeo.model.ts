@@ -1,5 +1,3 @@
-import { AppData } from "./appdata.model"
-
 export type VimeoResponse = {
     type: string,
     version: string,
@@ -22,4 +20,4 @@ export type VimeoResponse = {
     upload_date: string,
     video_id: number,
     uri: string
-  }
+}

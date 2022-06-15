@@ -1,11 +1,13 @@
-import { YouTubeResponse } from "./youtube.model";
-import { VimeoResponse } from "./vimeo.model";
-import { AppData } from "./appdata.model";
-
 export type Video = 
 {
-  appData: AppData,
-  video: any //YouTubeResponse ] VimeoResponse,
+    platform: string, //"youtube" | "vimeo",
+    id: number,
+    favorite: boolean,
+    date: Date
+    videoId: string,
+    title: string,
+    img: string,
+    viewCount: string
 }
 
 export type Videos = Video[]

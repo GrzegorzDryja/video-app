@@ -12,22 +12,24 @@ export class ItemComponent implements OnInit {
     @Input() video!: Video;
     
     thumnbnailPath!: string;
+    videoId!: string;
     id!: number;
     title!: string; 
     date!: Date;
-    viewCount!: number;
-    favorite!: string;
+    viewCount!: string;
+    favorite!: boolean;
 
-    constructor(private data: DataService) { }
+    constructor(private data: DataService) {
+        this.thumnbnailPath = this.video.img;
+        this.id = this.video.id;
+        this.videoId = this.video.videoId
+        this.title = this.video.title; 
+        this.date = this.video.date;
+        this.viewCount = this.video.viewCount;
+        this.favorite = this.video.favorite;
+     }
 
     ngOnInit(): void {
-        //This if logic will be removed to service
-        this.thumnbnailPath = this.video.appData.platform === 'youtube' ? this.video.video.items[0].snippet.thumbnails.default.url : this.video.video.thumbnail_url;
-        this.id = this.video.appData.platform === 'youtube' ? this.video.video.items[0].id : "1";
-        this.title = this.video.appData.platform === 'youtube' ? this.video.video.items[0].snippet.title :  this.video.video.title; 
-        this.date = this.video.appData.date;
-        this.viewCount = this.video.appData.platform === 'youtube' ? this.video.video.items[0].statistics.viewCount : "Not known";    
-        this.favorite = this.video.appData.favorite ? "favorite" : "favorite_outline"
     }
 
     onFavoriteClick(id: number){
@@ -40,7 +42,7 @@ export class ItemComponent implements OnInit {
         this.data.deleteVideo(id)
     }
 
-    play(id: number){
+    play(id: string){
         console.log("Zagram w modalu film: " + id);
         // this.dialog.open(PlayerComponent, {data: {id: id}})
         }
