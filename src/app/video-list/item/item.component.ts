@@ -18,8 +18,12 @@ export class ItemComponent implements OnInit {
     date!: Date;
     viewCount!: string;
     favorite!: boolean;
+    favoriteSwitch = "favorite_outline";
 
     constructor(private data: DataService) {
+     }
+
+    ngOnInit(): void {
         this.thumnbnailPath = this.video.img;
         this.id = this.video.id;
         this.videoId = this.video.videoId
@@ -27,13 +31,11 @@ export class ItemComponent implements OnInit {
         this.date = this.video.date;
         this.viewCount = this.video.viewCount;
         this.favorite = this.video.favorite;
-     }
-
-    ngOnInit(): void {
     }
 
     onFavoriteClick(id: number){
-        console.log("Dodam do ulubionych film: " + id);
+        this.favorite = !this.favorite
+        this.favoriteSwitch = this.favorite ? "favorite" : "favorite_outline"
         this.data.loveVideo(id)
     }
 
