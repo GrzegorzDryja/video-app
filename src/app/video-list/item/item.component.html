@@ -1,0 +1,22 @@
+<div class="item">
+    <div class="thumbnail">
+        <img
+        [src]="thumnbnailPath"
+        (click)="play(id)">
+    </div>
+    <div class="info">
+        <div class="title">
+            {{ title }}   
+        </div>
+        <div class="data">
+            <mat-icon>calendar_month</mat-icon>{{ date }}
+            <mat-icon>visibility</mat-icon>{{ viewCount }}
+        </div>
+    </div>
+    <div class="menu">
+        <mat-icon (click)="onFavoriteClick(video.appData.id)">
+            {{ favorite }}
+        </mat-icon>
+        <mat-icon (click)="onDeleteClick(video.appData.id)">delete_forever</mat-icon>
+    </div>
+</div>

@@ -43,19 +43,7 @@ export class VideoListComponent implements OnInit, AfterContentInit {
   onChangeGridStyle(colsNum: number){
     this.colsNumber = colsNum;
   }
-
-  onFavoriteClick(id: number){
-    this.data.loveVideo(id)
-  }
-
-  onDeleteClick(id: number){
-    this.data.deleteVideo(id)
-  }
-
-  play(id: number){
-    this.dialog.open(PlayerComponent, {data: {id: id}})
-  }
-
+  
   onPageChange(pageEvent: PageEvent){
     let startIndex = pageEvent.pageIndex * pageEvent.pageSize;
     let endIndex = startIndex + pageEvent.pageSize;

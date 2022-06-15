@@ -11,6 +11,7 @@ import { InputComponent } from './input/input.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { MenuComponent } from './video-list/menu/menu.component';
 import { PlayerComponent } from './video-list/player/player.component';
+import { ItemComponent } from './video-list/item/item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PlayerComponent } from './video-list/player/player.component';
     InputComponent,
     VideoListComponent,
     MenuComponent,
-    PlayerComponent
+    PlayerComponent,
+    ItemComponent
   ],
   imports: [
     BrowserModule,
