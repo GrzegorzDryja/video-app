@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog'
+
 import { DataService } from 'src/app/services/data.service';
 
 import { Video } from '../../models/video.model';
+import { PlayerComponent } from '../player/player.component';
 
 @Component({
     selector: 'app-item',
@@ -14,19 +17,21 @@ export class ItemComponent implements OnInit {
     thumnbnailPath!: string;
     videoId!: string;
     id!: number;
+    playerLink!: string;
     title!: string; 
     date!: Date;
     viewCount!: string;
     favorite!: boolean;
     favoriteSwitch = "favorite_outline";
 
-    constructor(private data: DataService) {
+    constructor(private data: DataService, private dialog: MatDialog) {
      }
 
     ngOnInit(): void {
         this.thumnbnailPath = this.video.img;
         this.id = this.video.id;
         this.videoId = this.video.videoId
+        this.playerLink = this.video.playerLink;
         this.title = this.video.title; 
         this.date = this.video.date;
         this.viewCount = this.video.viewCount;
@@ -40,12 +45,10 @@ export class ItemComponent implements OnInit {
     }
 
     onDeleteClick(id: number){
-        console.log("Usunę film: " + id);
         this.data.deleteVideo(id)
     }
 
     play(id: string){
-        console.log("Zagram w modalu film: " + id);
-        // this.dialog.open(PlayerComponent, {data: {id: id}})
+        this.dialog.open(PlayerComponent, {data: {id: this.playerLink}})
         }
     }

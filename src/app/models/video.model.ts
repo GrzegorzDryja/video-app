@@ -5,6 +5,7 @@ export type Video =
     favorite: boolean,
     date: Date
     videoId: string,
+    playerLink: string,
     title: string,
     img: string,
     viewCount: string

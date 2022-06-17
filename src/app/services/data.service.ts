@@ -26,6 +26,7 @@ export class DataService {
                 favorite: false,
                 date: new Date(),
                 videoId: resp.items[0].id,
+                playerLink: `http://www.youtube.com/embed/${resp.items[0].id}`,
                 title: resp.items[0].snippet.title,
                 img: resp.items[0].snippet.thumbnails.default.url,
                 viewCount: resp.items[0].statistics.viewCount
@@ -43,6 +44,7 @@ export class DataService {
                 favorite: false,
                 date: new Date(),
                 videoId: resp.video_id.toString(),
+                playerLink: resp.html.split('\"')[1], //This take http://... from Vimeo respons with <iframe...
                 title: resp.title,
                 img: resp.thumbnail_url,
                 viewCount: "Brak danych"
