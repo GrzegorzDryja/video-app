@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { YOUTUBE_API_KEY } from '../credentials/youtubekey.model';
-import { YouTubeResponse } from '../models/youtube.model';
-import { DataService } from './data.service';
+import { YOUTUBE_API_KEY } from '@credentials/youtubekey.model';
+import { YouTubeResponse } from '@models/youtube.model';
+import { DataService } from '@services/data.service';
 
 
 @Injectable({

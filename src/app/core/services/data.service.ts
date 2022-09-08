@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { DEMO_VIDEOS } from '../models/demo.model';
 
-import { Videos } from '../models/video.model';
-import { VimeoResponse } from '../models/vimeo.model';
-import { YouTubeResponse } from '../models/youtube.model';
+import { Videos } from '@models/video.model';
+import { VimeoResponse } from '@models/vimeo.model';
+import { YouTubeResponse } from '@models/youtube.model';
 
 @Injectable({
     providedIn: 'root'
@@ -84,7 +83,6 @@ export class DataService {
     }
 
     demoVideos(){
-            // this.userVideosList = DEMO_VIDEOS;
             this.subject.next(this.userVideosList);
     }
 

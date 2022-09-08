@@ -2,8 +2,8 @@ import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
-import { Videos } from 'src/app/core/models/video.model';
-import { DataService } from 'src/app/core/services/data.service';
+import { Videos } from '@models/video.model';
+import { DataService } from '@services/data.service';
 
 @Component({
   selector: 'app-video-list',

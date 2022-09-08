@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserInputService } from 'src/app/core/services/user-input.service';
-import { YoutubeService } from 'src/app/core/services/youtube.service';
-import { VimeoService } from 'src/app/core/services/vimeo.service'
+
+import { UserInputService } from '@services/user-input.service';
+import { YoutubeService } from '@services/youtube.service';
+import { VimeoService } from '@services/vimeo.service'
+
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',

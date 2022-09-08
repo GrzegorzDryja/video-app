@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { DataService } from './data.service';
-import { VimeoResponse } from '../models/vimeo.model'
+import { DataService } from '@services/data.service';
+import { VimeoResponse } from '@models/vimeo.model'
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SUPPORTED_PATHS, YOUTUBE_ID, VIMEO_ID, MAX_LINK_LENGTH, ID_LENGTH } from '../models/validation.model'
+import { SUPPORTED_PATHS, YOUTUBE_ID, VIMEO_ID, MAX_LINK_LENGTH, ID_LENGTH } from '@models/validation.model'
 
 @Injectable({
     providedIn: 'root'

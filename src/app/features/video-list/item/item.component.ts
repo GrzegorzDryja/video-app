@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/core/services/data.service';
+import { DataService } from '@services/data.service';
 import { MatDialog } from '@angular/material/dialog'
 
-import { PlayerComponent } from 'src/app/features/player/player.component';
-import { Video } from 'src/app/core/models/video.model';
+import { PlayerComponent } from '@features/player/player.component';
+import { Video } from '@models/video.model';
 
 @Component({
     selector: 'app-item',
