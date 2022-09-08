@@ -10,8 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PlayerComponent implements OnInit {
   link;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: {id: string}, private sanitizer: DomSanitizer) {
-    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.youtube.com/embed/${data.id}`);
+  constructor(@Inject(MAT_DIALOG_DATA) private data: {path: string}, private sanitizer: DomSanitizer) {
+    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.path);
   }
 
   ngOnInit(): void {  

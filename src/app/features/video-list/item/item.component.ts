@@ -13,6 +13,7 @@ import { Video } from '@models/video.model';
 export class ItemComponent implements OnInit {
     @Input() video!: Video;
     
+    platform!: string;
     thumnbnailPath!: string;
     videoId!: string;
     id!: number;
@@ -26,6 +27,7 @@ export class ItemComponent implements OnInit {
      }
 
     ngOnInit(): void {
+        this.platform = this.video.platform;
         this.thumnbnailPath = this.video.img;
         this.id = this.video.id;
         this.videoId = this.video.videoId
@@ -46,7 +48,7 @@ export class ItemComponent implements OnInit {
         this.data.deleteVideo(id)
     }
 
-    play(id: string): void {
-        this.dialog.open(PlayerComponent, {data: {id: id}})
+    play(source: string, id: string): void {
+        this.dialog.open(PlayerComponent, {data: {path: `${source === "youtube" ? "http://www.youtube.com/embed/" : "https://player.vimeo.com/video/"}${id}`}})
         }
     }
