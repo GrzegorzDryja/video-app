@@ -25,31 +25,31 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadDemo(){
+  loadDemo(): void {
     this.data.demoVideos();
   }
   
-  onGridChange(){
+  onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
     this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
   }
   
-  onFavoriteSort(){
+  onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
 
     this.data.showFavorite();
   }
 
-  onDateSort(){
+  onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
 
     this.data.sortByDate();
   }
 
-  onDeleteList(){
+  onDeleteList(): void {
     this.data.deleteVideos();
   }
 }

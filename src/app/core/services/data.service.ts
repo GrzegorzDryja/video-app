@@ -17,7 +17,7 @@ export class DataService {
     constructor() { 
     }
     
-    addYouTubeVideo(resp: YouTubeResponse){
+    addYouTubeVideo(resp: YouTubeResponse): void {
         this.userVideosList.push(
             {
                 platform: "youtube",
@@ -34,7 +34,7 @@ export class DataService {
         localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
     }
     
-    addVimeoVideo(resp: VimeoResponse){
+    addVimeoVideo(resp: VimeoResponse): void {
         this.userVideosList.push(
             {
                 platform: "vimeo",
@@ -51,29 +51,29 @@ export class DataService {
         localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
     }
 
-    loveVideo(id: number){
+    loveVideo(id: number): void {
         let lovedVideo = this.userVideosList.find(video => video.id == id);
                 lovedVideo!.favorite = !lovedVideo!.favorite
         this.subject.next(this.userVideosList);
     }
 
-    showFavorite(){
+    showFavorite(): void {
         this.love = !this.love;
         let lovedVideos = this.userVideosList.filter(video => video.favorite === true);
         this.subject.next(this.love ? lovedVideos : this.userVideosList)
     }
     
-    deleteVideo(id: number){
+    deleteVideo(id: number): void {
         this.userVideosList = this.userVideosList.filter(video => video.id != id);
         this.subject.next(this.userVideosList);
     }
 
-    deleteVideos(){
+    deleteVideos(): void {
         this.userVideosList = [];
         this.subject.next(this.userVideosList);
     }
 
-    sortByDate(){
+    sortByDate(): void {
         let sortedByDateVideos = this.userVideosList.reverse();     
         this.subject.next(sortedByDateVideos)
     }
@@ -82,11 +82,11 @@ export class DataService {
         return this.subject.asObservable();
     }
 
-    demoVideos(){
+    demoVideos(): void {
             this.subject.next(this.userVideosList);
     }
 
-    getLocalStorage() {
+    getLocalStorage(): void {
         const local = localStorage.getItem("video-app");
         if (local){
             this.userVideosList = JSON.parse(local);

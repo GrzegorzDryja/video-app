@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { DataService } from '@services/data.service';
 import { VimeoResponse } from '@models/vimeo.model'
@@ -14,7 +15,7 @@ export class VimeoService {
     private data: DataService  
   ) {}
 
-  fetchVideo(videoId: string) {
+  fetchVideo(videoId: string): Subscription {
 
     return this.http
       .get(`https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}`) 

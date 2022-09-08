@@ -21,7 +21,7 @@ export class InputComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddVideo(form: NgForm){
+  onAddVideo(form: NgForm): void{
     if (this.userInput.validatePath(form.form.value.video)){
       let dataToFetch = {
         platform: this.userInput.extractPlatform(form.form.value.video),

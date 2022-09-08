@@ -38,13 +38,14 @@ export class VideoListComponent implements OnInit, AfterContentInit {
     this.data.getLocalStorage();
   }
 
-  onChangeGridStyle(colsNum: number){
+  onChangeGridStyle(colsNum: number): void {
     this.colsNumber = colsNum;
   }
   
-  onPageChange(pageEvent: PageEvent){
+  onPageChange(pageEvent: PageEvent): void {
     let startIndex = pageEvent.pageIndex * pageEvent.pageSize;
     let endIndex = startIndex + pageEvent.pageSize;
+    
     if(endIndex > this.length){
       endIndex = this.length;
     }

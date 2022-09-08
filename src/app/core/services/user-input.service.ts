@@ -30,6 +30,7 @@ export class UserInputService {
         if(data.match(VIMEO_ID)){
             return data.match(VIMEO_ID)
         }
+        return null
     }
 
     extractPlatform(data: string): string {

@@ -35,18 +35,18 @@ export class ItemComponent implements OnInit {
         this.favorite = this.video.favorite;
     }
 
-    onFavoriteClick(id: number){
+    onFavoriteClick(id: number): void {
         this.favorite = !this.favorite
         this.favoriteSwitch = this.favorite ? "favorite" : "favorite_outline"
         this.data.loveVideo(id)
     }
 
-    onDeleteClick(id: number){
+    onDeleteClick(id: number): void {
         console.log("Usunę film: " + id);
         this.data.deleteVideo(id)
     }
 
-    play(id: string){
+    play(id: string): void {
         this.dialog.open(PlayerComponent, {data: {id: id}})
         }
     }

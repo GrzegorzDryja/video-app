@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { YouTubeResponse } from '@models/youtube.model';
@@ -16,7 +17,7 @@ export class YoutubeService {
     private data: DataService  
   ) {}
 
-  fetchVideo(videoId: string) {
+  fetchVideo(videoId: string): Subscription {
 
     return this.http
       .get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${environment.youTubeApiKey}&part=snippet,statistics`)
