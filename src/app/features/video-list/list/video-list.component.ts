@@ -3,9 +3,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog'
 import { Subscription } from 'rxjs';
 
-import { Videos } from '../models/video.model';
-import { DataService } from '../services/data.service';
-import { PlayerComponent } from './player/player.component';
+import { Videos } from '../../../core/models/video.model';
+import { DataService } from '../../../core/services/data.service';
+import { PlayerComponent } from '../../player/player.component';
 
 @Component({
   selector: 'app-video-list',

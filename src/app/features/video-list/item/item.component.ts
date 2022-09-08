@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/core/services/data.service';
 
-import { Video } from '../../models/video.model';
+import { Video } from '../../../core/models/video.model';
 
 @Component({
     selector: 'app-item',
