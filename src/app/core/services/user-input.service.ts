@@ -23,7 +23,7 @@ export class UserInputService {
         return result;
     }
 
-    extractId(data: string): any {
+    extractId(data: string): RegExpMatchArray | null {
         if(data.match(YOUTUBE_ID)){
             return data.match(YOUTUBE_ID)
         };

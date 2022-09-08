@@ -28,10 +28,10 @@ export class InputComponent implements OnInit {
         id: this.userInput.extractId(form.form.value.video)
       }
     if (dataToFetch.platform == "youtube"){
-        this.youtube.fetchVideo(dataToFetch.id)
+        this.youtube.fetchVideo(`${dataToFetch.id}`)
       }
     if (dataToFetch.platform == "vimeo"){
-        this.vimeo.fetchVideo(dataToFetch.id)
+        this.vimeo.fetchVideo(`${dataToFetch.id}`)
       }
     } else {
 
