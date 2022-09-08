@@ -1,11 +1,9 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog'
 import { Subscription } from 'rxjs';
 
-import { Videos } from '../../../core/models/video.model';
-import { DataService } from '../../../core/services/data.service';
-import { PlayerComponent } from '../../player/player.component';
+import { Videos } from 'src/app/core/models/video.model';
+import { DataService } from 'src/app/core/services/data.service';
 
 @Component({
   selector: 'app-video-list',
@@ -20,11 +18,11 @@ export class VideoListComponent implements OnInit, AfterContentInit {
   pagedList!: Videos;
   length!: number;
   pageSize = 8;
-  pageSizeOptions = [8, 16, 24]; //This could by dynamaic depending on grid layout and videos, issue: on grid list 3, 5 items dosn't look to good
+  pageSizeOptions = [8, 16, 24];
   listHeart = "favorite";
   listBucket = "delete_forever"
 
-  constructor(private data: DataService, private dialog: MatDialog) {
+  constructor(private data: DataService) {
   }
 
   ngOnInit(): void {   

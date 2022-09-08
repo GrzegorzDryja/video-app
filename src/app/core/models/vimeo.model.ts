@@ -8,7 +8,7 @@ export type VimeoResponse = {
     author_url: string,
     is_plus: string,
     account_type: string,
-    html: string, //"<iframe src=\"https://player.vimeo.com/video/286898202?h=fd61acd044\" width=\"480\" height=\"360\" frameborder=\"0\" title=\"My video\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"
+    html: string,
     width: number,
     height: number,
     duration: number,

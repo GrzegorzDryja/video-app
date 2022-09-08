@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/core/services/data.service';
+import { MatDialog } from '@angular/material/dialog'
 
-import { Video } from '../../../core/models/video.model';
+import { PlayerComponent } from 'src/app/features/player/player.component';
+import { Video } from 'src/app/core/models/video.model';
 
 @Component({
     selector: 'app-item',
@@ -20,7 +22,7 @@ export class ItemComponent implements OnInit {
     favorite!: boolean;
     favoriteSwitch = "favorite_outline";
 
-    constructor(private data: DataService) {
+    constructor(private data: DataService, private dialog: MatDialog) {
      }
 
     ngOnInit(): void {
@@ -45,7 +47,6 @@ export class ItemComponent implements OnInit {
     }
 
     play(id: string){
-        console.log("Zagram w modalu film: " + id);
-        // this.dialog.open(PlayerComponent, {data: {id: id}})
+        this.dialog.open(PlayerComponent, {data: {id: id}})
         }
     }

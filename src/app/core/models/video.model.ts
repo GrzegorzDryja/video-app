@@ -1,6 +1,6 @@
 export type Video = 
 {
-    platform: string, //"youtube" | "vimeo",
+    platform: string,
     id: number,
     favorite: boolean,
     date: Date
