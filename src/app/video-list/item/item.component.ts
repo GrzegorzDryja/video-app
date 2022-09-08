@@ -19,7 +19,7 @@ export class ItemComponent implements OnInit {
     id!: number;
     playerLink!: string;
     title!: string; 
-    date!: Date;
+    dateObj!: Date;
     viewCount!: string;
     favorite!: boolean;
     favoriteSwitch = "favorite_outline";
@@ -33,7 +33,7 @@ export class ItemComponent implements OnInit {
         this.videoId = this.video.videoId
         this.playerLink = this.video.playerLink;
         this.title = this.video.title; 
-        this.date = this.video.date;
+        this.dateObj = this.video.date;
         this.viewCount = this.video.viewCount;
         this.favorite = this.video.favorite;
     }
