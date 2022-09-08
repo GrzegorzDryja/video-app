@@ -27,7 +27,8 @@
       "@credentials/*": ["app/core/credentials/*"],
       "@services/*": ["app/core/services/*"],
       "@models/*": ["app/core/models/*"],
-      "@features/*": ["app/features/*"]
+      "@features/*": ["app/features/*"],
+      "@environments/*": ["environments/*"]
     }
   },
   "angularCompilerOptions": {
