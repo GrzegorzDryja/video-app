@@ -48,6 +48,6 @@ export class ItemComponent implements OnInit {
     }
 
     public play(id: string): void {
-        this.dialog.open(PlayerComponent, {data: {id: id}})
+        this.dialog.open(PlayerComponent, {data: { id }})
         }
-    }
+    } 

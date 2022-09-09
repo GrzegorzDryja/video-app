@@ -22,14 +22,8 @@ export class UserInputService {
         return result;
     }
 
-    public extractId(data: string): RegExpMatchArray | null {
-        if(data.match(YOUTUBE_ID)){
-            return data.match(YOUTUBE_ID)
-        };
-        if(data.match(VIMEO_ID)){
-            return data.match(VIMEO_ID)
-        }
-        return null
+    public extractId(data: string): string {   
+            return data.match(YOUTUBE_ID)![0] || data.match(VIMEO_ID)![0];
     }
 
     public extractPlatform(data: string): string {

@@ -14,6 +14,8 @@ export class MenuComponent {
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
   private favoriteSortSwith = true;
+  private oneColumnGrid = 1;
+  private moreColumnGrid = 3;
   
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
@@ -29,7 +31,7 @@ export class MenuComponent {
   public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
-    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3);
+    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
   }
   
   public onFavoriteSort(): void {
