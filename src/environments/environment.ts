@@ -5,7 +5,9 @@ import { YOUTUBE_API_KEY } from '@credentials/youtubekey.model';
 
 export const environment = {
   production: false,
-  youTubeApiKey: YOUTUBE_API_KEY
+  youTubeApiKeyAndOptions: `&key=${YOUTUBE_API_KEY}&part=snippet,statistics`,
+  youTubeApiURL: 'https://www.googleapis.com/youtube/v3/videos?id=',
+  vimeoApiURL: 'https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/',
 };
 
 /*

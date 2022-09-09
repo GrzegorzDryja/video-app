@@ -19,7 +19,7 @@ export class YoutubeService {
 
   public fetchVideo(videoId: string): Subscription {
     return this.http
-      .get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${environment.youTubeApiKey}&part=snippet,statistics`)
-      .subscribe(resp => this.data.addYouTubeVideo(<YouTubeResponse>resp)); //JSON.parse(JSON.stringify(<Video>resp)))
+      .get(`${environment.youTubeApiURL}${videoId}${environment.youTubeApiKeyAndOptions}`)
+      .subscribe(resp => this.data.addYouTubeVideo(<YouTubeResponse>resp));
   }
 }
