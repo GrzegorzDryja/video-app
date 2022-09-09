@@ -1,8 +1,9 @@
 <section>
-    <form #f="ngForm" (ngSubmit)="onAddVideo(f)">
+    <form [formGroup]="inputForm" (submit)="onAddVideo()">
         <mat-form-field appearance="fill">
             <mat-label>Tutaj wklej link do filmu</mat-label>
-            <input matInput placeholder="https://youtube..." ngModel name="video">
+            <input matInput placeholder="https://youtube..." formControlName="video">
+            <mat-error *ngIf="inputForm.get('video')!.invalid">Link/id filmu musi być poprawny!</mat-error>
         </mat-form-field>
         <button type="submit" mat-raised-button color="primary">Dodaj</button>
     </form>
