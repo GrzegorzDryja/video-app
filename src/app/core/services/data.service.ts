@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { Videos } from '@models/video.model';
 import { VimeoResponse } from '@models/vimeo.model';
 import { YouTubeResponse } from '@models/youtube.model';
+import { Platform } from '@shared/platform.model'
 
 @Injectable({
     providedIn: 'root'
@@ -13,14 +14,11 @@ export class DataService {
     userVideosCounter = this.userVideosList.length;
     subject = new Subject<Videos>();
     love = false;
-
-    constructor() { 
-    }
     
     addYouTubeVideo(resp: YouTubeResponse): void {
         this.userVideosList.push(
             {
-                platform: "youtube",
+                platform: Platform.youtube,
                 id: ++this.userVideosCounter,
                 favorite: false,
                 date: new Date(),
@@ -37,7 +35,7 @@ export class DataService {
     addVimeoVideo(resp: VimeoResponse): void {
         this.userVideosList.push(
             {
-                platform: "vimeo",
+                platform: Platform.vimeo,
                 id: ++this.userVideosCounter,
                 favorite: false,
                 date: new Date(),
