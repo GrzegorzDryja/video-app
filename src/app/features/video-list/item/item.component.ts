@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from '@services/data.service';
 import { MatDialog } from '@angular/material/dialog'
 
+import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
+import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
     selector: 'app-item',
@@ -20,7 +21,8 @@ export class ItemComponent implements OnInit {
     date!: Date;
     viewCount!: string;
     favorite!: boolean;
-    favoriteSwitch = "favorite_outline";
+    deleteIcon = MaterialIcons.delete_forever;
+    favoriteSwitch = MaterialIcons.favorite_outline;
 
     constructor(private data: DataService, private dialog: MatDialog) {
      }
@@ -37,7 +39,7 @@ export class ItemComponent implements OnInit {
 
     onFavoriteClick(id: string): void {
         this.favorite = !this.favorite
-        this.favoriteSwitch = this.favorite ? "favorite" : "favorite_outline"
+        this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline
         this.data.loveVideo(id)
     }
 

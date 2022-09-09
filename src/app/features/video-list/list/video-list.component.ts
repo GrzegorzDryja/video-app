@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Videos } from '@models/video.model';
 import { DataService } from '@services/data.service';
+import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-video-list',
@@ -19,8 +20,8 @@ export class VideoListComponent implements OnInit, AfterContentInit {
   length!: number;
   pageSize = 8;
   pageSizeOptions = [8, 16, 24];
-  listHeart = "favorite";
-  listBucket = "delete_forever"
+  listHeart = MaterialIcons.favorite;
+  listBucket = MaterialIcons.delete_forever;
 
   constructor(private data: DataService) {
   }

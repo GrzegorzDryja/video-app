@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { DataService } from '@services/data.service';
+import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-menu',
@@ -14,10 +15,11 @@ export class MenuComponent {
   gridChangeSwitch = true;
   favoriteSortSwith = true;
   
-  gridSwitch = "grid_on";
-  favoriteSwitch = "favorite_outlined"
+  gridSwitch = MaterialIcons.grid_on;
+  favoriteSwitch = MaterialIcons.favorite_outline;
+  delete_sweep = MaterialIcons.delete_sweep;
 
-  sortDirection = "arrow_upward"
+  sortDirection = MaterialIcons.arrow_upward;
   viewStyle = 1;
   
   constructor(private data: DataService) { }
@@ -28,20 +30,20 @@ export class MenuComponent {
   
   onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
+    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
     this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3);
   }
   
   onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
+    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
 
     this.data.showFavorite();
   }
 
   onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
+    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
 
     this.data.sortByDate();
   }
