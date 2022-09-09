@@ -5,6 +5,7 @@ import { Videos } from '@models/video.model';
 import { VimeoResponse } from '@models/vimeo.model';
 import { YouTubeResponse } from '@models/youtube.model';
 import { Platform } from '@shared/platform.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,8 @@ export class DataService {
     private userVideosCounter = this.userVideosList.length;
     private love = false;
     
+    constructor(private localStorageService: LocalStorageService) {}
+
     public addYouTubeVideo(resp: YouTubeResponse): void {
         this.userVideosList.push(
             {
@@ -29,8 +32,8 @@ export class DataService {
                 viewCount: resp.items[0].statistics.viewCount
             }
         );
-        this.subject.next(this.userVideosList)
-        localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
+        this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
     
     public addVimeoVideo(resp: VimeoResponse): void {
@@ -46,8 +49,9 @@ export class DataService {
                 viewCount: "Brak danych"
             }
         );
-        this.subject.next(this.userVideosList)
-        localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
+        this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
+        
     }
 
     public loveVideo(id: string): void {
@@ -64,13 +68,14 @@ export class DataService {
     
     public deleteVideo(id: string): void {
         this.userVideosList = this.userVideosList.filter(video => video.videoId !== id);
-        console.log("Usunę film" + id)
         this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
 
     public deleteVideos(): void {
         this.userVideosList = [];
         this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
 
     public sortByDate(): void {
@@ -87,7 +92,7 @@ export class DataService {
     }
 
     public getLocalStorage(): void {
-        const local = localStorage.getItem("video-app");
+        const local = this.localStorageService.getLocalStorage()
         if (local){
             this.userVideosList = JSON.parse(local);
         }
