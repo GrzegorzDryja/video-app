@@ -15,8 +15,7 @@ export class VimeoService {
     private data: DataService  
   ) {}
 
-  fetchVideo(videoId: string): Subscription {
-
+  public fetchVideo(videoId: string): Subscription {
     return this.http
       .get(`https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/${videoId}`) 
       .subscribe(resp => this.data.addVimeoVideo(<VimeoResponse>resp));

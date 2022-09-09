@@ -14,20 +14,20 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class ItemComponent implements OnInit {
     @Input() video!: Video;
     
-    thumnbnailPath!: string;
-    videoId!: string;
-    id!: number;
-    title!: string; 
-    date!: Date;
-    viewCount!: string;
-    favorite!: boolean;
-    deleteIcon = MaterialIcons.delete_forever;
-    favoriteSwitch = MaterialIcons.favorite_outline;
+    protected thumnbnailPath!: string;
+    protected videoId!: string;
+    protected id!: number;
+    protected title!: string; 
+    protected date!: Date;
+    protected viewCount!: string;
+    protected favorite!: boolean;
+    protected deleteIcon = MaterialIcons.delete_forever;
+    protected favoriteSwitch = MaterialIcons.favorite_outline;
 
     constructor(private data: DataService, private dialog: MatDialog) {
      }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.thumnbnailPath = this.video.img;
         this.id = this.video.id;
         this.videoId = this.video.videoId
@@ -37,17 +37,17 @@ export class ItemComponent implements OnInit {
         this.favorite = this.video.favorite;
     }
 
-    onFavoriteClick(id: string): void {
+    public onFavoriteClick(id: string): void {
         this.favorite = !this.favorite
         this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline
         this.data.loveVideo(id)
     }
 
-    onDeleteClick(id: string): void {
+    public onDeleteClick(id: string): void {
         this.data.deleteVideo(id)
     }
 
-    play(id: string): void {
+    public play(id: string): void {
         this.dialog.open(PlayerComponent, {data: {id: id}})
         }
     }

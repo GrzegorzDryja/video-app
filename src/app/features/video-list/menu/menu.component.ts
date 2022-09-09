@@ -11,44 +11,42 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class MenuComponent {
   @Output() colsNumber = new EventEmitter<number>;
 
-  dateSortSwitch = true;
-  gridChangeSwitch = true;
-  favoriteSortSwith = true;
+  private dateSortSwitch = true;
+  private gridChangeSwitch = true;
+  private favoriteSortSwith = true;
   
-  gridSwitch = MaterialIcons.grid_on;
-  favoriteSwitch = MaterialIcons.favorite_outline;
-  delete_sweep = MaterialIcons.delete_sweep;
-
-  sortDirection = MaterialIcons.arrow_upward;
-  viewStyle = 1;
+  protected gridSwitch = MaterialIcons.grid_on;
+  protected favoriteSwitch = MaterialIcons.favorite_outline;
+  protected delete_sweep = MaterialIcons.delete_sweep;
+  protected sortDirection = MaterialIcons.arrow_upward;
   
-  constructor(private data: DataService) { }
+  constructor(private data: DataService) {}
 
-  loadDemo(): void {
+  public loadDemo(): void {
     this.data.demoVideos();
   }
   
-  onGridChange(): void {
+  public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
     this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3);
   }
   
-  onFavoriteSort(): void {
+  public onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
 
     this.data.showFavorite();
   }
 
-  onDateSort(): void {
+  public onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
 
     this.data.sortByDate();
   }
 
-  onDeleteList(): void {
+  public onDeleteList(): void {
     this.data.deleteVideos();
   }
 }
