@@ -28,6 +28,7 @@
       "@services/*": ["app/core/services/*"],
       "@models/*": ["app/core/models/*"],
       "@features/*": ["app/features/*"],
+      "@shared/*": ["app/shared/*"],
       "@environments/*": ["environments/*"]
     }
   },
