@@ -10,16 +10,13 @@ import { VimeoService } from '@services/vimeo.service'
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
 
   constructor(
     private youtube: YoutubeService, 
     private userInput: UserInputService,
     private vimeo: VimeoService
   ){}
-
-  ngOnInit(): void {
-  }
 
   onAddVideo(form: NgForm): void{
     if (this.userInput.validatePath(form.form.value.video)){

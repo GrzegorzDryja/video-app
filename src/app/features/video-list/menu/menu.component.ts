@@ -7,7 +7,7 @@ import { DataService } from '@services/data.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   @Output() colsNumber = new EventEmitter<number>;
 
   dateSortSwitch = true;
@@ -21,9 +21,6 @@ export class MenuComponent implements OnInit {
   viewStyle = 1;
   
   constructor(private data: DataService) { }
-  
-  ngOnInit(): void {
-  }
 
   loadDemo(): void {
     this.data.demoVideos();
@@ -32,7 +29,7 @@ export class MenuComponent implements OnInit {
   onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
-    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
+    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3);
   }
   
   onFavoriteSort(): void {
