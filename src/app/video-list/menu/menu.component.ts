@@ -49,7 +49,6 @@ export class MenuComponent implements OnInit {
   onDateSort(){
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
-
     this.data.sortByDate();
   }
 
@@ -58,6 +57,5 @@ export class MenuComponent implements OnInit {
     this.snackBar.open(Messages.usunales_liste, Messages.zamknij, {
       duration: 5000
     })
-
   }
 }
