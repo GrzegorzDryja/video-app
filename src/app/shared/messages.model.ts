@@ -3,5 +3,6 @@ export enum Messages {
     usunales_film = "Usunąłeś film!",
     film_został_dodany = "Dodałeś film do listy.",
     usunales_liste = "Usunąłeś listę",
+    cofnij = "Cofnij",
     zamknij = "Zamknij"
 }

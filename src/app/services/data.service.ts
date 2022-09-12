@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { last, Observable, Subject } from 'rxjs';
 import { DEMO_VIDEOS } from '../models/demo.model';
 
 import { Videos } from '../models/video.model';
@@ -10,6 +10,7 @@ import { YouTubeResponse } from '../models/youtube.model';
     providedIn: 'root'
 })
 export class DataService {
+    private lastVideo: Videos = [];
     userVideosList: Videos = [];
     userVideosCounter = this.userVideosList.length;
     subject = new Subject<Videos>();
@@ -55,7 +56,7 @@ export class DataService {
     }
 
     loveVideo(id: number){
-        let lovedVideo = this.userVideosList.find(video => video.id == id);
+        let lovedVideo = this.userVideosList.find(video => video.id === id);
                 lovedVideo!.favorite = !lovedVideo!.favorite
         this.subject.next(this.userVideosList);
     }
@@ -66,13 +67,27 @@ export class DataService {
         this.subject.next(this.love ? lovedVideos : this.userVideosList)
     }
     
-    deleteVideo(id: number){
-        this.userVideosList = this.userVideosList.filter(video => video.id != id);
+    deleteVideo(videoId: string){     
+
+        this.lastVideo = this.userVideosList.filter((video, index) => {
+            if(video.videoId === videoId){
+                video.id = index
+                return true
+            }
+            return false
+        });
+        
+        this.userVideosList = this.userVideosList.filter(video => video.videoId !== videoId);
         this.subject.next(this.userVideosList);
     }
 
     deleteVideos(){
         this.userVideosList = [];
+        this.subject.next(this.userVideosList);
+    }
+
+    undoVideo(){
+        this.userVideosList.splice(this.lastVideo[0].id, 0, this.lastVideo[0]);
         this.subject.next(this.userVideosList);
     }
 

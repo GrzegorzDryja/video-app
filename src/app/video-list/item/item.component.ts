@@ -52,10 +52,13 @@ export class ItemComponent implements OnInit {
     
     }
 
-    onDeleteClick(id: number){
-        this.data.deleteVideo(id)
-        this.snackBar.open(Messages.usunales_film, Messages.zamknij, {
+    onDeleteClick(videoId: string): any{
+        this.data.deleteVideo(videoId)
+        let snackBarRef = this.snackBar.open(Messages.usunales_film, Messages.cofnij, {
             duration: 5000
+        })
+        snackBarRef.onAction().subscribe(() => {
+            this.data.undoVideo()
         })
     }
 
