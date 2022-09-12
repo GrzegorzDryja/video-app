@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="menu">
-        <mat-icon (click)="onFavoriteClick(id)">
+        <mat-icon (click)="onFavoriteClick(videoId)">
             {{ favoriteSwitch }}
         </mat-icon>
-        <mat-icon (click)="onDeleteClick(id)">delete_forever</mat-icon>
+        <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
     </div>
 </div>

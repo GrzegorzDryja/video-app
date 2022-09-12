@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from '@services/data.service';
 import { MatDialog } from '@angular/material/dialog'
 
+import { environment } from '@environments/environment';
+import { MaterialIcons } from '@shared/material-icons.model';
+import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
-import { environment } from '@environments/environment';
 import { VideoPlatform } from 'app/shared/video-platform.mode';
 
 @Component({
@@ -15,21 +16,21 @@ import { VideoPlatform } from 'app/shared/video-platform.mode';
 export class ItemComponent implements OnInit {
     @Input() video!: Video;
     
-    platform!: string;
-    thumnbnailPath!: string;
-    videoId!: string;
-    id!: number;
-    title!: string; 
-    date!: Date;
-    viewCount!: string;
-    favorite!: boolean;
-    favoriteSwitch = "favorite_outline";
+    protected platform!: string;
+    protected thumnbnailPath!: string;
+    protected videoId!: string;
+    protected id!: number;
+    protected title!: string; 
+    protected date!: Date;
+    protected viewCount!: string;
+    protected favorite!: boolean;
+    protected deleteIcon = MaterialIcons.delete_forever;
+    protected favoriteSwitch = MaterialIcons.favorite_outline;
 
-    constructor(private data: DataService, private dialog: MatDialog) {
-     }
+    constructor(private data: DataService, private dialog: MatDialog) {}
 
-    ngOnInit(): void {
-        this.platform = this.video.platform;
+    public ngOnInit(): void {
+		this.platform = this.video.platform;
         this.thumnbnailPath = this.video.img;
         this.id = this.video.id;
         this.videoId = this.video.videoId
@@ -39,13 +40,13 @@ export class ItemComponent implements OnInit {
         this.favorite = this.video.favorite;
     }
 
-    onFavoriteClick(id: number): void {
+    public onFavoriteClick(id: string): void {
         this.favorite = !this.favorite
-        this.favoriteSwitch = this.favorite ? "favorite" : "favorite_outline"
+        this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline
         this.data.loveVideo(id)
     }
 
-    onDeleteClick(id: number): void {
+    onDeleteClick(id: string): void {
         this.data.deleteVideo(id)
     }
 
@@ -57,8 +58,7 @@ export class ItemComponent implements OnInit {
                     environment.youTubePlayerURL :
                     environment.vimeoPlayerURL
                 }${id}`
-            }
-           
+            }           
         )
     }
 }

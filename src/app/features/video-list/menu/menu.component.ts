@@ -1,55 +1,54 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { DataService } from '@services/data.service';
+import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   @Output() colsNumber = new EventEmitter<number>;
 
-  dateSortSwitch = true;
-  gridChangeSwitch = true;
-  favoriteSortSwith = true;
+  private dateSortSwitch = true;
+  private gridChangeSwitch = true;
+  private favoriteSortSwith = true;
+  private oneColumnGrid = 1;
+  private moreColumnGrid = 3;
   
-  gridSwitch = "grid_on";
-  favoriteSwitch = "favorite_outlined"
+  protected gridSwitch = MaterialIcons.grid_on;
+  protected favoriteSwitch = MaterialIcons.favorite_outline;
+  protected delete_sweep = MaterialIcons.delete_sweep;
+  protected sortDirection = MaterialIcons.arrow_upward;
+  
+  constructor(private data: DataService) {}
 
-  sortDirection = "arrow_upward"
-  viewStyle = 1;
-  
-  constructor(private data: DataService) { }
-  
-  ngOnInit(): void {
-  }
-
-  loadDemo(): void {
+  public loadDemo(): void {
     this.data.demoVideos();
   }
   
-  onGridChange(): void {
+  public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
-    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
+    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
+    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
   }
   
-  onFavoriteSort(): void {
+  public onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
+    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
 
     this.data.showFavorite();
   }
 
-  onDateSort(): void {
+  public onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
+    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
 
     this.data.sortByDate();
   }
 
-  onDeleteList(): void {
+  public onDeleteList(): void {
     this.data.deleteVideos();
   }
 }

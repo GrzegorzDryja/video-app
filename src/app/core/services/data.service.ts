@@ -4,23 +4,25 @@ import { Observable, Subject } from 'rxjs';
 import { Videos } from '@models/video.model';
 import { VimeoResponse } from '@models/vimeo.model';
 import { YouTubeResponse } from '@models/youtube.model';
+import { Platform } from '@shared/platform.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
-    userVideosList: Videos = [];
-    userVideosCounter = this.userVideosList.length;
-    subject = new Subject<Videos>();
-    love = false;
-
-    constructor() { 
-    }
+    public userVideosList: Videos = [];
+    public subject = new Subject<Videos>();
     
-    addYouTubeVideo(resp: YouTubeResponse): void {
+    private userVideosCounter = this.userVideosList.length;
+    private love = false;
+    
+    constructor(private localStorageService: LocalStorageService) {}
+
+    public addYouTubeVideo(resp: YouTubeResponse): void {
         this.userVideosList.push(
             {
-                platform: "youtube",
+                platform: Platform.youtube,
                 id: ++this.userVideosCounter,
                 favorite: false,
                 date: new Date(),
@@ -30,14 +32,14 @@ export class DataService {
                 viewCount: resp.items[0].statistics.viewCount
             }
         );
-        this.subject.next(this.userVideosList)
-        localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
+        this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
     
-    addVimeoVideo(resp: VimeoResponse): void {
+    public addVimeoVideo(resp: VimeoResponse): void {
         this.userVideosList.push(
             {
-                platform: "vimeo",
+                platform: Platform.vimeo,
                 id: ++this.userVideosCounter,
                 favorite: false,
                 date: new Date(),
@@ -47,47 +49,49 @@ export class DataService {
                 viewCount: "Brak danych"
             }
         );
-        this.subject.next(this.userVideosList)
-        localStorage.setItem("video-app", JSON.stringify(this.userVideosList));
+        this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);        
     }
 
-    loveVideo(id: number): void {
-        let lovedVideo = this.userVideosList.find(video => video.id == id);
-                lovedVideo!.favorite = !lovedVideo!.favorite
+    public loveVideo(id: string): void {
+        const lovedVideo = this.userVideosList.find(video => video.videoId === id);
+        lovedVideo!.favorite = !lovedVideo!.favorite
         this.subject.next(this.userVideosList);
     }
 
-    showFavorite(): void {
+    public showFavorite(): void {
         this.love = !this.love;
-        let lovedVideos = this.userVideosList.filter(video => video.favorite === true);
+        const lovedVideos = this.userVideosList.filter(video => video.favorite);
         this.subject.next(this.love ? lovedVideos : this.userVideosList)
     }
     
-    deleteVideo(id: number): void {
-        this.userVideosList = this.userVideosList.filter(video => video.id != id);
+    public deleteVideo(id: string): void {
+        this.userVideosList = this.userVideosList.filter(video => video.videoId !== id);
         this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
 
-    deleteVideos(): void {
+    public deleteVideos(): void {
         this.userVideosList = [];
         this.subject.next(this.userVideosList);
+        this.localStorageService.saveToLocalStorage(this.userVideosList);
     }
 
-    sortByDate(): void {
-        let sortedByDateVideos = this.userVideosList.reverse();     
+    public sortByDate(): void {
+        const sortedByDateVideos = this.userVideosList.reverse();     
         this.subject.next(sortedByDateVideos)
     }
 
-    loadVideos(): Observable<Videos> {
+    public loadVideos(): Observable<Videos> {
         return this.subject.asObservable();
     }
 
-    demoVideos(): void {
-            this.subject.next(this.userVideosList);
+    public demoVideos(): void {
+        this.subject.next(this.userVideosList);
     }
 
-    getLocalStorage(): void {
-        const local = localStorage.getItem("video-app");
+    public getLocalStorage(): void {
+        const local = this.localStorageService.getLocalStorage()
         if (local){
             this.userVideosList = JSON.parse(local);
         }

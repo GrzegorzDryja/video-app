@@ -8,10 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './core/components/input/input.component';
-import { VideoListComponent } from './features/video-list/list/video-list.component';
-import { MenuComponent } from './features/video-list/menu/menu.component';
-import { PlayerComponent } from './features/player/player.component';
-import { ItemComponent } from './features/video-list/item/item.component';
+import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent  } from '@features/index';
 
 @NgModule({
   declarations: [

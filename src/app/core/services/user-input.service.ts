@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { SUPPORTED_PATHS, YOUTUBE_ID, VIMEO_ID, MAX_LINK_LENGTH, ID_LENGTH } from '@models/validation.model'
+import { Platform } from '@shared/platform.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserInputService {
 
-    constructor() { }
-
-    validatePath(data: string): boolean {
+    public validatePath(data: string): boolean {
         let result = false;
 
         for (let i = 0; i < SUPPORTED_PATHS.length; i++){
@@ -23,23 +22,11 @@ export class UserInputService {
         return result;
     }
 
-    extractId(data: string): RegExpMatchArray | null {
-        if(data.match(YOUTUBE_ID)){
-            return data.match(YOUTUBE_ID)
-        };
-        if(data.match(VIMEO_ID)){
-            return data.match(VIMEO_ID)
-        }
-        return null
+    public extractId(data: string): string {   
+        return data.match(YOUTUBE_ID)![0] || data.match(VIMEO_ID)![0];
     }
 
-    extractPlatform(data: string): string {
-        let platform = "youtube";
-        
-        if (data.includes("vimeo")){
-            platform = "vimeo"
-        }
-
-        return platform;
+    public extractPlatform(data: string): string {
+        return data.includes("vimeo") ? Platform.vimeo : Platform.youtube;
     }
 }
