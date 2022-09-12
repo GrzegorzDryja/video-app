@@ -42,3 +42,5 @@ testem.log
 Thumbs.db
 src/app/credentials/youtubekey.model.ts
 src/app/credentials/vimeokey.model.ts
+src/app/core/credentials/youtubekey.model.ts
+src/app/credentials/youtubekey.model.ts

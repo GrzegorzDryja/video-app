@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { DataService } from 'src/app/services/data.service';
-
 import { Video } from '../../models/video.model';
 import { PlayerComponent } from '../player/player.component';
+import { Messages } from 'src/app/shared/messages.model';
 
 @Component({
     selector: 'app-item',
@@ -24,7 +25,10 @@ export class ItemComponent implements OnInit {
     favorite!: boolean;
     favoriteSwitch = "favorite_outline";
 
-    constructor(private data: DataService, private dialog: MatDialog) {
+    constructor(
+        private data: DataService,
+        private dialog: MatDialog,
+        private snackBar: MatSnackBar) {
      }
 
     ngOnInit(): void {
@@ -42,10 +46,17 @@ export class ItemComponent implements OnInit {
         this.favorite = !this.favorite
         this.favoriteSwitch = this.favorite ? "favorite" : "favorite_outline"
         this.data.loveVideo(id)
+        this.snackBar.open(Messages.dodales_film_do_ulubionych, Messages.zamknij, {
+            duration: 5000
+          });
+    
     }
 
     onDeleteClick(id: number){
         this.data.deleteVideo(id)
+        this.snackBar.open(Messages.usunales_film, Messages.zamknij, {
+            duration: 5000
+        })
     }
 
     play(id: string){
