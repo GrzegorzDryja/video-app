@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog'
 
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
+import { environment } from '@environments/environment';
+import { VideoPlatform } from 'app/shared/video-platform.mode';
 
 @Component({
     selector: 'app-item',
@@ -44,11 +46,19 @@ export class ItemComponent implements OnInit {
     }
 
     onDeleteClick(id: number): void {
-        console.log("Usunę film: " + id);
         this.data.deleteVideo(id)
     }
 
-    play(source: string, id: string): void {
-        this.dialog.open(PlayerComponent, {data: {path: `${source === "youtube" ? "http://www.youtube.com/embed/" : "https://player.vimeo.com/video/"}${id}`}})
-        }
+    playRightPlatform(source: string, id: string): void {
+        this.dialog.open(
+            PlayerComponent,
+            { 
+                data: `${source === VideoPlatform.youtube ?
+                    environment.youTubePlayerURL :
+                    environment.vimeoPlayerURL
+                }${id}`
+            }
+           
+        )
     }
+}

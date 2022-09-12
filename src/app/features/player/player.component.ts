@@ -7,14 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
-  link;
+export class PlayerComponent {
+  protected link;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: {path: string}, private sanitizer: DomSanitizer) {
-    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.path);
+  constructor(@Inject(MAT_DIALOG_DATA) private path: string, private sanitizer: DomSanitizer) {
+    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(this.path);
   }
-
-  ngOnInit(): void {  
-  }
-
 }

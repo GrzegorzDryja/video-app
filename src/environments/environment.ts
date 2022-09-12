@@ -1,11 +1,13 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { YOUTUBE_API_KEY } from '@credentials/youtubekey.model';
+import { YOUTUBE_API_KEY } from '@credentials/credentials';
 
 export const environment = {
   production: false,
-  youTubeApiKey: YOUTUBE_API_KEY
+  youTubeApiKey: YOUTUBE_API_KEY,
+  youTubePlayerURL: 'http://www.youtube.com/embed/',
+  vimeoPlayerURL: 'https://player.vimeo.com/video/'
 };
 
 /*
