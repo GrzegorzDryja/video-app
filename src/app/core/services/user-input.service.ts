@@ -23,7 +23,7 @@ export class UserInputService {
     }
 
     public extractId(data: string): string {   
-            return data.match(YOUTUBE_ID)![0] || data.match(VIMEO_ID)![0];
+        return data.match(YOUTUBE_ID)![0] || data.match(VIMEO_ID)![0];
     }
 
     public extractPlatform(data: string): string {

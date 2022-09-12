@@ -50,8 +50,7 @@ export class DataService {
             }
         );
         this.subject.next(this.userVideosList);
-        this.localStorageService.saveToLocalStorage(this.userVideosList);
-        
+        this.localStorageService.saveToLocalStorage(this.userVideosList);        
     }
 
     public loveVideo(id: string): void {

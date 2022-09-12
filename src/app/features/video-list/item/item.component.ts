@@ -24,8 +24,7 @@ export class ItemComponent implements OnInit {
     protected deleteIcon = MaterialIcons.delete_forever;
     protected favoriteSwitch = MaterialIcons.favorite_outline;
 
-    constructor(private data: DataService, private dialog: MatDialog) {
-     }
+    constructor(private data: DataService, private dialog: MatDialog) {}
 
     public ngOnInit(): void {
         this.thumnbnailPath = this.video.img;
@@ -48,6 +47,10 @@ export class ItemComponent implements OnInit {
     }
 
     public play(id: string): void {
-        this.dialog.open(PlayerComponent, {data: { id }})
-        }
-    } 
+        this.dialog.open(PlayerComponent,
+            {
+                data: { id }
+            }
+        )
+    }
+} 

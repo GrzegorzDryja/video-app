@@ -6,12 +6,13 @@ import { Videos } from '@core/models/video.model';
 	providedIn: 'root'
 })
 export class LocalStorageService {
+	private localStorageName = "video-app";
 
-	public saveToLocalStorage(userVideosList: Videos){
-		localStorage.setItem("video-app", JSON.stringify(userVideosList));
+    public saveToLocalStorage(userVideosList: Videos): void {
+        localStorage.setItem(this.localStorageName, JSON.stringify(userVideosList));
   	}
 
-	public getLocalStorage(): string | null {
-    	return localStorage.getItem("video-app");
+    public getLocalStorage(): string | null {
+        return localStorage.getItem(this.localStorageName);
 	}
 }

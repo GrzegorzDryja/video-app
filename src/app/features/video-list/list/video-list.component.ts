@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { MaterialIcons } from '@shared/material-icons.model';
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss']
 })
-export class VideoListComponent implements OnInit, AfterContentInit {  
+export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {  
   
   protected colsNumber = 1;
   protected subscription!: Subscription;
@@ -52,5 +52,9 @@ export class VideoListComponent implements OnInit, AfterContentInit {
     }
     
     this.pagedList = this.videosList.slice(startIndex, endIndex);
+  }
+
+  public ngOnDestroy(): void{
+    this.subscription.unsubscribe()
   }
 }

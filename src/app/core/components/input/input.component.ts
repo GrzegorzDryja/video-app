@@ -20,22 +20,18 @@ export class InputComponent {
     private vimeo: VimeoService
   ){}
 
-  public onAddVideo(form: NgForm): Subscription | null {
+  public onAddVideo(form: NgForm): void {
     if (this.userInput.validatePath(form.form.value.video)){
       const dataToFetch = {
         platform: this.userInput.extractPlatform(form.form.value.video),
         id: this.userInput.extractId(form.form.value.video)
       }
-
       if (dataToFetch.platform === Platform.youtube){
-        return this.youtube.fetchVideo(`${dataToFetch.id}`)
+        this.youtube.fetchVideo(`${dataToFetch.id}`)
       }
-
       if (dataToFetch.platform === Platform.vimeo){
-        return this.vimeo.fetchVideo(`${dataToFetch.id}`)
+        this.vimeo.fetchVideo(`${dataToFetch.id}`)
       }
     }
-
-    return null;
   }
 }
