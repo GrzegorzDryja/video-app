@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { last, Observable, Subject } from 'rxjs';
-import { DEMO_VIDEOS } from '../models/demo.model';
+import { Observable, Subject } from 'rxjs';
 
 import { Videos } from '../models/video.model';
 import { VimeoResponse } from '../models/vimeo.model';
@@ -15,9 +14,6 @@ export class DataService {
     userVideosCounter = this.userVideosList.length;
     subject = new Subject<Videos>();
     love = false;
-
-    constructor() { 
-    }
     
     addYouTubeVideo(resp: YouTubeResponse){
         this.userVideosList.push(
@@ -101,7 +97,6 @@ export class DataService {
     }
 
     demoVideos(){
-            // this.userVideosList = DEMO_VIDEOS;
             this.subject.next(this.userVideosList);
     }
 
