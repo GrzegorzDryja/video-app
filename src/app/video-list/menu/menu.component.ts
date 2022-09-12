@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { DataService } from 'src/app/services/data.service';
+import { Messages } from 'src/app/shared/messages.model';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +22,9 @@ export class MenuComponent implements OnInit {
   sortDirection = "arrow_upward"
   viewStyle = 1;
   
-  constructor(private data: DataService) { }
+  constructor(
+    private data: DataService,
+    private snackBar: MatSnackBar) { }
   
   ngOnInit(): void {
   }
@@ -50,5 +55,9 @@ export class MenuComponent implements OnInit {
 
   onDeleteList(){
     this.data.deleteVideos();
+    this.snackBar.open(Messages.usunales_liste, Messages.zamknij, {
+      duration: 5000
+    })
+
   }
 }
