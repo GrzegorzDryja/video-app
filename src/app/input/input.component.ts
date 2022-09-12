@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { ValidateUrl } from './url.validator';
+import { ExtrnalErrorStateMatcher } from './external-error-state-matcher'
 
 import { UserInputService } from '../services/user-input.service';
 import { YoutubeService } from '../services/youtube.service';
@@ -14,6 +14,7 @@ import { VimeoService } from '../services/vimeo.service';
 })
 export class InputComponent implements OnInit {
   public inputForm!: FormGroup;
+  public externalErrorStateMatcher = new ExtrnalErrorStateMatcher()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,28 +25,29 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
-      video: ['', ValidateUrl ]
+      video: []
     })
   }
 
-  onAddVideo(){
-    console.log("klikłeś")
-    // if (this.userInput.validatePath(form.form.value.video)){
-    //   let dataToFetch = {
-    //     platform: this.userInput.extractPlatform(form.form.value.video),
-    //     id: this.userInput.extractId(form.form.value.video)
-    //   }
+  onAddVideo(){ 
+    this.externalErrorStateMatcher.setErrorStateFalse()
+    
+    if (this.userInput.validatePath(this.inputForm.value.video)){
+      let dataToFetch = {
+        platform: this.userInput.extractPlatform(this.inputForm.value.video),
+        id: this.userInput.extractId(this.inputForm.value.video)
+      }
+      if (dataToFetch.platform == "youtube"){
+        this.youtube.fetchVideo(dataToFetch.id)
+      }
 
-    //   if (dataToFetch.platform == "youtube"){
-    //     this.youtube.fetchVideo(dataToFetch.id)
-    //   }
+      if (dataToFetch.platform == "vimeo"){
+        this.vimeo.fetchVideo(dataToFetch.id)
+      }
+    } else {
+      this.externalErrorStateMatcher.setErrorStateTrue()
+    }
 
-    //   if (dataToFetch.platform == "vimeo"){
-    //     this.vimeo.fetchVideo(dataToFetch.id)
-    //   }
-
-    // } else {
-    //   console.error("eeeeyyy");
-    // }
+    this.inputForm.reset()
   }
 }
