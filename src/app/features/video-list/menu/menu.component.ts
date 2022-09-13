@@ -1,54 +1,61 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from '@services/data.service';
-import { MaterialIcons } from '@shared/material-icons.model';
+
+import { Content } from '@shared/content.model'
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
-  @Output() colsNumber = new EventEmitter<number>();
+export class MenuComponent implements OnInit {
+  @Output() colsNumber = new EventEmitter<number>;
 
-  private dateSortSwitch = true;
-  private gridChangeSwitch = true;
-  private favoriteSortSwith = true;
-  private oneColumnGrid = 1;
-  private moreColumnGrid = 3;
+  protected tooltipGridChange = Content.tooltipGridChange;
+  protected tooltipLoved = Content.tooltipLoved;
+  protected tooltipSort = Content.tooltipSort;
+  protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  protected gridSwitch = MaterialIcons.grid_on;
-  protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected delete_sweep = MaterialIcons.delete_sweep;
-  protected sortDirection = MaterialIcons.arrow_upward;
+  dateSortSwitch = true;
+  gridChangeSwitch = true;
+  favoriteSortSwith = true;
+  
+  gridSwitch = "grid_on";
+  favoriteSwitch = "favorite_outlined"
 
-  constructor(private data: DataService) {}
+  sortDirection = "arrow_upward"
+  viewStyle = 1;
+  
+  constructor(private data: DataService) { }
+  
+  ngOnInit(): void {
+  }
 
-  public loadDemo(): void {
+  loadDemo(){
     this.data.demoVideos();
   }
-
-  public onGridChange(): void {
+  
+  onGridChange(){
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
-    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
+    this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
+    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
   }
-
-  public onFavoriteSort(): void {
+  
+  onFavoriteSort(){
     this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
+    this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
 
     this.data.showFavorite();
   }
 
-  public onDateSort(): void {
+  onDateSort(){
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
+    this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
 
     this.data.sortByDate();
   }
 
-  public onDeleteList(): void {
+  onDeleteList(){
     this.data.deleteVideos();
   }
 }
