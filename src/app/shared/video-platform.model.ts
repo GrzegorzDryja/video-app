@@ -1,4 +1,4 @@
-export enum Platform {
+export enum VideoPlatform {
     youtube = "youtube",
     vimeo = "vimeo"
 }
