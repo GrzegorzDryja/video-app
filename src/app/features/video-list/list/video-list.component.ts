@@ -9,10 +9,9 @@ import { MaterialIcons } from '@shared/material-icons.model';
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
-  styleUrls: ['./video-list.component.scss']
+  styleUrls: ['./video-list.component.scss'],
 })
-export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {  
-  
+export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
   protected colsNumber = 1;
   protected subscription!: Subscription;
   protected videosList!: Videos;
@@ -23,16 +22,14 @@ export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
   protected listHeart = MaterialIcons.favorite;
   protected listBucket = MaterialIcons.delete_forever;
 
-  constructor(private data: DataService) {
-  }
+  constructor(private data: DataService) {}
 
-  public ngOnInit(): void {   
-    this.subscription = this.data.loadVideos().subscribe(
-      videos => {
-        this.videosList = videos;
-        this.pagedList = this.videosList.slice(0, this.pageSize);
-        this.length = this.videosList.length;
-      })
+  public ngOnInit(): void {
+    this.subscription = this.data.loadVideos().subscribe((videos) => {
+      this.videosList = videos;
+      this.pagedList = this.videosList.slice(0, this.pageSize);
+      this.length = this.videosList.length;
+    });
   }
 
   public ngAfterContentInit(): void {
@@ -42,19 +39,19 @@ export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
   public onChangeGridStyle(colsNum: number): void {
     this.colsNumber = colsNum;
   }
-  
+
   public onPageChange(pageEvent: PageEvent): void {
     const startIndex = pageEvent.pageIndex * pageEvent.pageSize;
     let endIndex = startIndex + pageEvent.pageSize;
-    
-    if(endIndex > this.length){
+
+    if (endIndex > this.length) {
       endIndex = this.length;
     }
-    
+
     this.pagedList = this.videosList.slice(startIndex, endIndex);
   }
 
-  public ngOnDestroy(): void{
-    this.subscription.unsubscribe()
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

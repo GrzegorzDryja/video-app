@@ -10,15 +10,10 @@ export class UserInputService {
   public validatePath(data: string): boolean {
     let result = false;
 
-    for (let i = 0; i < SUPPORTED_PATHS.length; i++) {
-      if (
-        (data.length <= MAX_LINK_LENGTH && data.includes(SUPPORTED_PATHS[i])) ||
-        (data.length == ID_LENGTH && data.match(YOUTUBE_ID))
-      ) {
+      if (SUPPORTED_PATHS.some(path => data.includes(path)) || data.length === ID_LENGTH && data.match(YOUTUBE_ID)) {    
         result = true;
-        break;
       }
-    }
+    
     return result;
   }
 
