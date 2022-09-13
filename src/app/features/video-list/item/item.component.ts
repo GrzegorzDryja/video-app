@@ -26,8 +26,8 @@ export class ItemComponent implements OnInit {
   protected favorite!: boolean;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected check_circle = MaterialIcons.check_circle
-  protected visibility = MaterialIcons.visibility
+  protected check_circle = MaterialIcons.check_circle;
+  protected visibility = MaterialIcons.visibility;
 
   constructor(private data: DataService, private dialog: MatDialog) {}
 
@@ -40,6 +40,7 @@ export class ItemComponent implements OnInit {
     this.dateObj = this.video.date;
     this.viewCount = this.video.viewCount;
     this.favorite = this.video.favorite;
+    this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
   }
 
   public onFavoriteClick(id: string): void {

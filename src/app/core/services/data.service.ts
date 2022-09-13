@@ -53,6 +53,7 @@ export class DataService {
     const lovedVideo = this.userVideosList.find((video) => video.videoId === id);
     lovedVideo!.favorite = !lovedVideo!.favorite;
     this.subject.next(this.userVideosList);
+    this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
   public showFavorite(): void {
