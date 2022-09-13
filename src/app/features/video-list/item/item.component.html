@@ -9,7 +9,7 @@
             {{ title }}   
         </div>
         <div class="data">
-            <mat-icon>calendar_month</mat-icon>{{ date }}
+            <mat-icon>check_circle</mat-icon>{{ dateObj | date:'mediumDate' }}
             <mat-icon>visibility</mat-icon>{{ viewCount }}
         </div>
     </div>
