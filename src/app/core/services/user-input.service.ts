@@ -8,13 +8,10 @@ import { VideoPlatform } from '@shared/video-platform.model';
 })
 export class UserInputService {
   public validatePath(data: string): boolean {
-    let result = false;
-
-    if (SUPPORTED_PATHS.some((path) => data.includes(path)) || (data.length === ID_LENGTH && data.match(YOUTUBE_ID))) {
-      result = true;
-    }
-
-    return result;
+    return (
+      SUPPORTED_PATHS.some((path) => data.includes(path)) ||
+      (data.length === ID_LENGTH && typeof data.match(YOUTUBE_ID)![0] === 'string')
+    );
   }
 
   public extractId(data: string): string {
