@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
+import { Content } from '../../shared/content.model'
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -8,6 +10,11 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class MenuComponent implements OnInit {
   @Output() colsNumber = new EventEmitter<number>;
+
+  protected tooltipGridChange = Content.tooltipGridChange;
+  protected tooltipLoved = Content.tooltipLoved;
+  protected tooltipSort = Content.tooltipSort;
+  protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
   dateSortSwitch = true;
   gridChangeSwitch = true;
