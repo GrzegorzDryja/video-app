@@ -6,34 +6,34 @@ import { MaterialIcons } from '@shared/material-icons.model';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-  @Output() colsNumber = new EventEmitter<number>;
+  @Output() colsNumber = new EventEmitter<number>();
 
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
   private favoriteSortSwith = true;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
-  
+
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected delete_sweep = MaterialIcons.delete_sweep;
   protected sortDirection = MaterialIcons.arrow_upward;
-  
+
   constructor(private data: DataService) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
   }
-  
+
   public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
     this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
   }
-  
+
   public onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;

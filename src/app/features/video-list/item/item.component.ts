@@ -21,11 +21,13 @@ export class ItemComponent implements OnInit {
   protected videoId!: string;
   protected id!: number;
   protected title!: string;
-  protected date!: Date;
+  protected dateObj!: Date;
   protected viewCount!: string;
   protected favorite!: boolean;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
+  protected check_circle = MaterialIcons.check_circle
+  protected visibility = MaterialIcons.visibility
 
   constructor(private data: DataService, private dialog: MatDialog) {}
 
@@ -35,7 +37,7 @@ export class ItemComponent implements OnInit {
     this.id = this.video.id;
     this.videoId = this.video.videoId;
     this.title = this.video.title;
-    this.date = this.video.date;
+    this.dateObj = this.video.date;
     this.viewCount = this.video.viewCount;
     this.favorite = this.video.favorite;
   }
@@ -52,8 +54,7 @@ export class ItemComponent implements OnInit {
 
   public playRightPlatform(source: string, id: string): void {
     this.dialog.open(PlayerComponent, {
-      data: `${source === VideoPlatform.youtube ? environment.youTubePlayerURL : environment.vimeoPlayerURL}
-            ${id}`,
+      data: `${source === VideoPlatform.youtube ? environment.youTubePlayerURL : environment.vimeoPlayerURL}${id}`,
     });
   }
 }
