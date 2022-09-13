@@ -94,4 +94,8 @@ export class DataService {
     }
     this.subject.next(this.userVideosList);
   }
+
+  public checkVideoIn(id: string){
+    return this.userVideosList.every(el => el.videoId !== id)
+  }
 }
