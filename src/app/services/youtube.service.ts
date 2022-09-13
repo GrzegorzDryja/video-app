@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { YOUTUBE_API_KEY } from '../credentials/youtubekey.model';
+import { YOUTUBE_API_KEY } from '../core/credentials/credentials';
 import { YouTubeResponse } from '../models/youtube.model';
 import { DataService } from './data.service';
 

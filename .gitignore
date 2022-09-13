@@ -40,5 +40,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-src/app/credentials/youtubekey.model.ts
-src/app/credentials/vimeokey.model.ts
+src/app/core/credentials/credentials.ts
