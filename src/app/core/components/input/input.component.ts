@@ -7,7 +7,7 @@ import { VimeoService } from '@services/vimeo.service';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { DataService } from '@core/services/data.service';
 import { ExtrnalErrorStateMatcher } from './external-error-state-matcher';
-import { Content } from '@shared/content.model'
+import { Content } from '@shared/content.model';
 
 @Component({
   selector: 'app-input',
@@ -41,12 +41,13 @@ export class InputComponent {
         platform: this.userInput.extractPlatform(this.inputForm.value.video),
         id: this.userInput.extractId(this.inputForm.value.video),
       };
-      if (dataToFetch.platform === VideoPlatform.youtube) {
+      if (dataToFetch.platform === VideoPlatform.youtube && this.data.checkVideoIn(dataToFetch.id)) {
         this.youtube.fetchVideo(`${dataToFetch.id}`);
       }
-      if (dataToFetch.platform === VideoPlatform.vimeo) {
+      if (dataToFetch.platform === VideoPlatform.vimeo  && this.data.checkVideoIn(dataToFetch.id)) {
         this.vimeo.fetchVideo(`${dataToFetch.id}`);
       }
     }
+    this.inputForm.reset();
   }
 }
