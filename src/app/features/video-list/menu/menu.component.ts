@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
+import { Content } from '@shared/content.model';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +22,10 @@ export class MenuComponent {
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected delete_sweep = MaterialIcons.delete_sweep;
   protected sortDirection = MaterialIcons.arrow_upward;
+  protected tooltipGridChange = Content.tooltipGridChange;
+  protected tooltipLoved = Content.tooltipLoved;
+  protected tooltipSort = Content.tooltipSort;
+  protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
   constructor(private data: DataService) {}
 
