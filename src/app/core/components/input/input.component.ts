@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { UserInputService } from '@services/user-input.service';
@@ -15,6 +15,9 @@ import { Content } from '@shared/content.model';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
+  @HostListener("click") onClick(){
+    this.inputForm.markAsUntouched()
+  }
   public inputForm!: FormGroup;
   public externalErrorStateMatcher = new ExtrnalErrorStateMatcher(this.data, this.userInput);
 
@@ -35,12 +38,10 @@ export class InputComponent {
       video: [],
     });
   }
-  private switcher = false;    
 
   public onAddVideo(): void {
     if (this.inputForm.value.video === null) {
-      this.switcher = !this.switcher
-      this.switcher ? this.inputForm.markAllAsTouched() : this.inputForm.markAsUntouched()
+      this.inputForm.markAllAsTouched()
     } else if (this.userInput.validatePath(this.inputForm.value.video)) {
       const dataToFetch = {
         platform: this.userInput.extractPlatform(this.inputForm.value.video),
