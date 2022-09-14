@@ -1,17 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DataService } from '@services/data.service';
 
-import { Content } from '@shared/content.model'
-
-import { Content } from '../../shared/content.model'
-
+import { Content } from '@shared/content.model';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  @Output() colsNumber = new EventEmitter<number>;
+  @Output() colsNumber = new EventEmitter<number>();
 
   protected tooltipGridChange = Content.tooltipGridChange;
   protected tooltipLoved = Content.tooltipLoved;
@@ -21,43 +18,42 @@ export class MenuComponent implements OnInit {
   dateSortSwitch = true;
   gridChangeSwitch = true;
   favoriteSortSwith = true;
-  
-  gridSwitch = "grid_on";
-  favoriteSwitch = "favorite_outlined"
 
-  sortDirection = "arrow_upward"
+  gridSwitch = 'grid_on';
+  favoriteSwitch = 'favorite_outlined';
+
+  sortDirection = 'arrow_upward';
   viewStyle = 1;
-  
-  constructor(private data: DataService) { }
-  
-  ngOnInit(): void {
-  }
 
-  loadDemo(){
+  constructor(private data: DataService) {}
+
+  ngOnInit(): void {}
+
+  loadDemo() {
     this.data.demoVideos();
   }
-  
-  onGridChange(){
+
+  onGridChange() {
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? "grid_on" : "reorder";
-    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3) //Magic numbers, and should by responsive
+    this.gridSwitch = this.gridChangeSwitch ? 'grid_on' : 'reorder';
+    this.colsNumber.emit(this.gridChangeSwitch ? 1 : 3); //Magic numbers, and should by responsive
   }
-  
-  onFavoriteSort(){
+
+  onFavoriteSort() {
     this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? "favorite_outlined" : "favorite";
+    this.favoriteSwitch = this.favoriteSortSwith ? 'favorite_outlined' : 'favorite';
 
     this.data.showFavorite();
   }
 
-  onDateSort(){
+  onDateSort() {
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? "arrow_upward" : "arrow_downward";
+    this.sortDirection = this.dateSortSwitch ? 'arrow_upward' : 'arrow_downward';
 
     this.data.sortByDate();
   }
 
-  onDeleteList(){
+  onDeleteList() {
     this.data.deleteVideos();
   }
 }
