@@ -8,6 +8,12 @@ export class ExtrnalErrorStateMatcher implements ErrorStateMatcher {
   constructor(private data: DataService, private userInput: UserInputService) {}
 
   isErrorState(control: AbstractControl<any, any> | null, form: FormGroupDirective | NgForm | null): boolean {
+    if(control?.touched){
+      control?.setErrors({
+        empty: true,
+      });
+      return true;
+    }    
     if (control!.value) {
       let dataToFetch = {
         platform: this.userInput.extractPlatform(control!.value),

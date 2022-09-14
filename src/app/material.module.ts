@@ -18,7 +18,6 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatPaginatorModule,
         MatSortModule,
         MatDialogModule
-
     ],
     exports: [
         MatInputModule, 

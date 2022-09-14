@@ -10,6 +10,7 @@
       />
       <mat-error *ngIf="this.inputForm.controls['video'].hasError('videoIsOnTheList')"> {{ videoIsOnTheList }}</mat-error>
       <mat-error *ngIf="this.inputForm.controls['video'].hasError('errorId')"> {{ errorId }}</mat-error>
+      <mat-error *ngIf="this.inputForm.controls['video'].hasError('empty')"> {{ errorEmpty }}</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Dodaj</button>
   </form>

@@ -20,6 +20,7 @@ export class InputComponent {
 
   protected videoIsOnTheList = Content.errorVideoExist;
   protected errorId = Content.errorUrl;
+  protected errorEmpty = Content.errorEmpty;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,9 +35,13 @@ export class InputComponent {
       video: [],
     });
   }
+  private switcher = false;    
 
   public onAddVideo(): void {
-    if (this.userInput.validatePath(this.inputForm.value.video)) {
+    if (this.inputForm.value.video === null) {
+      this.switcher = !this.switcher
+      this.switcher ? this.inputForm.markAllAsTouched() : this.inputForm.markAsUntouched()
+    } else if (this.userInput.validatePath(this.inputForm.value.video)) {
       const dataToFetch = {
         platform: this.userInput.extractPlatform(this.inputForm.value.video),
         id: this.userInput.extractId(this.inputForm.value.video),
@@ -44,10 +49,11 @@ export class InputComponent {
       if (dataToFetch.platform === VideoPlatform.youtube && this.data.checkVideoIn(dataToFetch.id)) {
         this.youtube.fetchVideo(`${dataToFetch.id}`);
       }
-      if (dataToFetch.platform === VideoPlatform.vimeo  && this.data.checkVideoIn(dataToFetch.id)) {
+      if (dataToFetch.platform === VideoPlatform.vimeo && this.data.checkVideoIn(dataToFetch.id)) {
         this.vimeo.fetchVideo(`${dataToFetch.id}`);
       }
+    } else {
+      this.inputForm.reset();
     }
-    this.inputForm.reset();
   }
 }
