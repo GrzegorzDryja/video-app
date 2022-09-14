@@ -3,6 +3,8 @@ import { DataService } from '@services/data.service';
 
 import { Content } from '@shared/content.model'
 
+import { Content } from '../../shared/content.model'
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
