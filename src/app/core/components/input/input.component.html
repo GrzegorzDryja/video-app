@@ -1,8 +1,15 @@
 <section>
-  <form #f="ngForm" (ngSubmit)="onAddVideo(f)">
+  <form [formGroup]="inputForm" (submit)="onAddVideo()">
     <mat-form-field appearance="fill">
       <mat-label>Tutaj wklej link do filmu</mat-label>
-      <input matInput placeholder="https://youtube..." ngModel name="video" />
+      <input
+        matInput
+        [errorStateMatcher]="externalErrorStateMatcher"
+        placeholder="https://youtube..."
+        formControlName="video"
+      />
+      <mat-error *ngIf="this.inputForm.controls['video'].hasError('videoIsOnTheList')"> {{ videoIsOnTheList }}</mat-error>
+      <mat-error *ngIf="this.inputForm.controls['video'].hasError('errorId')"> {{ errorId }}</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Dodaj</button>
   </form>
