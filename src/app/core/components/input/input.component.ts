@@ -7,6 +7,7 @@ import { YoutubeService } from '@services/youtube.service';
 import { VimeoService } from '@services/vimeo.service';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { ExtrnalErrorStateMatcher } from './external-error-state-matcher';
+import { Content } from '@shared/content.model';
 
 @Component({
   selector: 'app-input',
@@ -14,7 +15,7 @@ import { ExtrnalErrorStateMatcher } from './external-error-state-matcher';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  protected errorMessage = 'Źle!!! Błąd!';
+  protected errorMessage = Content.errorDefault;
   public inputForm!: FormGroup;
   public externalErrorStateMatcher = new ExtrnalErrorStateMatcher();
 
@@ -41,9 +42,9 @@ export class InputComponent {
         videoId: this.userInput.extractId(this.inputForm.value.video),
       };
       if (!this.data.checkVideoIn(dataToFetch.videoId)){
-        this.errorMessage = "Ten film już jest dodany";
+        this.errorMessage = Content.errorVideoExist;
         this.externalErrorStateMatcher.setErrorStateTrue()
-      }
+      } 
       if(this.data.checkVideoIn(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
         this.youtube.fetchVideo(`${dataToFetch.videoId}`);
       }
@@ -51,7 +52,7 @@ export class InputComponent {
         this.vimeo.fetchVideo(`${dataToFetch.videoId}`);
       }
     } else {
-      this.errorMessage = "Coś poszło nie tak";
+      this.errorMessage = Content.errorUrl
       this.externalErrorStateMatcher.setErrorStateTrue();
     }
 
