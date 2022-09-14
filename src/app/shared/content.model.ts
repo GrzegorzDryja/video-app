@@ -4,4 +4,3 @@ export enum Content {
     tooltipLoved = 'Pokaż ulubione',
     tooltipSort = 'Sortuj',
   }
-  
