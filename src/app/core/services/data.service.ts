@@ -11,6 +11,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class DataService {
+  private lastVideo: Videos = [];
   public userVideosList: Videos = [];
   public subject = new Subject<Videos>();
 
@@ -62,9 +63,16 @@ export class DataService {
     this.subject.next(this.love ? lovedVideos : this.userVideosList);
   }
 
-  public deleteVideo(id: string): void {
-    this.userVideosList = this.userVideosList.filter((video) => video.videoId !== id);
-    this.subject.next(this.userVideosList);
+  public deleteVideo(videoId: string): void {
+    this.lastVideo = this.userVideosList.filter((video, index) => {
+      if(video.videoId === videoId){
+          video.id = index
+          return true
+      }
+      return false
+    });
+
+    this.userVideosList = this.userVideosList.filter(video => video.videoId !== videoId);
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
@@ -92,6 +100,10 @@ export class DataService {
     if (local) {
       this.userVideosList = JSON.parse(local);
     }
+    this.subject.next(this.userVideosList);
+  }
+  public undoVideo(): void {
+    this.userVideosList.splice(this.lastVideo[0].id, 0, this.lastVideo[0]);
     this.subject.next(this.userVideosList);
   }
 }
