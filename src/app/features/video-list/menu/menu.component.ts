@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
+import { DialogComponent } from '@shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -27,7 +29,7 @@ export class MenuComponent {
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, public dialog: MatDialog) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -54,6 +56,7 @@ export class MenuComponent {
   }
 
   public onDeleteList(): void {
-    this.data.deleteVideos();
+    const dialog = this.dialog.open(DialogComponent);
+    dialog.afterClosed().subscribe((result) => (result ? this.data.deleteVideos() : this.dialog.closeAll()));
   }
 }

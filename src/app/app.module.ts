@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './core/components/input/input.component';
 import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent  } from '@features/index';
+import { DialogComponent } from '@shared/dialog/dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent  } fr
     VideoListComponent,
     MenuComponent,
     PlayerComponent,
-    ItemComponent
+    ItemComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
