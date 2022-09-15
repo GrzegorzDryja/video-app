@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
+import { Messages } from '@shared/messages.model';
 
 @Component({
   selector: 'app-menu',
@@ -27,7 +29,7 @@ export class MenuComponent {
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private snackBar: MatSnackBar) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -55,5 +57,9 @@ export class MenuComponent {
 
   public onDeleteList(): void {
     this.data.deleteVideos();
+
+    this.snackBar.open(Messages.usunales_liste, Messages.zamknij, {
+      duration: 5000
+    })
   }
 }
