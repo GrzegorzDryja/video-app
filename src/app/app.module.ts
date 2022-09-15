@@ -10,7 +10,11 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { InputComponent } from './core/components/input/input.component';
 import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent } from '@features/index';
-import { appReducer } from './app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { reducers } from '@core/store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { VideosEffects } from '@core/store/effects';
 
 @NgModule({
   declarations: [AppComponent, InputComponent, VideoListComponent, MenuComponent, PlayerComponent, ItemComponent],
@@ -21,7 +25,9 @@ import { appReducer } from './app.reducer';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({status: appReducer}),
+    StoreModule.forRoot({videos: reducers}),
+    EffectsModule.forRoot([VideosEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,7 +7,6 @@ import { VimeoResponse } from '@models/vimeo.model';
 import { YouTubeResponse } from '@models/youtube.model';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { LocalStorageService } from './local-storage.service';
-import * as fromAppReducer from '../../app.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +18,7 @@ export class DataService {
   private userVideosCounter = this.userVideosList.length;
   private love = false;
 
-  constructor(private localStorageService: LocalStorageService, private store: Store<{ data: fromAppReducer.State }>) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   public addYouTubeVideo(resp: YouTubeResponse): void {
     this.userVideosList.push({
@@ -32,8 +31,7 @@ export class DataService {
       img: resp.items[0].snippet.thumbnails.default.url,
       viewCount: resp.items[0].statistics.viewCount,
     });
-    // this.subject.next(this.userVideosList);
-    this.store.dispatch({ type: 'ADD_VIDEO', data: this.userVideosList });
+    this.subject.next(this.userVideosList);
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
@@ -90,11 +88,11 @@ export class DataService {
     this.subject.next(this.userVideosList);
   }
 
-  public getLocalStorage(): void {
-    const local = this.localStorageService.getLocalStorage();
-    if (local) {
-      this.userVideosList = JSON.parse(local);
-    }
-    this.subject.next(this.userVideosList);
-  }
+  // public getLocalStorage(): void {
+  //   const local = this.localStorageService.getLocalStorage();
+  //   if (local) {
+  //     return this.userVideosList = JSON.parse(local);
+  //   }
+  //   this.subject.next(this.userVideosList);
+  // }
 }

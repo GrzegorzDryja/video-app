@@ -1,7 +1,7 @@
 <section>
   <app-menu (colsNumber)="onChangeGridStyle($event)"></app-menu>
   <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
-    <mat-grid-tile *ngFor="let video of pagedList">
+    <mat-grid-tile *ngFor="let video of videosListObservable$ | async">
       <app-item [video]="video"></app-item>
     </mat-grid-tile>
   </mat-grid-list>

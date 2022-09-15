@@ -1,10 +1,15 @@
 import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 
 import { Videos } from '@models/video.model';
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
+import { select, Store } from '@ngrx/store';
+
+import * as VideosActions from '@core/store/actions'
+import { isLoadingSelector, videosSelector } from '@core/store/selectors';
+import { AppStateInterface } from '@core/models/appState.interface';
 
 @Component({
   selector: 'app-video-list',
@@ -22,18 +27,22 @@ export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
   protected listHeart = MaterialIcons.favorite;
   protected listBucket = MaterialIcons.delete_forever;
 
-  constructor(private data: DataService) {}
+  public isLoading$: Observable<boolean>;
+  public videosListObservable$: Observable<Videos>;
+
+  constructor(private data: DataService, private store: Store<AppStateInterface>) {
+    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
+    this.videosListObservable$ = this.store.pipe(select(videosSelector))
+  }
 
   public ngOnInit(): void {
-    this.subscription = this.data.loadVideos().subscribe((videos) => {
-      this.videosList = videos;
+      this.videosListObservable$.pipe(tap(res => this.videosList = res));  
       this.pagedList = this.videosList.slice(0, this.pageSize);
       this.length = this.videosList.length;
-    });
   }
 
   public ngAfterContentInit(): void {
-    this.data.getLocalStorage();
+    this.store.dispatch(VideosActions.getVideosFromLocalStorage()) 
   }
 
   public onChangeGridStyle(colsNum: number): void {
