@@ -7,8 +7,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { InputComponent } from './core/components/input/input.component';
-import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent  } from '@features/index';
+import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent  } from '@features/index';
 
 @NgModule({
   declarations: [

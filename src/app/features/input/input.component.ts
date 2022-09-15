@@ -7,7 +7,7 @@ import { YoutubeService } from '@services/youtube.service';
 import { VimeoService } from '@services/vimeo.service';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { ExtrnalErrorStateMatcher } from './external-error-state-matcher';
-import { Content } from '@shared/content.model';
+import { ErrorTypes } from '@shared/errorsTypes.model';
 
 @Component({
   selector: 'app-input',
@@ -15,7 +15,7 @@ import { Content } from '@shared/content.model';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  protected errorMessage = Content.errorDefault;
+  protected errorMessage = ErrorTypes.errorDefault;
   public inputForm!: FormGroup;
   public externalErrorStateMatcher = new ExtrnalErrorStateMatcher();
 
@@ -41,18 +41,18 @@ export class InputComponent {
         platform: this.userInput.extractPlatform(this.inputForm.value.video),
         videoId: this.userInput.extractId(this.inputForm.value.video),
       };
-      if (!this.data.checkVideoIn(dataToFetch.videoId)){
-        this.errorMessage = Content.errorVideoExist;
+      if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)){
+        this.errorMessage = ErrorTypes.errorVideoExist;
         this.externalErrorStateMatcher.setErrorStateTrue()
       } 
-      if(this.data.checkVideoIn(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
+      if(this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
         this.youtube.fetchVideo(`${dataToFetch.videoId}`);
       }
-      if (this.data.checkVideoIn(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.vimeo) {
+      if (this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.vimeo) {
         this.vimeo.fetchVideo(`${dataToFetch.videoId}`);
       }
     } else {
-      this.errorMessage = Content.errorUrl
+      this.errorMessage = ErrorTypes.errorUrl
       this.externalErrorStateMatcher.setErrorStateTrue();
     }
 
