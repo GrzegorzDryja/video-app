@@ -56,7 +56,10 @@ export class MenuComponent {
   }
 
   public onDeleteList(): void {
-    const dialog = this.dialog.open(DialogComponent);
+    const dialog = this.dialog.open(DialogComponent, {
+      data: Content.questionDeletAll,
+    });
+
     dialog.afterClosed().subscribe((result) => (result ? this.data.deleteVideos() : this.dialog.closeAll()));
   }
 }
