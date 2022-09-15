@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { environment } from '@environments/environment';
 import { MaterialIcons } from '@shared/material-icons.model';
@@ -7,6 +8,7 @@ import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
+import { Messages } from '@shared/messages.model';
 
 @Component({
   selector: 'app-item',
@@ -29,7 +31,7 @@ export class ItemComponent implements OnInit {
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(private data: DataService, private dialog: MatDialog) {}
+  constructor(private data: DataService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
@@ -41,6 +43,10 @@ export class ItemComponent implements OnInit {
     this.viewCount = this.video.viewCount;
     this.favorite = this.video.favorite;
     this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
+
+    this.snackBar.open(Messages.dodales_film_do_ulubionych, Messages.zamknij, {
+      duration: 5000,
+    });
   }
 
   public onFavoriteClick(id: string): void {
@@ -51,6 +57,10 @@ export class ItemComponent implements OnInit {
 
   public onDeleteClick(id: string): void {
     this.data.deleteVideo(id);
+
+    this.snackBar.open(Messages.usunales_film, Messages.zamknij, {
+      duration: 5000,
+    });
   }
 
   public playRightPlatform(source: string, id: string): void {
