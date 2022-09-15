@@ -6,8 +6,8 @@ import { DataService } from '@core/services/data.service';
 import { YoutubeService } from '@services/youtube.service';
 import { VimeoService } from '@services/vimeo.service';
 import { VideoPlatform } from '@shared/video-platform.model';
-import { ExtrnalErrorStateMatcher } from './external-error-state-matcher';
 import { ErrorTypes } from '@shared/errorsTypes.model';
+import { inputValidator } from '@features/input/input.validator';
 
 @Component({
   selector: 'app-input',
@@ -15,9 +15,8 @@ import { ErrorTypes } from '@shared/errorsTypes.model';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent {
-  protected errorMessage = ErrorTypes.errorDefault;
+  protected errorMessage = ErrorTypes.errorLength;
   public inputForm!: FormGroup;
-  public externalErrorStateMatcher = new ExtrnalErrorStateMatcher();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,31 +28,29 @@ export class InputComponent {
 
   ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
-      video: [],
+      video: [
+        '',
+        {
+          validators: [inputValidator()],
+        },
+      ],
     });
   }
 
   public onAddVideo(): void {
-    this.externalErrorStateMatcher.setErrorStateFalse();
-
     if (this.userInput.validatePath(this.inputForm.value.video)) {
       const dataToFetch = {
         platform: this.userInput.extractPlatform(this.inputForm.value.video),
         videoId: this.userInput.extractId(this.inputForm.value.video),
       };
-      if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)){
-        this.errorMessage = ErrorTypes.errorVideoExist;
-        this.externalErrorStateMatcher.setErrorStateTrue()
-      } 
-      if(this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
+      if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)) {
+      }
+      if (this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
         this.youtube.fetchVideo(`${dataToFetch.videoId}`);
       }
       if (this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.vimeo) {
         this.vimeo.fetchVideo(`${dataToFetch.videoId}`);
       }
-    } else {
-      this.errorMessage = ErrorTypes.errorUrl
-      this.externalErrorStateMatcher.setErrorStateTrue();
     }
 
     this.inputForm.reset();
