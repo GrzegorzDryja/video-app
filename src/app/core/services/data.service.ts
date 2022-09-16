@@ -12,10 +12,11 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class DataService {
   private lastDeletedVideo: Video | undefined;
+  private love = false;
+  private sortByDateSwitch = true;
+
   public userVideosList: Videos = [];
   public subject = new Subject<Videos>();
-
-  private love = false;
 
   constructor(private localStorageService: LocalStorageService) {}
 
@@ -75,7 +76,8 @@ export class DataService {
   }
 
   public sortByDate(dateSortSwitch: boolean): void {
-    dateSortSwitch
+    this.sortByDateSwitch = dateSortSwitch;
+    this.sortByDateSwitch
       ? this.userVideosList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       : this.userVideosList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     this.updateSubjectAndLocalStorage();
@@ -99,6 +101,7 @@ export class DataService {
 
   public undoVideo(): void {
     this.userVideosList.push(this.lastDeletedVideo!);
+    this.sortByDate(this.sortByDateSwitch);
     this.updateSubjectAndLocalStorage();
   }
 }
