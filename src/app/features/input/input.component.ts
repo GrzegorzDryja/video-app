@@ -46,7 +46,7 @@ export class InputComponent implements OnInit {
       videoId: this.userInput.extractId(this.inputForm.value.video),
     };
 
-    if (!!dataToFetch?.platform) {
+    if (!!dataToFetch?.platform || dataToFetch?.platform === VideoPlatform.notSupported) {
       //Snack bar
       return;
     }
@@ -55,7 +55,7 @@ export class InputComponent implements OnInit {
       //Snack bar
       return;
     }
-
+ 
     dataToFetch.platform === VideoPlatform.vimeo
       ? this.vimeo.fetchVideo(dataToFetch.videoId)
       : this.youtube.fetchVideo(dataToFetch.videoId);

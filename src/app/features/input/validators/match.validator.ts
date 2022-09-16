@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { YOUTUBE_ID, VIMEO_ID } from '@core/models/validation.model';
+import { YOUTUBE_ID_VALIDATION, VIMEO_ID_VALIDATION } from '@core/models/validation.model';
 
 export function inputMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -12,7 +12,7 @@ export function inputMatchValidator(): ValidatorFn {
     if (value.includes('vimeo') || value.includes('youtube')) {
       return null
     }
-    if (YOUTUBE_ID.test(value) || VIMEO_ID.test(value)) {
+    if (YOUTUBE_ID_VALIDATION.test(value) || VIMEO_ID_VALIDATION.test(value)) {
       return null
     }
     return { matchValid: true }

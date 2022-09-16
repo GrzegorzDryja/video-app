@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { YOUTUBE_ID, VIMEO_ID } from '@models/validation.model';
+import { YOUTUBE_ID, VIMEO_ID, VIMEO_ID_VALIDATION, YOUTUBE_ID_VALIDATION } from '@models/validation.model';
 import { VideoPlatform } from '@shared/video-platform.model';
 
 @Injectable({
@@ -18,6 +18,12 @@ export class UserInputService {
   }
 
   public extractPlatform(data: string): string {
-    return data.includes(VideoPlatform.vimeo) ? VideoPlatform.vimeo : VideoPlatform.youtube;
+    if (data.includes(VideoPlatform.vimeo) || VIMEO_ID_VALIDATION.test(data)) {
+      return VideoPlatform.vimeo
+    }
+    if (data.includes(VideoPlatform.youtube) || YOUTUBE_ID_VALIDATION.test(data)) {
+      return VideoPlatform.youtube
+    }
+    return VideoPlatform.notSupported
   }
 }
