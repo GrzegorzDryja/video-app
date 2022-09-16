@@ -11,7 +11,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class DataService {
-  private lastDeletedVideo: Video | undefined;
+  private lastDeletedVideo!: Video;
   private love = false;
   private sortByDateSwitch = true;
 
