@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';
 import { YoutubeService } from '@services/youtube.service';
 import { VimeoService } from '@services/vimeo.service';
-import { VideoPlatform } from '@shared/video-platform.model';
 import { ErrorTypes } from '@shared/errorsTypes.model';
-import { inputValidator } from '@features/input/input.validator';
-import { Subscription } from 'rxjs';
+import { inputMatchValidator } from '@features/input/validators/match.validator';
+import { VideoPlatform } from '@shared/video-platform.model';
+import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent {
-  protected errorMessage = ErrorTypes.errorLength;
+export class InputComponent implements OnInit {
+  protected errorMessageLength = ErrorTypes.errorLength;
+  protected errorMessageURL = ErrorTypes.errorUrl;
+
   public inputForm!: FormGroup;
 
   constructor(
@@ -27,9 +29,14 @@ export class InputComponent {
     private vimeo: VimeoService
   ) {}
 
-  private ngOnInit(): void {
+  public ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
-      video: ['', { validators: [inputValidator()] }],
+      video: ['', {
+        validators: [
+        Validators.minLength(ID_LENGTH),
+        Validators.maxLength(MAX_LINK_LENGTH),
+        inputMatchValidator()
+      ]}],
     });
   }
 
@@ -38,15 +45,19 @@ export class InputComponent {
       platform: this.userInput.extractPlatform(this.inputForm.value.video),
       videoId: this.userInput.extractId(this.inputForm.value.video),
     };
-    const fetchPlatform: any = {
-      youtube: () => this.youtube.fetchVideo(`${dataToFetch.videoId}`),
-      vimeo: () => this.vimeo.fetchVideo(`${dataToFetch.videoId}`),
-    };
+
+    if (!!dataToFetch?.platform) {
+      //Snack bar
+      return;
+    }
 
     if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)) {
-      //Po zatwierdzeniu snack bara wyrzucę tu komunikat
-    } else {
-      fetchPlatform[dataToFetch.platform]();
+      //Snack bar
+      return;
     }
+
+    dataToFetch.platform === VideoPlatform.vimeo
+      ? this.vimeo.fetchVideo(dataToFetch.videoId)
+      : this.youtube.fetchVideo(dataToFetch.videoId);
   }
 }
