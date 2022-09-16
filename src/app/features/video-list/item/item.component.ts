@@ -22,7 +22,6 @@ export class ItemComponent implements OnInit {
   protected platform!: string;
   protected thumnbnailPath!: string;
   protected videoId!: string;
-  protected id!: number;
   protected title!: string;
   protected dateObj!: Date;
   protected viewCount!: string;
@@ -37,17 +36,12 @@ export class ItemComponent implements OnInit {
   public ngOnInit(): void {
     this.platform = this.video.platform;
     this.thumnbnailPath = this.video.img;
-    this.id = this.video.id;
     this.videoId = this.video.videoId;
     this.title = this.video.title;
     this.dateObj = this.video.date;
     this.viewCount = this.video.viewCount;
     this.favorite = this.video.favorite;
     this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-
-    this.snackBar.open(Messages.video_added, Messages.close, {
-      duration: SnackBar.duration,
-    });
   }
 
   public onFavoriteClick(id: string): void {
@@ -59,9 +53,12 @@ export class ItemComponent implements OnInit {
   public onDeleteClick(id: string): void {
     this.data.deleteVideo(id);
 
-    this.snackBar.open(Messages.video_deleted, Messages.close, {
-      duration: 5000,
-    });
+    this.snackBar
+      .open(Messages.video_deleted, Messages.undo, {
+        duration: SnackBar.duration,
+      })
+      .onAction()
+      .subscribe(() => this.data.undoVideo());
   }
 
   public playRightPlatform(source: string, id: string): void {

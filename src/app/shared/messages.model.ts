@@ -4,4 +4,5 @@ export enum Messages {
   video_added = 'Dodałeś film do listy.',
   video_list_deleted = 'Usunąłeś listę',
   close = 'Zamknij',
+  undo = 'Cofnij'
 }

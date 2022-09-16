@@ -53,7 +53,7 @@ export class MenuComponent {
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
 
-    this.data.sortByDate();
+    this.data.sortByDate(this.dateSortSwitch);
   }
 
   public onDeleteList(): void {
