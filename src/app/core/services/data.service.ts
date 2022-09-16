@@ -65,8 +65,9 @@ export class DataService {
   }
 
   public deleteVideo(videoId: string): void {
-    this.lastDeletedVideo = this.userVideosList.find((video) => video.videoId === videoId);
-    this.userVideosList = this.userVideosList.filter((video) => video.videoId !== videoId);
+    const lastDeletedVideoIndex = this.userVideosList.findIndex((video) => video.videoId === videoId);
+    this.lastDeletedVideo = this.userVideosList[lastDeletedVideoIndex];
+    this.userVideosList.splice(lastDeletedVideoIndex, 1)
     this.updateSubjectAndLocalStorage();
   }
 
