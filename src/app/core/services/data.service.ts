@@ -95,7 +95,7 @@ export class DataService {
     this.subject.next(this.userVideosList);
   }
 
-  public checkIfVideoIdIsOnTheList(id: string){
-    return this.userVideosList.every(el => el.videoId !== id)
+  public checkIfVideoIdIsOnTheList(id: string) {
+    return this.userVideosList.length === 0 ? true : this.userVideosList.every((el) => el.videoId !== id);
   }
 }

@@ -8,6 +8,7 @@ import { VimeoService } from '@services/vimeo.service';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { ErrorTypes } from '@shared/errorsTypes.model';
 import { inputValidator } from '@features/input/input.validator';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-input',
@@ -26,33 +27,26 @@ export class InputComponent {
     private vimeo: VimeoService
   ) {}
 
-  ngOnInit(): void {
+  private ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
-      video: [
-        '',
-        {
-          validators: [inputValidator()],
-        },
-      ],
+      video: ['', { validators: [inputValidator()] }],
     });
   }
 
   public onAddVideo(): void {
-    if (this.userInput.validatePath(this.inputForm.value.video)) {
-      const dataToFetch = {
-        platform: this.userInput.extractPlatform(this.inputForm.value.video),
-        videoId: this.userInput.extractId(this.inputForm.value.video),
-      };
-      if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)) {
-      }
-      if (this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.youtube) {
-        this.youtube.fetchVideo(`${dataToFetch.videoId}`);
-      }
-      if (this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId) && dataToFetch.platform === VideoPlatform.vimeo) {
-        this.vimeo.fetchVideo(`${dataToFetch.videoId}`);
-      }
-    }
+    const dataToFetch: { platform: string; videoId: string } = {
+      platform: this.userInput.extractPlatform(this.inputForm.value.video),
+      videoId: this.userInput.extractId(this.inputForm.value.video),
+    };
+    const fetchPlatform: any = {
+      youtube: () => this.youtube.fetchVideo(`${dataToFetch.videoId}`),
+      vimeo: () => this.vimeo.fetchVideo(`${dataToFetch.videoId}`),
+    };
 
-    this.inputForm.reset();
+    if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)) {
+      //Po zatwierdzeniu snack bara wyrzucę tu komunikat
+    } else {
+      fetchPlatform[dataToFetch.platform]();
+    }
   }
 }
