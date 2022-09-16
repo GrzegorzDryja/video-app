@@ -5,6 +5,7 @@ import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
 import { Messages } from '@shared/messages.model';
+import { SnackBar } from '@shared/snack-bar.model';
 
 @Component({
   selector: 'app-menu',
@@ -58,8 +59,8 @@ export class MenuComponent {
   public onDeleteList(): void {
     this.data.deleteVideos();
 
-    this.snackBar.open(Messages.usunales_liste, Messages.zamknij, {
-      duration: 5000
+    this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+      duration: SnackBar.duration
     })
   }
 }

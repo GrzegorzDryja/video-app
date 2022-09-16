@@ -9,6 +9,7 @@ import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
 import { Messages } from '@shared/messages.model';
+import { SnackBar } from '@shared/snack-bar.model';
 
 @Component({
   selector: 'app-item',
@@ -44,8 +45,8 @@ export class ItemComponent implements OnInit {
     this.favorite = this.video.favorite;
     this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
 
-    this.snackBar.open(Messages.dodales_film_do_ulubionych, Messages.zamknij, {
-      duration: 5000,
+    this.snackBar.open(Messages.video_added, Messages.close, {
+      duration: SnackBar.duration,
     });
   }
 
@@ -58,7 +59,7 @@ export class ItemComponent implements OnInit {
   public onDeleteClick(id: string): void {
     this.data.deleteVideo(id);
 
-    this.snackBar.open(Messages.usunales_film, Messages.zamknij, {
+    this.snackBar.open(Messages.video_deleted, Messages.close, {
       duration: 5000,
     });
   }
