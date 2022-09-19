@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Content } from '@shared/content.model';
+import { MAT_DIALOG } from './dialog.model';
 
 @Component({
   selector: 'app-dialog',
@@ -13,7 +14,7 @@ export class DialogComponent implements OnInit {
   protected yes = Content.yes;
   protected no = Content.no;
   protected close = Content.close;
-  protected acstionStatus = false;
+  protected acstionStatus = Boolean(MAT_DIALOG.actionRequiredFalse);
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,

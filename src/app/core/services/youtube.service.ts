@@ -16,12 +16,15 @@ export class YoutubeService {
 
   public fetchVideo(videoId: string): void {
     this.http
-    .get<YouTubeResponse>(`${environment.youTubeApiURL}${videoId}${environment.youTubeApiKeyAndOptions}`)
-    .subscribe((responseData) => {
-      if(!responseData.items.length) {
-        this.matDialog.open(ErrorTypes.errorUrl, MAT_DIALOG.actionRequiredFalse)
-      }
-      this.data.addYouTubeVideo(<YouTubeResponse>responseData)
-    })
+      .get<YouTubeResponse>(`${environment.youTubeApiURL}${videoId}${environment.youTubeApiKeyAndOptions}`)
+      .subscribe({
+        next: (responseData) => {
+          if (!responseData.items.length) {
+            this.matDialog.open(ErrorTypes.errorUrl, MAT_DIALOG.actionRequiredFalse);
+          }
+          this.data.addYouTubeVideo(<YouTubeResponse>responseData);
+        },
+        error: (e) => this.matDialog.open(e.message, MAT_DIALOG.actionRequiredFalse),
+      });
   }
 }
