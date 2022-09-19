@@ -31,12 +31,7 @@ export class InputComponent implements OnInit {
 
   public ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
-      video: ['', {
-        validators: [
-        Validators.minLength(ID_LENGTH),
-        Validators.maxLength(MAX_LINK_LENGTH),
-        inputMatchValidator()
-      ]}],
+      video: ['', [Validators.minLength(ID_LENGTH), Validators.maxLength(MAX_LINK_LENGTH), inputMatchValidator()]],
     });
   }
 
@@ -46,7 +41,7 @@ export class InputComponent implements OnInit {
       videoId: this.userInput.extractId(this.inputForm.value.video),
     };
 
-    if (!!dataToFetch?.platform || dataToFetch?.platform === VideoPlatform.notSupported) {
+    if (dataToFetch?.platform === VideoPlatform.notSupported) {
       //Snack bar
       return;
     }
@@ -55,7 +50,7 @@ export class InputComponent implements OnInit {
       //Snack bar
       return;
     }
- 
+
     dataToFetch.platform === VideoPlatform.vimeo
       ? this.vimeo.fetchVideo(dataToFetch.videoId)
       : this.youtube.fetchVideo(dataToFetch.videoId);

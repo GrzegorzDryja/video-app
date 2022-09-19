@@ -1,9 +1,10 @@
 <section>
   <form [formGroup]="inputForm" (submit)="onAddVideo()">
     <mat-form-field appearance="fill">
-        <mat-label>Tutaj wklej link do filmu</mat-label>
-        <input matInput placeholder="https://youtube..." formControlName="video">
-        <mat-error>{{ errorMessageURL }}</mat-error>
+      <mat-label>Tutaj wklej link do filmu</mat-label>
+      <input matInput placeholder="https://youtube..." formControlName="video" #f />
+      <mat-error *ngIf="inputForm.controls['video'].hasError('matchValid')">{{ errorMessageURL }}</mat-error>
+      <mat-error *ngIf="inputForm.controls['video'].hasError('minlength')">{{ errorMessageLength }}</mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary" [disabled]="!inputForm.valid">Dodaj</button>
   </form>
