@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { environment } from '@environments/environment';
 import { MaterialIcons } from '@shared/material-icons.model';
@@ -7,6 +8,8 @@ import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
+import { Messages } from '@shared/messages.model';
+import { SnackBar } from '@shared/snack-bar.model';
 
 @Component({
   selector: 'app-item',
@@ -19,7 +22,6 @@ export class ItemComponent implements OnInit {
   protected platform!: string;
   protected thumnbnailPath!: string;
   protected videoId!: string;
-  protected id!: number;
   protected title!: string;
   protected dateObj!: Date;
   protected viewCount!: string;
@@ -29,12 +31,11 @@ export class ItemComponent implements OnInit {
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(private data: DataService, private dialog: MatDialog) {}
+  constructor(private data: DataService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
     this.thumnbnailPath = this.video.img;
-    this.id = this.video.id;
     this.videoId = this.video.videoId;
     this.title = this.video.title;
     this.dateObj = this.video.date;
@@ -51,6 +52,13 @@ export class ItemComponent implements OnInit {
 
   public onDeleteClick(id: string): void {
     this.data.deleteVideo(id);
+
+    this.snackBar
+      .open(Messages.video_deleted, Messages.undo, {
+        duration: SnackBar.duration,
+      })
+      .onAction()
+      .subscribe(() => this.data.undoVideo());
   }
 
   public playRightPlatform(source: string, id: string): void {

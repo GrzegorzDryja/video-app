@@ -1,6 +1,5 @@
 export type Video = {
   platform: string;
-  id: number;
   favorite: boolean;
   date: Date;
   videoId: string;
