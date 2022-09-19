@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
+import { DialogComponent } from '@shared/dialog/dialog.component';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
 
@@ -29,8 +31,8 @@ export class MenuComponent {
   protected tooltipLoved = Content.tooltipLoved;
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
-
-  constructor(private data: DataService, private snackBar: MatSnackBar) {}
+  
+  constructor(private data: DataService, public dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -57,6 +59,10 @@ export class MenuComponent {
   }
 
   public onDeleteList(): void {
+    const dialog = this.dialog.open(DialogComponent, {
+      data: Content.questionDeletAll,
+    });
+    dialog.afterClosed().subscribe((result) => (result ? this.data.deleteVideos() : this.dialog.closeAll()));
     this.data.deleteVideos();
 
     this.snackBar.open(Messages.video_list_deleted, Messages.close, {

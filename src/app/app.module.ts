@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
+import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent } from '@features/index';
+import { DialogComponent } from '@shared/dialog/dialog.component';
 import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent  } from '@features/index';
 
 @NgModule({
@@ -16,7 +18,8 @@ import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, Inpu
     VideoListComponent,
     MenuComponent,
     PlayerComponent,
-    ItemComponent
+    ItemComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
