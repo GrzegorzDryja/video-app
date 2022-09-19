@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';
@@ -9,6 +10,8 @@ import { ErrorTypes } from '@shared/errorsTypes.model';
 import { inputMatchValidator } from '@features/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
+import { SnackBar } from '@shared/snack-bar.model';
+import { Messages } from '@shared/messages.model';
 
 @Component({
   selector: 'app-input',
@@ -27,7 +30,8 @@ export class InputComponent implements OnInit {
     private userInput: UserInputService,
     private data: DataService,
     private youtube: YoutubeService,
-    private vimeo: VimeoService
+    private vimeo: VimeoService,
+    private snackBar: MatSnackBar
   ) {}
 
   public ngOnInit(): void {
@@ -43,17 +47,23 @@ export class InputComponent implements OnInit {
     };
 
     if (dataToFetch?.platform === VideoPlatform.notSupported) {
-      //Snack bar
+      this.snackBar.open(Messages.video_not_supported, Messages.close, {
+        duration: SnackBar.duration,
+      });
       return;
     }
 
     if (!this.data.checkIfVideoIdIsOnTheList(dataToFetch.videoId)) {
-      //Snack bar
+      this.snackBar.open(Messages.video_is_on_the_list, Messages.close, {
+        duration: SnackBar.duration,
+      });
       return;
     }
 
     dataToFetch.platform === VideoPlatform.vimeo
       ? this.vimeo.fetchVideo(dataToFetch.videoId)
       : this.youtube.fetchVideo(dataToFetch.videoId);
+
+    this.inputForm.reset();
   }
 }

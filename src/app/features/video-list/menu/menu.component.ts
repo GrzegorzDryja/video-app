@@ -31,7 +31,7 @@ export class MenuComponent {
   protected tooltipLoved = Content.tooltipLoved;
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
-  
+
   constructor(private data: DataService, public dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   public loadDemo(): void {
@@ -62,11 +62,16 @@ export class MenuComponent {
     const dialog = this.dialog.open(DialogComponent, {
       data: Content.questionDeletAll,
     });
-    dialog.afterClosed().subscribe((result) => (result ? this.data.deleteVideos() : this.dialog.closeAll()));
-    this.data.deleteVideos();
 
-    this.snackBar.open(Messages.video_list_deleted, Messages.close, {
-      duration: SnackBar.duration
-    })
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.data.deleteVideos();
+        this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+          duration: SnackBar.duration,
+        });
+      } else {
+        this.dialog.closeAll();
+      }
+    });
   }
 }

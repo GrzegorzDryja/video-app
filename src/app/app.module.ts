@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent } from '@features/index';
 import { DialogComponent } from '@shared/dialog/dialog.component';
-import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent  } from '@features/index';
+import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent } from '@features/index';
 
 @NgModule({
   declarations: [
@@ -19,18 +18,11 @@ import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, Inpu
     MenuComponent,
     PlayerComponent,
     ItemComponent,
-    DialogComponent
+    DialogComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, MaterialModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [PlayerComponent]
+  entryComponents: [PlayerComponent],
 })
-export class AppModule { }
+export class AppModule {}
