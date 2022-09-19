@@ -16,7 +16,8 @@ import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  protected errorMessageLength = ErrorTypes.errorLength;
+  protected errorMessageMinLength = ErrorTypes.errorMinLength;
+  protected errorMessageMaxLength = ErrorTypes.errorMaxLength;
   protected errorMessageURL = ErrorTypes.errorUrl;
 
   public inputForm!: FormGroup;
