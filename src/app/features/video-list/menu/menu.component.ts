@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
-import { DialogComponent } from '@shared/dialog/dialog.component';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
+import { MatDialogService } from '@core/services/mat-dialog.service';
+import { MAT_DIALOG } from '@shared/dialog/dialog.model';
 
 @Component({
   selector: 'app-menu',
@@ -32,7 +32,7 @@ export class MenuComponent {
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  constructor(private data: DataService, public dialog: MatDialog, private snackBar: MatSnackBar) {}
+  constructor(private data: DataService, public dialog: MatDialogService, private snackBar: MatSnackBar) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -58,20 +58,17 @@ export class MenuComponent {
     this.data.sortByDate(this.dateSortSwitch);
   }
 
-  public onDeleteList(): void {
-    const dialog = this.dialog.open(DialogComponent, {
-      data: Content.questionDeletAll,
-    });
-
-    dialog.afterClosed().subscribe((result) => {
-      if (result) {
-        this.data.deleteVideos();
-        this.snackBar.open(Messages.video_list_deleted, Messages.close, {
-          duration: SnackBar.duration,
-        });
-      } else {
+  public onDeleteList(): void {    
+    this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
+    this.dialog.afterClosed().subscribe((result) => {
+      if (!result) {
         this.dialog.closeAll();
+      return;      
       }
-    });
+      this.data.deleteVideos();
+      this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+        duration: SnackBar.duration,
+      });
+    })
   }
 }

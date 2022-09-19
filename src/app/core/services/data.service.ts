@@ -25,7 +25,7 @@ export class DataService {
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
-  public addYouTubeVideo(resp: YouTubeResponse): void {
+  public addYouTubeVideo(responseData: YouTubeResponse): void {
     this.userVideosList.push({
       platform: VideoPlatform.youtube,
       favorite: false,

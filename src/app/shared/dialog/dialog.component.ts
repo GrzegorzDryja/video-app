@@ -9,13 +9,19 @@ import { Content } from '@shared/content.model';
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent implements OnInit {
-    public content = (Content.questionDefault).toString();
-    public yes = Content.yes;
-    public no = Content.no;
+  protected content = Content.questionDefault.toString();
+  protected yes = Content.yes;
+  protected no = Content.no;
+  protected close = Content.close;
+  protected acstionStatus = false;
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: string) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { content: string; actionStatus: boolean }
+  ) {}
 
   ngOnInit() {
-    this.content = this.data;
+    this.content = this.data.content;
+    this.acstionStatus = this.data.actionStatus;
   }
 }
