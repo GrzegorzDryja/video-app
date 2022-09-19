@@ -105,4 +105,8 @@ export class DataService {
     this.sortByDate(this.sortByDateSwitch);
     this.updateSubjectAndLocalStorage();
   }
+  
+  public checkIfVideoIdIsOnTheList(id: string) {
+    return this.userVideosList.length === 0 ? true : this.userVideosList.every((el) => el.videoId !== id);
+  }
 }

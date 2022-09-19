@@ -21,7 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    MatSnackBarModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
@@ -33,7 +33,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    MatSnackBarModule,
+    MatSnackBarModule
   ],
 })
 export class MaterialModule {}
