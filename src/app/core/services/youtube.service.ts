@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { YouTubeResponse } from '@models/youtube.model';
@@ -12,9 +13,12 @@ import { DataService } from '@services/data.service';
 export class YoutubeService {
   constructor(private http: HttpClient, private data: DataService) {}
 
-  public fetchVideo(videoId: string): Subscription {
-    return this.http
-      .get(`${environment.youTubeApiURL}${videoId}${environment.youTubeApiKeyAndOptions}`)
-      .subscribe((resp) => this.data.addYouTubeVideo(<YouTubeResponse>resp));
+  public fetchVideo(videoId: string): void {
+    this.http
+    .get(`${environment.youTubeApiURL}${videoId}${environment.youTubeApiKeyAndOptions}`)
+    .pipe(
+      map((responseData) => this.data.addYouTubeVideo(<YouTubeResponse>responseData)),
+      catchError((errorRes) => errorRes)
+    );
   }
 }
