@@ -16,6 +16,7 @@ import { VideoPlatform } from '@shared/video-platform.model';
 import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { Messages } from '@shared/messages.model';
+import { Content } from '@shared/content.model';
 
 @Component({
   selector: 'app-input',
@@ -26,6 +27,8 @@ export class InputComponent implements OnInit {
   protected errorMessageMinLength = ErrorTypes.errorMinLength;
   protected errorMessageMaxLength = ErrorTypes.errorMaxLength;
   protected errorMessageURL = ErrorTypes.errorUrl;
+  protected addButton = Content.addButton;
+  protected inputLabel = Content.inputLabel;
   protected isLoading$: Observable<boolean>;
 
   public inputForm!: FormGroup;
