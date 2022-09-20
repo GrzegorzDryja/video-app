@@ -2,7 +2,7 @@
   <form [formGroup]="inputForm" (submit)="onAddVideo()">
     <mat-form-field appearance="fill">
       <mat-label>Tutaj wklej link do filmu</mat-label>
-      <input matInput placeholder="https://youtube..." formControlName="video" #f />
+      <input matInput placeholder="https://youtube..." formControlName="video" />
       <mat-error *ngIf="inputForm.controls['video'].hasError('minlength')">{{ errorMessageMinLength }}</mat-error>
       <mat-error *ngIf="inputForm.controls['video'].hasError('maxlength')">{{ errorMessageMaxLength }}</mat-error>
       <mat-error *ngIf="inputForm.controls['video'].hasError('matchValid')">{{ errorMessageURL }}</mat-error>

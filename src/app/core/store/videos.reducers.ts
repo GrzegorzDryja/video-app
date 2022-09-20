@@ -94,7 +94,11 @@ export const reducers = createReducer(
     error: action.error,
   })),
 
-  on(VideosActions.addVideo, (state) => ({
+  on(VideosActions.addVimeoVideo, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(VideosActions.addYouTubeVideo, (state) => ({
     ...state,
     isLoading: true,
   })),

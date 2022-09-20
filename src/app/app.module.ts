@@ -35,7 +35,7 @@ import { VideosModule } from '@core/store/videos.module';
     HttpClientModule,
     VideosModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],

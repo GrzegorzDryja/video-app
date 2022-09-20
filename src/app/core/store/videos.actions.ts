@@ -33,7 +33,9 @@ export const deleteVideosList = createAction('[Videos] Delete Videos List');
 export const deleteVideosListSucces = createAction('[Videos] Delete Videos List succes', props<{ videos: Videos }>());
 export const deleteVideosListFailure = createAction('[Videos] Delete Videos List error', props<{ error: string }>());
 
-export const addVideo = createAction('[Videos] Add Video');
+export const addYouTubeVideo = createAction('[Videos] Add YouTube Video', props<{ videoPlatform: string, videoId: string }>());
+export const addVimeoVideo = createAction('[Videos] Add Vimeo Video', props<{ videoPlatform: string, videoId: string }>());
+
 export const addVideoSucces = createAction('[Videos] Add Video succes', props<{ videos: Videos }>());
 export const addVideoFailure = createAction('[Videos] Add Video error', props<{ error: string }>());
 

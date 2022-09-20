@@ -25,7 +25,7 @@ export class DataService {
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
-  public addYouTubeVideo(responseData: YouTubeResponse): void {
+  public addYouTubeVideo(responseData: YouTubeResponse): Videos {
     this.userVideosList.push({
       platform: VideoPlatform.youtube,
       favorite: false,
@@ -36,9 +36,11 @@ export class DataService {
       viewCount: responseData.items[0].statistics.viewCount,
     });
     this.updateSubjectAndLocalStorage();
+
+    return this.userVideosList
   }
 
-  public addVimeoVideo(responseData: VimeoResponse): void {
+  public addVimeoVideo(responseData: VimeoResponse): Videos {
     this.userVideosList.push({
       platform: VideoPlatform.vimeo,
       favorite: false,
@@ -49,6 +51,8 @@ export class DataService {
       viewCount: 'Brak danych',
     });
     this.updateSubjectAndLocalStorage();
+
+    return this.userVideosList
   }
 
   public loveVideo(id: string): void {

@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as VideosActions from '@core/store/videos.actions';
+import { AppStateInterface } from '@core/models/appState.interface';
+import { isLoadingSelector } from '@core/store/videos.selectors';
+
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';
-import { YoutubeService } from '@services/youtube.service';
-import { VimeoService } from '@services/vimeo.service';
 import { ErrorTypes } from '@shared/errorsTypes.model';
 import { inputMatchValidator } from '@features/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
@@ -22,6 +26,7 @@ export class InputComponent implements OnInit {
   protected errorMessageMinLength = ErrorTypes.errorMinLength;
   protected errorMessageMaxLength = ErrorTypes.errorMaxLength;
   protected errorMessageURL = ErrorTypes.errorUrl;
+  protected isLoading$: Observable<boolean>;
 
   public inputForm!: FormGroup;
 
@@ -29,10 +34,11 @@ export class InputComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userInput: UserInputService,
     private data: DataService,
-    private youtube: YoutubeService,
-    private vimeo: VimeoService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private store: Store<AppStateInterface>
+  ) {
+    this.isLoading$ = this.store.select(isLoadingSelector);
+  }
 
   public ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
@@ -61,8 +67,12 @@ export class InputComponent implements OnInit {
     }
 
     dataToFetch.platform === VideoPlatform.vimeo
-      ? this.vimeo.fetchVideo(dataToFetch.videoId)
-      : this.youtube.fetchVideo(dataToFetch.videoId);
+      ? this.store.dispatch(
+          VideosActions.addVimeoVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
+        )
+      : this.store.dispatch(
+          VideosActions.addYouTubeVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
+        );
 
     this.inputForm.reset();
   }

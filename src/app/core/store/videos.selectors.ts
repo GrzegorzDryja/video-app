@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 
-import { VideosStateInterface } from '@core/models/videosState.interface';
+import { AppStateInterface } from '@core/models/appState.interface';
 
-export const selectFeuture = (state: VideosStateInterface) => state;
+export const selectFeuture = (state: AppStateInterface) => state.videos;
 
 export const isLoadingSelector = createSelector(selectFeuture, (state) => state.isLoading);
 export const videosSelector = createSelector(selectFeuture, (state) => state.videos);
