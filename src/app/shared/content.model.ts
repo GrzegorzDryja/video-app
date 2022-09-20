@@ -5,6 +5,7 @@ export enum Content {
     tooltipSort = 'Sortuj',
     questionDefault = "Czy na pewno?",
     questionDeletAll = 'Czy na pewno chcesz usunąć wszystkie filmy',
+    close = 'Zamknij',
     yes = 'Tak',
     no = 'Nie',
   }

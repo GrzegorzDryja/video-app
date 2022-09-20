@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Content } from '@shared/content.model';
+import { MAT_DIALOG } from './dialog.model';
 
 @Component({
   selector: 'app-dialog',
@@ -9,13 +10,19 @@ import { Content } from '@shared/content.model';
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent implements OnInit {
-    public content = (Content.questionDefault).toString();
-    public yes = Content.yes;
-    public no = Content.no;
+  protected content = Content.questionDefault.toString();
+  protected yes = Content.yes;
+  protected no = Content.no;
+  protected close = Content.close;
+  protected acstionStatus = Boolean(MAT_DIALOG.actionRequiredFalse);
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: string) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { content: string; actionStatus: boolean }
+  ) {}
 
-  ngOnInit() {
-    this.content = this.data;
+  public ngOnInit(): void {
+    this.content = this.data.content;
+    this.acstionStatus = this.data.actionStatus;
   }
 }

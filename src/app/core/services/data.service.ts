@@ -25,27 +25,27 @@ export class DataService {
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
-  public addYouTubeVideo(resp: YouTubeResponse): void {
+  public addYouTubeVideo(responseData: YouTubeResponse): void {
     this.userVideosList.push({
       platform: VideoPlatform.youtube,
       favorite: false,
       date: new Date(),
-      videoId: resp.items[0].id,
-      title: resp.items[0].snippet.title,
-      img: resp.items[0].snippet.thumbnails.default.url,
-      viewCount: resp.items[0].statistics.viewCount,
+      videoId: responseData.items[0].id,
+      title: responseData.items[0].snippet.title,
+      img: responseData.items[0].snippet.thumbnails.default.url,
+      viewCount: responseData.items[0].statistics.viewCount,
     });
     this.updateSubjectAndLocalStorage();
   }
 
-  public addVimeoVideo(resp: VimeoResponse): void {
+  public addVimeoVideo(responseData: VimeoResponse): void {
     this.userVideosList.push({
       platform: VideoPlatform.vimeo,
       favorite: false,
       date: new Date(),
-      videoId: resp.video_id.toString(),
-      title: resp.title,
-      img: resp.thumbnail_url,
+      videoId: responseData.video_id.toString(),
+      title: responseData.title,
+      img: responseData.thumbnail_url,
       viewCount: 'Brak danych',
     });
     this.updateSubjectAndLocalStorage();
