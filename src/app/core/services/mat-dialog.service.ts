@@ -15,8 +15,8 @@ export class MatDialogService {
   public open(content: string, actionStatus: boolean): void {
     this.dialog = this.matDialog.open(DialogComponent, {
       data: {
-        content: content,
-        actionStatus: actionStatus,
+        content,
+        actionStatus,
       },
     });
   }
