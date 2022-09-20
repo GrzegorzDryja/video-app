@@ -14,8 +14,7 @@ import { AppComponent } from './app.component';
 import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent } from '@features/index';
 import { DialogComponent } from '@shared/dialog/dialog.component';
 import { environment } from '../environments/environment';
-import { reducers } from '@core/store/videos.reducers';
-import { VideosEffects } from '@core/store/videos.effects';
+import { VideosModule } from '@core/store/videos.module';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,9 @@ import { VideosEffects } from '@core/store/videos.effects';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({videos: reducers}, {}),
-    EffectsModule.forRoot([VideosEffects]),
+    VideosModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
