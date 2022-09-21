@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Store } from '@ngrx/store';
+import { VideosFacade } from '@core/store/videos.facade';
 import { Observable } from 'rxjs';
 import * as VideosActions from '@core/store/videos.actions';
-import { AppStateInterface } from '@core/models/appState.interface';
-import { isLoadingSelector } from '@core/store/videos.selectors';
 
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';
@@ -38,9 +36,9 @@ export class InputComponent implements OnInit {
     private userInput: UserInputService,
     private data: DataService,
     private snackBar: MatSnackBar,
-    private store: Store<AppStateInterface>
+    private store: VideosFacade
   ) {
-    this.isLoading$ = this.store.select(isLoadingSelector);
+    this.isLoading$ = this.store.loading$;
   }
 
   public ngOnInit(): void {
@@ -70,10 +68,10 @@ export class InputComponent implements OnInit {
     }
 
     dataToFetch.platform === VideoPlatform.vimeo
-      ? this.store.dispatch(
+      ? this.store.addVimeoVideo(
           VideosActions.addVimeoVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
         )
-      : this.store.dispatch(
+      : this.store.addYouTubeVideo(
           VideosActions.addYouTubeVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
         );
 

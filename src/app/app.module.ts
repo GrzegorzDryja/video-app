@@ -15,6 +15,7 @@ import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, Inpu
 import { DialogComponent } from '@shared/dialog/dialog.component';
 import { environment } from '../environments/environment';
 import { VideosModule } from '@core/store/videos.module';
+import { VideosFacade } from '@core/store/videos.facade';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { VideosModule } from '@core/store/videos.module';
     EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
-  providers: [],
+  providers: [VideosFacade],
   bootstrap: [AppComponent],
   entryComponents: [PlayerComponent],
 })
