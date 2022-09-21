@@ -16,6 +16,7 @@ import { DialogComponent } from '@shared/dialog/dialog.component';
 import { environment } from '../environments/environment';
 import { VideosModule } from '@core/store/videos.module';
 import { VideosFacade } from '@core/store/videos.facade';
+import { FavoritePipe } from '@features/video-list/list/pipe/favorite.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { VideosFacade } from '@core/store/videos.facade';
     PlayerComponent,
     ItemComponent,
     DialogComponent,
+    FavoritePipe
   ],
   imports: [
     BrowserModule,

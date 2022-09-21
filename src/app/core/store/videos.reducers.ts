@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { VideosStateInterface } from '@core/models/videosState.interface';
 import * as VideosActions from '@core/store/videos.actions';
 import { Video, Videos } from '@core/models/video.model';
+import { Actions } from '@ngrx/effects';
 
 const initialState: VideosStateInterface = {
   isLoading: false,
@@ -19,6 +20,7 @@ const initialState: VideosStateInterface = {
     pages: 0,
     player: false,
   },
+  showLoved: false,
 };
 
 export const reducers = createReducer(
@@ -60,17 +62,10 @@ export const reducers = createReducer(
   //   error: action.error,
   // })),
 
-  // on(VideosActions.showLovedVideos, (state) => ({ ...state, isLoading: true })),
-  // on(VideosActions.showLovedVideosSucces, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   layout: action.layout,
-  // })),
-  // on(VideosActions.showLovedVideosFailure, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   error: action.error,
-  // })),
+  on(VideosActions.showLovedVideos, (state, action) => ({
+    ...state,
+    showLoved: action.showLoved
+  })),
 
   // on(VideosActions.sortVideosByDate, (state) => ({ ...state, isLoading: true })),
   // on(VideosActions.sortVideosByDateSucces, (state, action) => ({

@@ -49,7 +49,7 @@ export class MenuComponent {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
 
-    this.data.showFavorite();
+    this.store.showLovedVideos({ showLoved: !this.favoriteSortSwith })
   }
 
   public onDateSort(): void {

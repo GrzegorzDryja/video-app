@@ -1,14 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
-import { Store } from '@ngrx/store';
-import { AppStateInterface } from '@core/models/appState.interface';
-import { videosSelector } from '@core/store/videos.selectors';
+import { VideosFacade } from '@core/store/videos.facade';
 
 import { Videos } from '@models/video.model';
 import { MaterialIcons } from '@shared/material-icons.model';
+import { Layout } from '@core/models/layout.model';
 
 @Component({
   selector: 'app-video-list',
@@ -20,6 +19,8 @@ export class VideoListComponent {
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
   
   protected videosList$: Observable<Videos>;
+  protected favorite$: Observable<boolean>
+  protected favorite = false;
 
   protected colsNumber = 1;
   protected pagedList!: Videos;
@@ -30,8 +31,9 @@ export class VideoListComponent {
   protected listBucket = MaterialIcons.delete_forever;
   public pageEvent!: PageEvent;
 
-  constructor(private store: Store<AppStateInterface>) {
-    this.videosList$ = this.store.select(videosSelector)
+  constructor(private store: VideosFacade) {
+    this.videosList$ = this.store.videos$
+    this.favorite$ = this.store.favorite$
   }
 
   public onChangeGridStyle(colsNum: number): void {
