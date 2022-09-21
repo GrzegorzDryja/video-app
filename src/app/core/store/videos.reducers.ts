@@ -84,17 +84,7 @@ export const reducers = createReducer(
     error: action.error,
   })),
 
-  on(VideosActions.deleteVideosList, (state) => ({ ...state, isLoading: true })),
-  on(VideosActions.deleteVideosListSucces, (state, action) => ({
-    ...state,
-    isLoading: false,
-    videos: action.videos,
-  })),
-  on(VideosActions.deleteVideosListFailure, (state, action) => ({
-    ...state,
-    isLoading: false,
-    error: action.error,
-  })),
+  on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
 
   on(VideosActions.addVimeoVideo, (state) => ({
     ...state,

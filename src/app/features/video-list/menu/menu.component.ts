@@ -8,6 +8,7 @@ import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
+import { VideosFacade } from '@core/store/videos.facade';
 
 @Component({
   selector: 'app-menu',
@@ -32,7 +33,7 @@ export class MenuComponent {
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  constructor(private data: DataService, public dialog: MatDialogService, private snackBar: MatSnackBar) {}
+  constructor(private data: DataService, public dialog: MatDialogService, private snackBar: MatSnackBar, private store: VideosFacade) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -65,7 +66,7 @@ export class MenuComponent {
         this.dialog.closeAll();
       return;      
       }
-      this.data.deleteVideos();
+      this.store.deleteVideosList()
       this.snackBar.open(Messages.video_list_deleted, Messages.close, {
         duration: SnackBar.duration,
       });

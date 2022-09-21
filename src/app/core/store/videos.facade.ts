@@ -27,6 +27,10 @@ export class VideosFacade {
   }
 
   public undoLastVideo(): void {
-    this.store.dispatch(actions.undoLastVideo())
+    this.store.dispatch(actions.undoLastVideo());
+  }
+
+  public deleteVideosList(): void {
+    this.store.dispatch(actions.deleteVideosList());
   }
 }

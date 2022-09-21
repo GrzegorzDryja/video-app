@@ -30,8 +30,6 @@ export const sortVideosByDateSucces = createAction('[Videos] Sort Videos By Date
 export const sortVideosByDateFailure = createAction('[Videos] Sort Videos By Date error', props<{ error: string }>());
 
 export const deleteVideosList = createAction('[Videos] Delete Videos List');
-export const deleteVideosListSucces = createAction('[Videos] Delete Videos List succes', props<{ videos: Videos }>());
-export const deleteVideosListFailure = createAction('[Videos] Delete Videos List error', props<{ error: string }>());
 
 export const addYouTubeVideo = createAction(
   '[Videos] Add YouTube Video',
@@ -45,7 +43,6 @@ export const addVideoSucces = createAction('[Videos] Add Video succes', props<{ 
 export const addVideoFailure = createAction('[Videos] Add Video error', props<{ error: string }>());
 
 export const deleteVideo = createAction('[Videos] Delete Video', props<{ videoId: string }>());
-
 export const undoLastVideo = createAction('[Videos] Undo Last Deleted Video');
 
 export const loveVideo = createAction('[Videos] Love Video');
