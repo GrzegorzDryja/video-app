@@ -1,20 +1,24 @@
 import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+
+import { videosSelector } from '@core/store/videos.selectors';
 
 import { Videos } from '@models/video.model';
-import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
+import { Store } from '@ngrx/store';
+import { AppStateInterface } from '@core/models/appState.interface';
 
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss'],
 })
-export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
+export class VideoListComponent implements AfterContentInit, OnDestroy {
+  protected videosList$: Observable<Videos>;
+
   protected colsNumber = 1;
   protected subscription!: Subscription;
-  protected videosList!: Videos;
   protected pagedList!: Videos;
   protected length!: number;
   protected pageSize = 8;
@@ -22,18 +26,11 @@ export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
   protected listHeart = MaterialIcons.favorite;
   protected listBucket = MaterialIcons.delete_forever;
 
-  constructor(private data: DataService) {}
-
-  public ngOnInit(): void {
-    this.subscription = this.data.loadVideos().subscribe((videos) => {
-      this.videosList = videos;
-      this.pagedList = this.videosList.slice(0, this.pageSize);
-      this.length = this.videosList.length;
-    });
+  constructor(private store: Store<AppStateInterface>) {
+    this.videosList$ = this.store.select(videosSelector)
   }
 
   public ngAfterContentInit(): void {
-    this.data.getLocalStorage();
   }
 
   public onChangeGridStyle(colsNum: number): void {
@@ -48,7 +45,7 @@ export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
       endIndex = this.length;
     }
 
-    this.pagedList = this.videosList.slice(startIndex, endIndex);
+    // this.pagedList = this.videosList.slice(startIndex, endIndex);
   }
 
   public ngOnDestroy(): void {

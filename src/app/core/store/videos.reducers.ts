@@ -105,7 +105,7 @@ export const reducers = createReducer(
   on(VideosActions.addVideoSucces, (state, action) => ({
     ...state,
     isLoading: false,
-    videos: action.videos,
+    videos: [ ...state.videos, ...action.videos ]
   })),
   on(VideosActions.addVideoFailure, (state, action) => ({
     ...state,

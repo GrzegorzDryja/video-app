@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+import { Store } from '@ngrx/store';
+import * as VideosActions from '@core/store/videos.actions';
+
 import { Video, Videos } from '@models/video.model';
 import { VimeoResponse } from '@models/vimeo.model';
 import { YouTubeResponse } from '@models/youtube.model';
@@ -18,47 +21,20 @@ export class DataService {
   public userVideosList: Videos = [];
   public subject = new Subject<Videos>();
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService, private store: Store) {}
 
-  private updateSubjectAndLocalStorage() {
-    this.subject.next(this.userVideosList);
-    this.localStorageService.saveToLocalStorage(this.userVideosList);
-  }
-
-  public addYouTubeVideo(responseData: YouTubeResponse): Videos {
-    this.userVideosList.push({
-      platform: VideoPlatform.youtube,
-      favorite: false,
-      date: new Date(),
-      videoId: responseData.items[0].id,
-      title: responseData.items[0].snippet.title,
-      img: responseData.items[0].snippet.thumbnails.default.url,
-      viewCount: responseData.items[0].statistics.viewCount,
-    });
-    this.updateSubjectAndLocalStorage();
-
-    return this.userVideosList
-  }
-
-  public addVimeoVideo(responseData: VimeoResponse): Videos {
-    this.userVideosList.push({
-      platform: VideoPlatform.vimeo,
-      favorite: false,
-      date: new Date(),
-      videoId: responseData.video_id.toString(),
-      title: responseData.title,
-      img: responseData.thumbnail_url,
-      viewCount: 'Brak danych',
-    });
-    this.updateSubjectAndLocalStorage();
-
-    return this.userVideosList
+  private updateSubjectAndLocalStorage(): void {
+    // this.subject.next(this.userVideosList);
+    // this.localStorageService.saveToLocalStorage(this.userVideosList);
+    return
   }
 
   public loveVideo(id: string): void {
     const lovedVideo = this.userVideosList.find((video) => video.videoId === id);
     lovedVideo!.favorite = !lovedVideo!.favorite;
-    this.subject.next(this.userVideosList);
+    
+    this.store.dispatch(VideosActions.loveVideoSucces({ videos: this.userVideosList }))
+ 
     this.localStorageService.saveToLocalStorage(this.userVideosList);
   }
 
