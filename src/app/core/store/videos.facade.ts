@@ -25,4 +25,8 @@ export class VideosFacade {
   public deleteVideo(payload: { videoId: string }): void {
     this.store.dispatch(actions.deleteVideo(payload));
   }
+
+  public undoLastVideo(): void {
+    this.store.dispatch(actions.undoLastVideo())
+  }
 }

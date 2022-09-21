@@ -45,8 +45,8 @@ export const addVideoSucces = createAction('[Videos] Add Video succes', props<{ 
 export const addVideoFailure = createAction('[Videos] Add Video error', props<{ error: string }>());
 
 export const deleteVideo = createAction('[Videos] Delete Video', props<{ videoId: string }>());
-export const deleteVideoSucces = createAction('[Videos] Delete Video succes', props<{ videos: Videos }>());
-export const deleteVideoFailure = createAction('[Videos] Delete Video error', props<{ error: string }>());
+
+export const undoLastVideo = createAction('[Videos] Undo Last Deleted Video');
 
 export const loveVideo = createAction('[Videos] Love Video');
 export const loveVideoSucces = createAction('[Videos] Love Video succes', props<{ videos: Videos }>());

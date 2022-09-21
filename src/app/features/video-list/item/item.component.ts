@@ -60,7 +60,7 @@ export class ItemComponent implements OnInit {
         duration: SnackBar.duration,
       })
       .onAction()
-      .subscribe(() => this.data.undoVideo());
+      .subscribe(() => this.store.undoLastVideo());
   }
 
   public playRightPlatform(source: string, id: string): void {

@@ -2,10 +2,12 @@ import { createReducer, on } from '@ngrx/store';
 
 import { VideosStateInterface } from '@core/models/videosState.interface';
 import * as VideosActions from '@core/store/videos.actions';
+import { Videos } from '@core/models/video.model';
 
 const initialState: VideosStateInterface = {
   isLoading: false,
   videos: [],
+  lastDeletedVideo: [],
   error: null,
   layout: {
     items: 0,
@@ -113,14 +115,20 @@ export const reducers = createReducer(
     error: action.error,
   })),
 
-  on(VideosActions.deleteVideo, (state, action) => ({
-    ...state,
-    videos: [
-      ...state.videos.filter((el, index) => index !== state.videos.findIndex((video) => video.videoId === action.videoId),
-        1
-      ),
-    ],
-  })),
+  on(VideosActions.deleteVideo, (state, action) => {
+    const videos: Videos = [...state.videos];
+
+    return {
+      ...state,
+      lastDeletedVideo: [
+        ...videos.splice(
+          state.videos.findIndex((video) => video.videoId === action.videoId),
+          1
+        ),
+      ],
+      videos: [...videos],
+    };
+  }),
 
   on(VideosActions.loveVideo, (state) => ({
     ...state,
@@ -165,5 +173,11 @@ export const reducers = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
+  })),
+
+  on(VideosActions.undoLastVideo, (state) => ({
+    ...state,
+    videos: [...state.videos, ...state.lastDeletedVideo],
+    lastDeletedVideo: [],
   }))
 );
