@@ -49,7 +49,7 @@ export class ItemComponent implements OnInit {
   public onFavoriteClick(videoId: string): void {
     this.favorite = !this.favorite;
     this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-    this.data.loveVideo(videoId);
+    this.store.loveVideo({videoId});
   }
 
   public onDeleteClick(videoId: string): void {
