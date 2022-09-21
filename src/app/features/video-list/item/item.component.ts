@@ -10,6 +10,7 @@ import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
+import { VideosFacade } from '@core/store/videos.facade';
 
 @Component({
   selector: 'app-item',
@@ -32,7 +33,7 @@ export class ItemComponent implements OnInit {
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(private data: DataService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
+  constructor(private data: DataService, private dialog: MatDialog, private snackBar: MatSnackBar, private store: VideosFacade) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
@@ -51,8 +52,8 @@ export class ItemComponent implements OnInit {
     this.data.loveVideo(videoId);
   }
 
-  public onDeleteClick(id: string): void {
-    this.data.deleteVideo(id);
+  public onDeleteClick(videoId: string): void {
+    this.store.deleteVideo({ videoId })
 
     this.snackBar
       .open(Messages.video_deleted, Messages.undo, {

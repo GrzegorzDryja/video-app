@@ -22,4 +22,7 @@ export class VideosFacade {
     this.store.dispatch(actions.addVimeoVideo(payload));
   }
 
+  public deleteVideo(payload: { videoId: string }): void {
+    this.store.dispatch(actions.deleteVideo(payload));
+  }
 }

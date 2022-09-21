@@ -105,7 +105,7 @@ export const reducers = createReducer(
   on(VideosActions.addVideoSucces, (state, action) => ({
     ...state,
     isLoading: false,
-    videos: [ ...state.videos, ...action.videos ]
+    videos: [...state.videos, ...action.videos],
   })),
   on(VideosActions.addVideoFailure, (state, action) => ({
     ...state,
@@ -113,19 +113,13 @@ export const reducers = createReducer(
     error: action.error,
   })),
 
-  on(VideosActions.deleteVideo, (state) => ({
+  on(VideosActions.deleteVideo, (state, action) => ({
     ...state,
-    isLoading: true,
-  })),
-  on(VideosActions.deleteVideoSucces, (state, action) => ({
-    ...state,
-    isLoading: false,
-    videos: action.videos,
-  })),
-  on(VideosActions.deleteVideoFailure, (state, action) => ({
-    ...state,
-    isLoading: false,
-    error: action.error,
+    videos: [
+      ...state.videos.filter((el, index) => index !== state.videos.findIndex((video) => video.videoId === action.videoId),
+        1
+      ),
+    ],
   })),
 
   on(VideosActions.loveVideo, (state) => ({

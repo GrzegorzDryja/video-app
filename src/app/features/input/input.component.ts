@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { VideosFacade } from '@core/store/videos.facade';
 import { Observable } from 'rxjs';
-import * as VideosActions from '@core/store/videos.actions';
+import { VideosFacade } from '@core/store/videos.facade';
 
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';
@@ -68,12 +67,8 @@ export class InputComponent implements OnInit {
     }
 
     dataToFetch.platform === VideoPlatform.vimeo
-      ? this.store.addVimeoVideo(
-          VideosActions.addVimeoVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
-        )
-      : this.store.addYouTubeVideo(
-          VideosActions.addYouTubeVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
-        );
+      ? this.store.addVimeoVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
+      : this.store.addYouTubeVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId });
 
     this.inputForm.reset();
   }

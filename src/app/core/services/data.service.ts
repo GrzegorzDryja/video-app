@@ -44,12 +44,12 @@ export class DataService {
     this.subject.next(this.love ? lovedVideos : this.userVideosList);
   }
 
-  public deleteVideo(videoId: string): void {
-    const lastDeletedVideoIndex = this.userVideosList.findIndex((video) => video.videoId === videoId);
-    this.lastDeletedVideo = this.userVideosList[lastDeletedVideoIndex];
-    this.userVideosList.splice(lastDeletedVideoIndex, 1)
-    this.updateSubjectAndLocalStorage();
-  }
+  // public deleteVideo(videoId: string): void {
+  //   const lastDeletedVideoIndex = this.userVideosList.findIndex((video) => video.videoId === videoId);
+  //   this.lastDeletedVideo = this.userVideosList[lastDeletedVideoIndex];
+  //   this.userVideosList.splice(lastDeletedVideoIndex, 1)
+  //   this.updateSubjectAndLocalStorage();
+  // }
 
   public deleteVideos(): void {
     this.userVideosList = [];
