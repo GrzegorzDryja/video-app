@@ -6,9 +6,10 @@
     </mat-grid-tile>
   </mat-grid-list>
   <mat-paginator
-    [length]="length"
+    #pagintor
+    [length]="(videosList$ | async)?.length"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
-    (page)="onPageChange($event)"
+    (page)="pageEvent = $event"
   ></mat-paginator>
 </section>
