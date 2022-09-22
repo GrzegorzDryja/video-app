@@ -11,7 +11,6 @@ export class VideosFacade {
   public videos$ = this.store.select(selectors.videosSelector);
   public error$ = this.store.select(selectors.errorSelector);
   public layout$ = this.store.select(selectors.layoutSelector);
-  public favorite$ = this.store.select(selectors.favoriteSelector);
 
   constructor(private store: Store<AppStateInterface>) {}
 
@@ -25,10 +24,6 @@ export class VideosFacade {
 
   public loveVideo(payload: { videoId: string }): void {
     this.store.dispatch(actions.loveVideo(payload));
-  }
-
-  public showLovedVideos(payload: { showLoved: boolean }): void {
-    this.store.dispatch(actions.showLovedVideos(payload));
   }
 
   public sortVideosByDate(payload: { sortVideos: boolean }): void {

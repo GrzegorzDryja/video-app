@@ -8,4 +8,3 @@ export const isLoadingSelector = createSelector(selectFeuture, (state) => state.
 export const videosSelector = createSelector(selectFeuture, (state) => state.videos);
 export const errorSelector = createSelector(selectFeuture, (state) => state.error);
 export const layoutSelector = createSelector(selectFeuture, (state) => state.layout);
-export const favoriteSelector = createSelector(selectFeuture, (state) => state.showLoved);

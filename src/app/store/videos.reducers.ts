@@ -21,7 +21,6 @@ const initialState: VideosStateInterface = {
     pages: 0,
     player: false,
   },
-  showLoved: false,
   sortVideos: true,
 };
 
@@ -51,11 +50,6 @@ export const reducers = createReducer(
   //   isLoading: false,
   //   error: action.error,
   // })),
-
-  on(VideosActions.showLovedVideos, (state, action) => ({
-    ...state,
-    showLoved: action.showLoved,
-  })),
 
   on(VideosActions.sortVideosByDate, (state, action) => {
     const videos: Videos = [...state.videos];

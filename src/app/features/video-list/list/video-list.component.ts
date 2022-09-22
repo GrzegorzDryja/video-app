@@ -16,13 +16,11 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
-  private favoriteSubscription: Subscription;
   private videosListSubsription: Subscription;
-  
-  protected videosList: Videos = [];
-  protected favorite = false;
 
+  protected videosList: Videos = [];
   protected colsNumber = 1;
+  protected showFavorite = false;
   protected pagedList!: Videos;
   protected length!: number;
   protected pageSize = 8;
@@ -32,17 +30,19 @@ export class VideoListComponent implements OnDestroy {
   public pageEvent!: PageEvent;
 
   constructor(private store: VideosFacade) {
-    this.videosListSubsription = this.store.videos$.subscribe(el => this.videosList = el)
-    this.favoriteSubscription = this.store.favorite$.subscribe(el => this.favorite = el)
+    this.videosListSubsription = this.store.videos$.subscribe((el) => (this.videosList = el));
   }
 
   public onChangeGridStyle(colsNum: number): void {
     this.colsNumber = colsNum;
   }
 
+  public onShowFavoriteSwitch(showFavorite: boolean): void {
+    this.showFavorite = showFavorite;
+  }
+
   dataSource = new MatTableDataSource();
   dataSourceWithPageSize = new MatTableDataSource();
-
 
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -50,7 +50,6 @@ export class VideoListComponent implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.favoriteSubscription.unsubscribe()
-    this.videosListSubsription.unsubscribe()
+    this.videosListSubsription.unsubscribe();
   }
 }

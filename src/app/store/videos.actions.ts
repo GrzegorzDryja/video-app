@@ -21,8 +21,6 @@ export const changeGridLayout = createAction('[Videos] Change Grid Layout');
 export const changeGridLayoutSucces = createAction('[Videos] Change Grid Layout succes', props<{ layout: Layout }>());
 export const changeGridLayoutoFailure = createAction('[Videos] Change Grid Layout error', props<{ error: string }>());
 
-export const showLovedVideos = createAction('[Videos] Show Loved Videos', props<{ showLoved: boolean}>());
-
 export const sortVideosByDate = createAction('[Videos] Sort Videos By Date', props<{ sortVideos: boolean}>());
 
 export const deleteVideosList = createAction('[Videos] Delete Videos List');
