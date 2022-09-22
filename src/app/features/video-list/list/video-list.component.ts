@@ -21,6 +21,7 @@ export class VideoListComponent implements OnDestroy {
   protected videosList: Videos = [];
   protected colsNumber = 1;
   protected showFavorite = false;
+  protected sortSwitch = false;
   protected pagedList!: Videos;
   protected length!: number;
   protected pageSize = 8;
@@ -39,6 +40,10 @@ export class VideoListComponent implements OnDestroy {
 
   public onShowFavoriteSwitch(showFavorite: boolean): void {
     this.showFavorite = showFavorite;
+  }
+
+  public onSortSwitch(sortSwitch: boolean): void {
+    this.sortSwitch = sortSwitch;
   }
 
   dataSource = new MatTableDataSource();

@@ -1,7 +1,11 @@
 <section>
-  <app-menu (colsNumber)="onChangeGridStyle($event)" (showFavorite)="onShowFavoriteSwitch($event)"></app-menu>
+  <app-menu
+    (colsNumber)="onChangeGridStyle($event)"
+    (showFavorite)="onShowFavoriteSwitch($event)"
+    (sortSwitch)="onSortSwitch($event)"
+  ></app-menu>
   <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
-    <mat-grid-tile *ngFor="let video of videosList | showFavorite: showFavorite">
+    <mat-grid-tile *ngFor="let video of videosList | sort:sortSwitch | showFavorite:showFavorite">
       <app-item [video]="video"></app-item>
     </mat-grid-tile>
   </mat-grid-list>

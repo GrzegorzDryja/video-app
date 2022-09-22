@@ -18,6 +18,7 @@ import { VideosFacade } from '@store/videos.facade';
 export class MenuComponent {
   @Output() colsNumber = new EventEmitter<number>();
   @Output() showFavorite = new EventEmitter<boolean>()
+  @Output() sortSwitch = new EventEmitter<boolean>()
 
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
@@ -54,15 +55,13 @@ export class MenuComponent {
   public onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
     this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-
     this.showFavorite.emit(this.favoriteSortSwith)
   }
 
   public onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
     this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_downward : MaterialIcons.arrow_upward;
-
-    this.store.sortVideosByDate({ sortVideos: this.dateSortSwitch });
+    this.sortSwitch.emit(this.dateSortSwitch)
   }
 
   public onDeleteList(): void {

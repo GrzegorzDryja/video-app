@@ -20,8 +20,7 @@ const initialState: VideosStateInterface = {
     itemPerPage: 8,
     pages: 0,
     player: false,
-  },
-  sortVideos: true,
+  }
 };
 
 export const reducers = createReducer(
@@ -51,19 +50,19 @@ export const reducers = createReducer(
   //   error: action.error,
   // })),
 
-  on(VideosActions.sortVideosByDate, (state, action) => {
-    const videos: Videos = [...state.videos];
+  // on(VideosActions.sortVideosByDate, (state, action) => {
+  //   const videos: Videos = [...state.videos];
 
-    action.sortVideos
-      ? videos.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-      : videos.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  //   action.sortVideos
+  //     ? videos.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  //     : videos.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    return {
-      ...state,
-      sortVideos: action.sortVideos,
-      videos: [...videos],
-    };
-  }),
+  //   return {
+  //     ...state,
+  //     sortVideos: action.sortVideos,
+  //     videos: [...videos],
+  //   };
+  // }),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
 
@@ -149,11 +148,4 @@ export const reducers = createReducer(
     videos: [...state.videos, ...state.lastDeletedVideo],
     lastDeletedVideo: [],
   }))
-
-  // public sortByDate(dateSortSwitch: boolean): void {
-  //   this.sortByDateSwitch = dateSortSwitch;
-  //   this.sortByDateSwitch
-  //     ? this.userVideosList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-  //     : this.userVideosList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  // }
 );

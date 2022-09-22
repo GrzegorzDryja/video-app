@@ -26,10 +26,6 @@ export class VideosFacade {
     this.store.dispatch(actions.loveVideo(payload));
   }
 
-  public sortVideosByDate(payload: { sortVideos: boolean }): void {
-    this.store.dispatch(actions.sortVideosByDate(payload));
-  }
-
   public deleteVideo(payload: { videoId: string }): void {
     this.store.dispatch(actions.deleteVideo(payload));
   }

@@ -7,5 +7,4 @@ export interface VideosStateInterface {
   lastDeletedVideo: Videos;
   error: string | null;
   layout: Layout;
-  sortVideos: boolean;
 }
