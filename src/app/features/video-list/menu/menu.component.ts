@@ -20,20 +20,25 @@ export class MenuComponent {
 
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
-  private favoriteSortSwith = true;
+  private favoriteSortSwith = false;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
 
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected delete_sweep = MaterialIcons.delete_sweep;
-  protected sortDirection = MaterialIcons.arrow_upward;
+  protected sortDirection = MaterialIcons.arrow_downward;
   protected tooltipGridChange = Content.tooltipGridChange;
   protected tooltipLoved = Content.tooltipLoved;
   protected tooltipSort = Content.tooltipSort;
   protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
-  constructor(private data: DataService, public dialog: MatDialogService, private snackBar: MatSnackBar, private store: VideosFacade) {}
+  constructor(
+    private data: DataService,
+    public dialog: MatDialogService,
+    private snackBar: MatSnackBar,
+    private store: VideosFacade
+  ) {}
 
   public loadDemo(): void {
     this.data.demoVideos();
@@ -47,29 +52,29 @@ export class MenuComponent {
 
   public onFavoriteSort(): void {
     this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite_outline : MaterialIcons.favorite;
+    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
 
-    this.store.showLovedVideos({ showLoved: !this.favoriteSortSwith })
+    this.store.showLovedVideos({ showLoved: this.favoriteSortSwith });
   }
 
   public onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_upward : MaterialIcons.arrow_downward;
+    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_downward : MaterialIcons.arrow_upward;
 
-    this.data.sortByDate(this.dateSortSwitch);
+    this.store.sortVideosByDate({ sortVideos: this.dateSortSwitch });
   }
 
-  public onDeleteList(): void {    
+  public onDeleteList(): void {
     this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {
         this.dialog.closeAll();
-      return;      
+        return;
       }
-      this.store.deleteVideosList()
+      this.store.deleteVideosList();
       this.snackBar.open(Messages.video_list_deleted, Messages.close, {
         duration: SnackBar.duration,
       });
-    })
+    });
   }
 }

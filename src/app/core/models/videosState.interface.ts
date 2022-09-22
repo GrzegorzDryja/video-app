@@ -8,4 +8,5 @@ export interface VideosStateInterface {
   error: string | null;
   layout: Layout;
   showLoved: boolean;
+  sortVideos: boolean;
 }

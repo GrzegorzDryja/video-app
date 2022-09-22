@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import { Store } from '@ngrx/store';
-import * as VideosActions from '@core/store/videos.actions';
 
-import { Video, Videos } from '@models/video.model';
+import { Videos } from '@models/video.model';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private lastDeletedVideo!: Video;
   private love = false;
-  private sortByDateSwitch = true;
 
   public userVideosList: Videos = [];
   public subject = new Subject<Videos>();
@@ -24,13 +21,6 @@ export class DataService {
     this.love = !this.love;
     const lovedVideos = this.userVideosList.filter((video) => video.favorite);
     this.subject.next(this.love ? lovedVideos : this.userVideosList);
-  }
-
-  public sortByDate(dateSortSwitch: boolean): void {
-    this.sortByDateSwitch = dateSortSwitch;
-    this.sortByDateSwitch
-      ? this.userVideosList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-      : this.userVideosList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
   public loadVideos(): Observable<Videos> {
@@ -47,11 +37,6 @@ export class DataService {
       this.userVideosList = JSON.parse(local);
     }
     this.subject.next(this.userVideosList);
-  }
-
-  public undoVideo(): void {
-    this.userVideosList.push(this.lastDeletedVideo!);
-    this.sortByDate(this.sortByDateSwitch);
   }
   
   public checkIfVideoIdIsOnTheList(id: string) {

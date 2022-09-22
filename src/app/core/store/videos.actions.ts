@@ -23,9 +23,7 @@ export const changeGridLayoutoFailure = createAction('[Videos] Change Grid Layou
 
 export const showLovedVideos = createAction('[Videos] Show Loved Videos', props<{ showLoved: boolean}>());
 
-export const sortVideosByDate = createAction('[Videos] Sort Videos By Date');
-export const sortVideosByDateSucces = createAction('[Videos] Sort Videos By Date succes', props<{ videos: Videos }>());
-export const sortVideosByDateFailure = createAction('[Videos] Sort Videos By Date error', props<{ error: string }>());
+export const sortVideosByDate = createAction('[Videos] Sort Videos By Date', props<{ sortVideos: boolean}>());
 
 export const deleteVideosList = createAction('[Videos] Delete Videos List');
 

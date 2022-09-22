@@ -4,6 +4,7 @@ import { VideosStateInterface } from '@core/models/videosState.interface';
 import * as VideosActions from '@core/store/videos.actions';
 import { Video, Videos } from '@core/models/video.model';
 import { Actions } from '@ngrx/effects';
+import { state } from '@angular/animations';
 
 const initialState: VideosStateInterface = {
   isLoading: false,
@@ -21,6 +22,7 @@ const initialState: VideosStateInterface = {
     player: false,
   },
   showLoved: false,
+  sortVideos: true,
 };
 
 export const reducers = createReducer(
@@ -50,34 +52,24 @@ export const reducers = createReducer(
   //   error: action.error,
   // })),
 
-  // on(VideosActions.changeGridLayout, (state) => ({ ...state, isLoading: true })),
-  // on(VideosActions.changeGridLayoutSucces, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   layout: action.layout,
-  // })),
-  // on(VideosActions.changeGridLayoutoFailure, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   error: action.error,
-  // })),
-
   on(VideosActions.showLovedVideos, (state, action) => ({
     ...state,
-    showLoved: action.showLoved
+    showLoved: action.showLoved,
   })),
 
-  // on(VideosActions.sortVideosByDate, (state) => ({ ...state, isLoading: true })),
-  // on(VideosActions.sortVideosByDateSucces, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   videos: action.videos,
-  // })),
-  // on(VideosActions.sortVideosByDateFailure, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   error: action.error,
-  // })),
+  on(VideosActions.sortVideosByDate, (state, action) => {
+    const videos: Videos = [...state.videos];
+
+    action.sortVideos
+      ? videos.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      : videos.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return {
+      ...state,
+      sortVideos: action.sortVideos,
+      videos: [...videos],
+    };
+  }),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
 
@@ -163,4 +155,11 @@ export const reducers = createReducer(
     videos: [...state.videos, ...state.lastDeletedVideo],
     lastDeletedVideo: [],
   }))
+
+  // public sortByDate(dateSortSwitch: boolean): void {
+  //   this.sortByDateSwitch = dateSortSwitch;
+  //   this.sortByDateSwitch
+  //     ? this.userVideosList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  //     : this.userVideosList.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  // }
 );
