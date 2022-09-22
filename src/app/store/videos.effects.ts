@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, Observable, of, switchMap } from 'rxjs';
-import { MAT_DIALOG } from '@shared/dialog/dialog.model';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import * as VideosActions from 'app/store/videos.actions';
 
@@ -12,7 +11,6 @@ import { YouTubeResponse } from '@core/models/youtube.model';
 import { Videos } from '@core/models/video.model';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { VimeoResponse } from '@core/models/vimeo.model';
-import { Content } from '@shared/content.model';
 
 @Injectable()
 export class VideosEffects {
@@ -53,24 +51,6 @@ export class VideosEffects {
     );
   });
 
-  // deleteVideosList$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(VideosActions.deleteVideosList),
-  //     switchMap(() => {
-  //       this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
-  //       this.dialog.afterClosed().pipe(
-  //         map((value) => {
-  //           if(!value){
-  //             this.dialog.closeAll()
-  //             return VideosActions.deleteVideosListSucces()
-  //           }
-  //           return VideosActions.deleteVideosListFailure()
-  //         },
-  //         catchError((error) => of(VideosActions.deleteVideosListFailure()))
-  //       ))
-  //     })
-  // });
-
   private parseYouTubeResponse = (responseData: YouTubeResponse): Videos => {
     return [
       {
@@ -98,9 +78,4 @@ export class VideosEffects {
       },
     ];
   };
-
-  // private showDialog = (): void => {
-  //   let dialog = this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
-  //   return dialog;
-  // };
 }

@@ -20,7 +20,7 @@ export class VideoListComponent implements OnDestroy {
   protected videosList: Videos = [];
   protected colsNumber = 1;
   protected showFavorite = false;
-  protected sortSwitch = false;
+  protected sortSwitch = true;
   protected pageIndex = 0;
   protected pageSize = 9;
   protected firstPage = this.pageIndex * this.pageSize;
