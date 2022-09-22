@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
 
-import * as VideosActions from '@core/store/videos.actions';
+import * as VideosActions from 'app/store/videos.actions';
 
 import { YoutubeService } from '@core/services/youtube.service';
 import { VimeoService } from '@core/services/vimeo.service';

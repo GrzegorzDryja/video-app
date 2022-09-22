@@ -1,13 +1,13 @@
 <section>
   <app-menu (colsNumber)="onChangeGridStyle($event)"></app-menu>
   <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
-    <mat-grid-tile *ngFor="let video of videosList$ | async | showFavorite: favorite">
+    <mat-grid-tile *ngFor="let video of videosList | showFavorite:favorite">
       <app-item [video]="video"></app-item>
-    </mat-grid-tile>
+  </mat-grid-tile>
   </mat-grid-list>
   <mat-paginator
     #pagintor
-    [length]="(videosList$ | async)?.length"
+    [length]="videosList.length"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
     (page)="pageEvent = $event"

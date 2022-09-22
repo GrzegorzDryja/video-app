@@ -1,9 +1,9 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { VideosFacade } from '@core/store/videos.facade';
+import { VideosFacade } from '@store/videos.facade';
 
 import { Videos } from '@models/video.model';
 import { MaterialIcons } from '@shared/material-icons.model';
@@ -16,9 +16,10 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
+  private favoriteSubscription: Subscription;
+  private videosListSubsription: Subscription;
   
-  protected videosList$: Observable<Videos>;
-  protected favoriteSubscription: Subscription;
+  protected videosList: Videos = [];
   protected favorite = false;
 
   protected colsNumber = 1;
@@ -31,7 +32,7 @@ export class VideoListComponent implements OnDestroy {
   public pageEvent!: PageEvent;
 
   constructor(private store: VideosFacade) {
-    this.videosList$ = this.store.videos$
+    this.videosListSubsription = this.store.videos$.subscribe(el => this.videosList = el)
     this.favoriteSubscription = this.store.favorite$.subscribe(el => this.favorite = el)
   }
 
@@ -50,5 +51,6 @@ export class VideoListComponent implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.favoriteSubscription.unsubscribe()
+    this.videosListSubsription.unsubscribe()
   }
 }

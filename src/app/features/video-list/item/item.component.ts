@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { VideosFacade } from '@store/videos.facade';
+
 import { environment } from '@environments/environment';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { DataService } from '@services/data.service';
@@ -10,7 +12,6 @@ import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
-import { VideosFacade } from '@core/store/videos.facade';
 
 @Component({
   selector: 'app-item',

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable } from 'rxjs';
-import { VideosFacade } from '@core/store/videos.facade';
+import { VideosFacade } from '@store/videos.facade';
 
 import { UserInputService } from '@services/user-input.service';
 import { DataService } from '@core/services/data.service';

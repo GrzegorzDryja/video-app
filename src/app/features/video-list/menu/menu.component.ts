@@ -8,7 +8,7 @@ import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
-import { VideosFacade } from '@core/store/videos.facade';
+import { VideosFacade } from '@store/videos.facade';
 
 @Component({
   selector: 'app-menu',

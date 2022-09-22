@@ -1,14 +1,12 @@
-import { NgIterable, Pipe, PipeTransform } from '@angular/core';
-import { Video } from '@core/models/video.model';
-import { ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Videos } from '@core/models/video.model';
 
 @Pipe({
   name: 'showFavorite'
 })
 export class FavoritePipe implements PipeTransform {
 
-  transform(value: NgIterable<Video> | null | undefined , showLoved: any): NgIterable<any> | null | undefined {
-    return showLoved ? (value! as Array<Video>).filter((el) => el.favorite === showLoved) : value
+  transform(value: Videos, showLoved: boolean): Videos {
+    return showLoved ? value!.filter((el) => el.favorite === showLoved) : value
   }
 }
