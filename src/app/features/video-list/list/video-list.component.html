@@ -5,7 +5,9 @@
     (sortSwitch)="onSortSwitch($event)"
   ></app-menu>
   <mat-grid-list [cols]="colsNumber" rowHeight="7rem">
-    <mat-grid-tile *ngFor="let video of videosList | sort:sortSwitch | showFavorite:showFavorite">
+    <mat-grid-tile
+      *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage"
+    >
       <app-item [video]="video"></app-item>
     </mat-grid-tile>
   </mat-grid-list>
@@ -14,6 +16,6 @@
     [length]="videosList.length"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
-    (page)="pageEvent = $event"
+    (page)="pageEvent = setPaginaotor($event)"
   ></mat-paginator>
 </section>
