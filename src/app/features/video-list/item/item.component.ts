@@ -54,7 +54,7 @@ export class ItemComponent implements OnInit {
     this.favorite = !this.favorite;
     this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
     this.store.loveVideo({ videoId });
-    this.snackBar.open(Messages.video_loved, Messages.close, {
+    this.snackBar.open(this.favorite ? Messages.video_loved : Messages.video_unloved, Messages.close, {
       duration: SnackBar.duration,
     });
   }
