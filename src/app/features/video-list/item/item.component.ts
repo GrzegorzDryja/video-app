@@ -6,7 +6,6 @@ import { VideosFacade } from '@store/videos.facade';
 
 import { environment } from '@environments/environment';
 import { MaterialIcons } from '@shared/material-icons.model';
-import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
@@ -25,7 +24,7 @@ export class ItemComponent implements OnInit {
   protected thumnbnailPath!: string;
   protected videoId!: string;
   protected title!: string;
-  protected dateObj!: Date;
+  protected dateObj!: Date | string;
   protected viewCount!: string;
   protected favorite!: boolean;
 

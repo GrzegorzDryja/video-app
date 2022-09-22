@@ -2,7 +2,9 @@ import { createReducer, on } from '@ngrx/store';
 
 import { VideosStateInterface } from '@core/models/videosState.interface';
 import * as VideosActions from 'app/store/videos.actions';
+
 import { Video, Videos } from '@core/models/video.model';
+import { DEMO_VIDEOS } from '@core/models/demo.model';
 
 const initialState: VideosStateInterface = {
   isLoading: false,
@@ -14,11 +16,11 @@ const initialState: VideosStateInterface = {
 export const reducers = createReducer(
   initialState,
 
-  // on(VideosActions.loadDemoVideos, (state, action) => ({
-  //   ...state,
-  //   isLoading: false,
-  //   videos: action.videos,
-  // })),
+  on(VideosActions.loadDemoVideos, (state) => ({
+    ...state,
+    isLoading: false,
+    videos: [ ...DEMO_VIDEOS ],
+  })),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
 

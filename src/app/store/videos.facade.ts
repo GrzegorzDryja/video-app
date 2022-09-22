@@ -13,6 +13,10 @@ export class VideosFacade {
 
   constructor(private store: Store<AppStateInterface>) {}
 
+  public loadDemoVideos(): void {
+    this.store.dispatch(actions.loadDemoVideos())
+  }
+
   public addYouTubeVideo(payload: { videoPlatform: string; videoId: string }): void {
     this.store.dispatch(actions.addYouTubeVideo(payload));
   }
