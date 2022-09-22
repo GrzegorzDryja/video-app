@@ -10,7 +10,6 @@ export class VideosFacade {
   public loading$ = this.store.select(selectors.isLoadingSelector);
   public videos$ = this.store.select(selectors.videosSelector);
   public error$ = this.store.select(selectors.errorSelector);
-  public layout$ = this.store.select(selectors.layoutSelector);
 
   constructor(private store: Store<AppStateInterface>) {}
 

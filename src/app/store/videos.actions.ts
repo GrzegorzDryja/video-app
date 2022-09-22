@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Videos } from '@models/video.model';
-import { Layout } from '@core/models/layout.model';
+
 
 export const getVideosFromLocalStorage = createAction('[Videos] Get Videos From Local Storage');
 export const getVideosFromLocalStorageSucces = createAction(
@@ -16,10 +16,6 @@ export const getVideosFromLocalStorageFailure = createAction(
 export const loadDemoVideos = createAction('[Videos] Load Demo');
 export const loadDemoVideosSucces = createAction('[Videos] Load Demo succes', props<{ videos: Videos }>());
 export const loadDemoVideosFailure = createAction('[Videos] Load Demo error', props<{ error: string }>());
-
-export const changeGridLayout = createAction('[Videos] Change Grid Layout');
-export const changeGridLayoutSucces = createAction('[Videos] Change Grid Layout succes', props<{ layout: Layout }>());
-export const changeGridLayoutoFailure = createAction('[Videos] Change Grid Layout error', props<{ error: string }>());
 
 export const sortVideosByDate = createAction('[Videos] Sort Videos By Date', props<{ sortVideos: boolean}>());
 
@@ -41,10 +37,3 @@ export const undoLastVideo = createAction('[Videos] Undo Last Deleted Video');
 
 export const loveVideo = createAction('[Videos] Love Video', props<{ videoId: string }>());
 
-export const playVideo = createAction('[Videos] Play Video');
-export const playVideoSucces = createAction('[Videos] Play Video succes', props<{ layout: Layout }>());
-export const playVideoFailure = createAction('[Videos] Play Video error', props<{ error: string }>());
-
-export const changePage = createAction('[Videos] Change Page');
-export const changePageSucces = createAction('[Videos] Change Page succes', props<{ layout: Layout }>());
-export const changePageFailure = createAction('[Videos] Change Page error', props<{ error: string }>());
