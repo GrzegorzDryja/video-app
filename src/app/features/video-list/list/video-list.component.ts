@@ -1,9 +1,10 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
+import { VideosFacade } from '@store/videos.facade';
+
 import { Videos } from '@models/video.model';
-import { DataService } from '@services/data.service';
 import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
@@ -11,47 +12,57 @@ import { MaterialIcons } from '@shared/material-icons.model';
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss'],
 })
-export class VideoListComponent implements OnInit, AfterContentInit, OnDestroy {
+export class VideoListComponent implements OnDestroy {
+  @ViewChild('paginator') paginator!: MatPaginator;
+  @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
+  private videosListSubsription: Subscription;
+  
+  protected videosList: Videos = [];
   protected colsNumber = 1;
-  protected subscription!: Subscription;
-  protected videosList!: Videos;
-  protected pagedList!: Videos;
-  protected length!: number;
-  protected pageSize = 8;
-  protected pageSizeOptions = [8, 16, 24];
+  protected rowHeightRatio = "7rem";
+  protected showFavorite = false;
+  protected sortSwitch = true;
+  protected pageIndex = 0;
+  protected pageSize = 9;
+  protected firstPage = this.pageIndex * this.pageSize;
+  protected secondPage = (this.pageIndex + 1) * this.pageSize;
+  protected pageSizeOptions = [9, 18, 27];  
   protected listHeart = MaterialIcons.favorite;
-  protected listBucket = MaterialIcons.delete_forever;
+  protected listBucket = MaterialIcons.delete_forever;  
+  protected pageEvent: PageEvent;
 
-  constructor(private data: DataService) {}
-
-  public ngOnInit(): void {
-    this.subscription = this.data.loadVideos().subscribe((videos) => {
-      this.videosList = videos;
-      this.pagedList = this.videosList.slice(0, this.pageSize);
-      this.length = this.videosList.length;
-    });
-  }
-
-  public ngAfterContentInit(): void {
-    this.data.getLocalStorage();
+  constructor(private store: VideosFacade) {
+    this.videosListSubsription = this.store.videos$.subscribe((el) => (this.videosList = el));
+    this.pageEvent = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      length: this.videosList.length,
+    };
   }
 
   public onChangeGridStyle(colsNum: number): void {
     this.colsNumber = colsNum;
   }
 
-  public onPageChange(pageEvent: PageEvent): void {
-    const startIndex = pageEvent.pageIndex * pageEvent.pageSize;
-    let endIndex = startIndex + pageEvent.pageSize;
+  public onShowFavoriteSwitch(showFavorite: boolean): void {
+    this.showFavorite = showFavorite;
+  }
 
-    if (endIndex > this.length) {
-      endIndex = this.length;
-    }
+  public onSortSwitch(sortSwitch: boolean): void {
+    this.sortSwitch = sortSwitch;
+  }
 
-    this.pagedList = this.videosList.slice(startIndex, endIndex);
+  public setPaginaotor(pageEvent: PageEvent): PageEvent {
+    this.firstPage = pageEvent.pageIndex * pageEvent.pageSize;
+    this.secondPage = (pageEvent.pageIndex + 1) * pageEvent.pageSize;
+    return pageEvent;
+  }
+
+  public ngAfterViewInit(): void {
+    this.pageEvent = new PageEvent();
   }
 
   public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.videosListSubsription.unsubscribe();
   }
 }

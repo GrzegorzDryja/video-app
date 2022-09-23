@@ -1,4 +1,4 @@
-<button type="button" mat-raised-button color="primary" (click)="loadDemo()">Demo</button>
+<button type="button" mat-raised-button color="primary" (click)="loadDemo()" [disabled]="demoSwitch">Demo</button>
 
 <mat-icon (click)="onGridChange()" [matTooltip]="tooltipGridChange">{{ gridSwitch }}</mat-icon>
 <mat-icon (click)="onFavoriteSort()" [matTooltip]="tooltipLoved">{{ favoriteSwitch }}</mat-icon>

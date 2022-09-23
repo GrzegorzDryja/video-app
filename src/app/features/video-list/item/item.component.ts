@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { VideosFacade } from '@store/videos.facade';
+
 import { environment } from '@environments/environment';
 import { MaterialIcons } from '@shared/material-icons.model';
-import { DataService } from '@services/data.service';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 import { VideoPlatform } from 'app/shared/video-platform.model';
@@ -23,15 +24,16 @@ export class ItemComponent implements OnInit {
   protected thumnbnailPath!: string;
   protected videoId!: string;
   protected title!: string;
-  protected dateObj!: Date;
+  protected dateObj!: Date | string;
   protected viewCount!: string;
   protected favorite!: boolean;
+
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(private data: DataService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private store: VideosFacade) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
@@ -44,21 +46,24 @@ export class ItemComponent implements OnInit {
     this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
   }
 
-  public onFavoriteClick(id: string): void {
+  public onFavoriteClick(videoId: string): void {
     this.favorite = !this.favorite;
     this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-    this.data.loveVideo(id);
+    this.store.loveVideo({ videoId });
+    this.snackBar.open(this.favorite ? Messages.video_loved : Messages.video_unloved, Messages.close, {
+      duration: SnackBar.duration,
+    });
   }
 
-  public onDeleteClick(id: string): void {
-    this.data.deleteVideo(id);
+  public onDeleteClick(videoId: string): void {
+    this.store.deleteVideo({ videoId });
 
     this.snackBar
       .open(Messages.video_deleted, Messages.undo, {
         duration: SnackBar.duration,
       })
       .onAction()
-      .subscribe(() => this.data.undoVideo());
+      .subscribe(() => this.store.undoLastVideo());
   }
 
   public playRightPlatform(source: string, id: string): void {

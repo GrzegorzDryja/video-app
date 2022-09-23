@@ -1,7 +1,7 @@
 export type Video = {
   platform: string;
   favorite: boolean;
-  date: Date;
+  date: Date | string;
   videoId: string;
   title: string;
   img: string;
