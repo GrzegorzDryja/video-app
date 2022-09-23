@@ -60,10 +60,10 @@ export const reducers = createReducer(
 
   on(VideosActions.loveVideo, (state, action) => {
     const videos: Videos = [...state.videos];
-    const i: number = state.videos.findIndex((video) => video.videoId === action.videoId);
-    const v: Video = Object.assign({}, state.videos[i]);
-    v.favorite = !v.favorite;
-    videos.splice(i, 1, v);
+    const videoToLoveIndex: number = state.videos.findIndex((video) => video.videoId === action.videoId);
+    const videoToLove: Video = Object.assign({}, state.videos[videoToLoveIndex]);
+    videoToLove.favorite = !videoToLove.favorite;
+    videos.splice(videoToLoveIndex, 1, videoToLove);
 
     return {
       ...state,

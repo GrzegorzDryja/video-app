@@ -67,7 +67,7 @@ export class InputComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.checkIsVideoIdIsOnTheList(dataToFetch.videoId) === false) {
+    if (!this.checkIsVideoIdIsOnTheList(dataToFetch.videoId)) {
       this.snackBar.open(Messages.video_is_on_the_list, Messages.close, {
         duration: SnackBar.duration,
       });

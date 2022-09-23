@@ -33,11 +33,7 @@ export class ItemComponent implements OnInit {
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private store: VideosFacade
-  ) {}
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private store: VideosFacade) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
