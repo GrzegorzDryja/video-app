@@ -1,6 +1,30 @@
-<button type="button" mat-raised-button color="primary" (click)="loadDemo()" [disabled]="demoSwitch">Demo</button>
+<div class="toolbox">
+    <div class="toolbox__actions">
+      <ul>
+        <li>Akcje:</li>
+        <li (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">Wyczyść</li>
+        <li (click)="loadDemo()">Wgraj demo</li>
+      </ul>
+    </div>
+    <div class="toolbox__sort">
+      <ul>
+        <li>Kolejność:</li>
+        <li (click)="onDateSort()" [matTooltip]="tooltipSort">Od najnowszych</li>
+        <li (click)="onDateSort()" [matTooltip]="tooltipSort">Od najstarszych</li>
+      </ul>
+    </div>
+    <div class="toolbox__view">
+      <ul>
+        <li>Widok:</li>
+        <li (click)="onGridChange()" [matTooltip]="tooltipGridChange">Lista</li>
+        <li (click)="onGridChange()" [matTooltip]="tooltipGridChange">Kafelki</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- <button type="button" mat-raised-button color="primary" (click)="loadDemo()" [disabled]="demoSwitch">Demo</button>
 
 <mat-icon (click)="onGridChange()" [matTooltip]="tooltipGridChange">{{ gridSwitch }}</mat-icon>
 <mat-icon (click)="onFavoriteSort()" [matTooltip]="tooltipLoved">{{ favoriteSwitch }}</mat-icon>
 <mat-icon (click)="onDateSort()" [matTooltip]="tooltipSort"> {{ sortDirection }}</mat-icon>
-<mat-icon (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">{{ delete_sweep }}</mat-icon>
+<mat-icon (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">{{ delete_sweep }}</mat-icon> -->

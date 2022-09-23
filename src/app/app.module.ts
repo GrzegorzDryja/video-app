@@ -10,12 +10,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { VideosStore } from '@store/videos.store';
 import { VideosFacade } from '@store/videos.facade';
-import { reducers } from '@store/videos.reducers'
+import { reducers } from '@store/videos.reducers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent } from '@features/index';
+import {
+  VideoListComponent,
+  MenuComponent,
+  PlayerComponent,
+  ItemComponent,
+  InputComponent,
+  StickyMenuComponent,
+  VideoPageComponent,
+} from '@features/index';
 import { DialogComponent } from '@shared/dialog/dialog.component';
 import { environment } from '@environments/environment';
 import { FavoritePipe } from '@features/video-list/list/pipe/favorite.pipe';
@@ -36,7 +44,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     ItemComponent,
     DialogComponent,
     FavoritePipe,
-    SortPipe
+    SortPipe,
+    StickyMenuComponent,
+    VideoPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,4 +64,4 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   bootstrap: [AppComponent],
   entryComponents: [PlayerComponent],
 })
-export class AppModule { }
+export class AppModule {}

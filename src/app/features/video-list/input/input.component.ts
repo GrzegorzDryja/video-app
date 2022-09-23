@@ -8,7 +8,7 @@ import { VideosFacade } from '@store/videos.facade';
 
 import { UserInputService } from '@services/user-input.service';
 import { ErrorTypes } from '@shared/errorsTypes.model';
-import { inputMatchValidator } from '@features/input/validators/match.validator';
+import { inputMatchValidator } from '@features/video-list/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { SnackBar } from '@shared/snack-bar.model';

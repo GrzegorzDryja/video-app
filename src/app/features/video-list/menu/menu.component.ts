@@ -25,7 +25,7 @@ export class MenuComponent implements OnDestroy {
   private gridChangeSwitch = true;
   private favoriteSortSwith = true;
   private oneColumnGrid = 1;
-  private moreColumnGrid = 3;
+  private moreColumnGrid = 4;
 
   protected demoSwitch = true;
   protected videosLenght = 0;
@@ -52,8 +52,8 @@ export class MenuComponent implements OnDestroy {
 
   public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
-    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
+    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.reorder : MaterialIcons.grid_on;
+    this.colsNumber.emit(this.gridChangeSwitch ? this.moreColumnGrid : this.oneColumnGrid);
   }
 
   public onFavoriteSort(): void {

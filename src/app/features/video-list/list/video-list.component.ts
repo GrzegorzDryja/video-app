@@ -18,15 +18,15 @@ export class VideoListComponent implements OnDestroy {
   private videosListSubsription: Subscription;
   
   protected videosList: Videos = [];
-  protected colsNumber = 1;
-  protected rowHeightRatio = "7rem";
+  protected colsNumber = 4;
+  protected rowHeightRatio = "1:1";
   protected showFavorite = false;
   protected sortSwitch = true;
   protected pageIndex = 0;
-  protected pageSize = 9;
+  protected pageSize = 20;
   protected firstPage = this.pageIndex * this.pageSize;
   protected secondPage = (this.pageIndex + 1) * this.pageSize;
-  protected pageSizeOptions = [9, 18, 27];  
+  protected pageSizeOptions = [10, 20, 40];  
   protected listHeart = MaterialIcons.favorite;
   protected listBucket = MaterialIcons.delete_forever;  
   protected pageEvent: PageEvent;

@@ -1,5 +1,12 @@
 export enum Content {
   title = 'Video-App',
+  loveIcon = '<3',
+  deleteIcon = 'X',
+  displays = 'Liczba wyświetleń:',
+  likes = 'Liczba polubień:',
+  showAllVideos = 'Wszystkie filmy',
+  showFavoriteVideos = 'Ulubione',
+  dateOfAddingVideo = 'Data dodania:',
   tooltipDeleteAll = 'Usuń wszystko',
   tooltipGridChange = 'Zmień widok',
   tooltipLoved = 'Pokaż ulubione',
