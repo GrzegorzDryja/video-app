@@ -1,23 +1,32 @@
 <div class="video_page">
   <div class="video_page__header">
-    <div class="video_page__header__title">{{ videoTitle }}</div>
+    <div class="video_page__header__title fontBold">{{ videoTitle }}</div>
     <div class="video_page__header__actions">
-      <ul>
-        <li>{{ loveIcon }}</li>
-        <li>{{ deleteIcon }}</li>
-      </ul>
+      <app-actions [videoId]="videoId" (isVideoDeleted)="isVideoDeleted($event)"></app-actions>
     </div>
   </div>
-  <div class="video_page_content"></div>
+  <div class="video_page_content">
+    <iframe
+    [src]="sanitizerLink"
+    height="539px"
+    width="860px"
+    title="Video App player"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
+  </iframe>
+  </div>
   <div class="video_page__footer">
-    <div class="video_page__footer__likes">
+    <div class="video_page__footer__stats">
       {{ contentDisplays }} <span class="fontBold">{{ displays }}</span>
     </div>
-    <div class="video_page__footer__stats">
+    <div class="video_page__footer__likes">
       {{ contentLikes }} <span class="fontBold">{{ likes }}</span>
     </div>
     <div class="video_page__footer__date">
-      {{ contentDate }} <span class="fontBold">{{ dateOfAddingVideo }}</span>
+      {{ contentDate }} <span class="fontBold">{{ dateOfAddingVideo | date: 'short' }}</span>
     </div>
   </div>
 </div>

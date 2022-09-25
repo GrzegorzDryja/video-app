@@ -6,6 +6,8 @@ export type Video = {
   title: string;
   img: string;
   viewCount: string;
+  likes: string;
+  playLink: string;
 };
 
 export type Videos = Video[];

@@ -11,6 +11,7 @@ import { YouTubeResponse } from '@core/models/youtube.model';
 import { Videos } from '@core/models/video.model';
 import { VideoPlatform } from '@shared/video-platform.model';
 import { VimeoResponse } from '@core/models/vimeo.model';
+import { environment } from '@environments/environment';
 
 @Injectable()
 export class VideosEffects {
@@ -59,8 +60,10 @@ export class VideosEffects {
         date: new Date(),
         videoId: responseData.items[0].id,
         title: responseData.items[0].snippet.title,
-        img: responseData.items[0].snippet.thumbnails.default.url,
+        img: responseData.items[0].snippet.thumbnails.medium.url,
         viewCount: responseData.items[0].statistics.viewCount,
+        likes: responseData.items[0].statistics.likeCount,
+        playLink: this.createPlayLink(VideoPlatform.youtube, responseData.items[0].id),
       },
     ];
   };
@@ -74,8 +77,14 @@ export class VideosEffects {
         videoId: responseData.video_id.toString(),
         title: responseData.title,
         img: responseData.thumbnail_url,
-        viewCount: 'Brak danych',
+        viewCount: '_',
+        likes: '_',
+        playLink: this.createPlayLink(VideoPlatform.vimeo, responseData.video_id.toString())
       },
     ];
   };
+
+  public createPlayLink(source: string, id: string): string {
+      return `${(source === VideoPlatform.youtube) ? environment.youTubePlayerURL : environment.vimeoPlayerURL}${id}`;   
+  }
 }

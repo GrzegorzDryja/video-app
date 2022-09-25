@@ -1,39 +1,16 @@
 <div class="video_tile">
   <div class="video_tile__header">
     <div class="video_tile__header__image">
-      <img [src]="thumnbnailPath" (click)="playRightPlatform(platform, videoId)" />
+      <img [src]="thumnbnailPath" (click)="play(video.playLink)" />
     </div>
     <div class="video_tile__header__title">
-      <a [routerLink]="['video', videoId]" href="#">{{ title }}</a>
+      <a [routerLink]="['video', videoId]" href="#">{{ title | short }}</a>
     </div>
   </div>
   <div class="video_tile__footer">
-    <div class="video_tile__info">20 like {{ viewCount }} wyświetleń</div>
+    <div class="video_tile__info">{{ likes | thousand }} like {{ viewCount | thousand }} wyświetleń</div>
     <div class="video_tile__actions">
-      <a href="#" class="video_tile__link" (click)="onFavoriteClick(videoId)"><3</a>
-      <a href="#" class="video_tile__link" (click)="onDeleteClick(videoId)">X</a>
+      <app-actions [videoId]="videoId"></app-actions>
     </div>
   </div>
 </div>
-<!-- 
-<div class="item">
-  <div class="thumbnail">
-    <img [src]="thumnbnailPath" (click)="playRightPlatform(platform, videoId)" />
-  </div>
-  <div class="info">
-    <div class="title">
-      <a [routerLink]="['video', videoId]" href="#">{{ title }}</a>
-    </div>
-    <div class="data">
-      <mat-icon>{{ check_circle }}</mat-icon
-      >{{ dateObj | date: 'mediumDate' }}<mat-icon>{{ visibility }}</mat-icon
-      >{{ viewCount }}
-    </div>
-  </div>
-  <div class="menu">
-    <mat-icon (click)="onFavoriteClick(videoId)">
-      {{ favoriteSwitch }}
-    </mat-icon>
-    <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
-  </div>
-</div> -->

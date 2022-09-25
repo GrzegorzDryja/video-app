@@ -28,6 +28,9 @@ import { DialogComponent } from '@shared/dialog/dialog.component';
 import { environment } from '@environments/environment';
 import { FavoritePipe } from '@features/video-list/list/pipe/favorite.pipe';
 import { SortPipe } from '@features/video-list/list/pipe/sort.pipe';
+import { ActionsComponent } from '@shared/actions/actions.component';
+import { ShortPipe } from '@features/video-list/item/pipe/short.pipe';
+import { ThousandPipe } from '@features/video-list/item/pipe/thousand.pipe';
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({ keys: ['videos'], rehydrate: true })(reducer);
@@ -47,6 +50,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     SortPipe,
     StickyMenuComponent,
     VideoPageComponent,
+    ActionsComponent,
+    ShortPipe,
+    ThousandPipe,
   ],
   imports: [
     BrowserModule,

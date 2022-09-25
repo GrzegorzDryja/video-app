@@ -2,22 +2,22 @@
     <div class="toolbox__actions">
       <ul>
         <li>Akcje:</li>
-        <li (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">Wyczyść</li>
-        <li (click)="loadDemo()">Wgraj demo</li>
+        <li class="link" (click)="onDeleteList()">Wyczyść</li>
+        <li class="link" (click)="loadDemo()">Wgraj demo</li>
       </ul>
     </div>
     <div class="toolbox__sort">
       <ul>
         <li>Kolejność:</li>
-        <li (click)="onDateSort()" [matTooltip]="tooltipSort">Od najnowszych</li>
-        <li (click)="onDateSort()" [matTooltip]="tooltipSort">Od najstarszych</li>
+        <li class="link" (click)="onDateSort()">Od najnowszych</li>
+        <li class="link" (click)="onDateSort()">Od najstarszych</li>
       </ul>
     </div>
     <div class="toolbox__view">
       <ul>
         <li>Widok:</li>
-        <li (click)="onGridChange()" [matTooltip]="tooltipGridChange">Lista</li>
-        <li (click)="onGridChange()" [matTooltip]="tooltipGridChange">Kafelki</li>
+        <li class="link" (click)="onGridChange()">Lista</li>
+        <li class="link" (click)="onGridChange()">Kafelki</li>
       </ul>
     </div>
   </div>

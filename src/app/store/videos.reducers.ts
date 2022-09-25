@@ -11,15 +11,21 @@ const initialState: VideosStateInterface = {
   videos: [],
   lastDeletedVideo: [],
   error: null,
+  showLovedVideos: false,
 };
 
 export const reducers = createReducer(
   initialState,
 
+  on(VideosActions.showLovedVideos, (state, action) => ({
+    ...state,
+    showLovedVideos: action.showLovedVideos,
+  })),
+
   on(VideosActions.loadDemoVideos, (state) => ({
     ...state,
     isLoading: false,
-    videos: [ ...DEMO_VIDEOS ],
+    videos: [...DEMO_VIDEOS],
   })),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),

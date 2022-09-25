@@ -5,4 +5,5 @@ export interface VideosStateInterface {
   videos: Videos;
   lastDeletedVideo: Videos;
   error: string | null;
+  showLovedVideos: boolean;
 }
