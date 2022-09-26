@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ShortPipe implements PipeTransform {
 
   transform(videoTitle: string): string {
-    return `${videoTitle.slice(0,61)}...`;
+    return `${videoTitle.slice(0,55)}...`;
   }
 
 }

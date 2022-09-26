@@ -3,7 +3,12 @@ $color-black: #000000;
 $color-white: #ffffff;
 $width: 1089px;
 
-.video_tile {
+mat-icon {
+  font-size: 2rem;
+  line-height: 3.2rem;
+}
+
+.video_tile_grid {
   padding: 1.6rem;
   height: 23rem;
   width: 23rem;
@@ -36,6 +41,49 @@ $width: 1089px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+}
+
+.video_tile_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  height: 101px;
+  width: 510px;
+  border-radius: 0px;
+  background-color: $color-grey-light-1;
+
+  &__image img {
+    height: 100px;
+    width: 92px;
+    border-radius: 0px;
+    background-color: $color-black;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    flex-grow: 2;
+
+    &__title {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+    }
+
+    &__info {
+      padding-top: 1rem;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+    }
   }
 }
 

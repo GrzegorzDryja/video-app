@@ -1,0 +1,32 @@
+<div class="video_tile_grid" *ngIf="!gridSwitch">
+  <div class="video_tile_grid__header">
+    <div class="video_tile_grid__header__image">
+      <img [src]="thumnbnailPath" (click)="play(video.playLink)" />
+    </div>
+    <div class="video_tile_grid__header__title">
+      <a [routerLink]="['video', videoId]" href="#">{{ title | short }}</a>
+    </div>
+  </div>
+  <div class="video_tile_grid__footer">
+    <div class="video_tile_grid__info">
+      {{ likes | thousand }} 👍 {{ viewCount | thousand }}
+      👀
+    </div>
+    <div class="video_tile_grid__actions">
+      <app-actions [videoId]="videoId"></app-actions>
+    </div>
+  </div>
+</div>
+
+<div class="video_tile_list" *ngIf="gridSwitch">
+  <div class="video_tile_list__image"><img [src]="thumnbnailPath" (click)="play(video.playLink)" /></div>
+  <div class="video_tile_list__content">
+    <div class="video_tile_list__content__title">
+      <a [routerLink]="['video', videoId]" href="#">{{ title | short }}</a>
+    </div>
+    <div class="video_tile_list__content__info">{{ likes | thousand }} like {{ viewCount | thousand }} wyświetleń</div>
+  </div>
+  <div class="video_tile_list__actions">
+    <app-actions [videoId]="videoId"></app-actions>
+  </div>
+</div>

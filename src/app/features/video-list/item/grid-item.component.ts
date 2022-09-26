@@ -6,12 +6,13 @@ import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss'],
+  selector: 'app-grid-item',
+  templateUrl: './grid-item.component.html',
+  styleUrls: ['./grid-item.component.scss'],
 })
-export class ItemComponent implements OnInit {
+export class GridItemComponent implements OnInit {
   @Input() video!: Video;
+  @Input() gridSwitch: boolean = true;
 
   protected platform!: string;
   protected thumnbnailPath!: string;
@@ -24,8 +25,8 @@ export class ItemComponent implements OnInit {
 
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected check_circle = MaterialIcons.check_circle;
-  protected visibility = MaterialIcons.visibility;
+  protected contentLikesText = MaterialIcons.check_circle;
+  protected contentViewsText = MaterialIcons.visibility;
 
   constructor(private dialog: MatDialog) {}
 

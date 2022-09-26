@@ -18,4 +18,13 @@ export enum Content {
   close = 'Zamknij',
   yes = 'Tak',
   no = 'Nie',
+  toolboxActionTitle = 'Akcje:',
+  toolboxActionClearAll = 'Wyczyść',
+  toolboxActionLoadDemo = 'Wgraj demo',
+  toolboxSortTitle = 'Kolejność:',
+  toolboxSortFromNew = 'Od najnowszych',
+  toolboxSortFromOld = 'Od najstarszych',
+  toolboxLayoutTitle = 'Widok:',
+  toolboxLayoutList = 'Lista',
+  toolboxLayoutGrid = 'Kafelki',
 }

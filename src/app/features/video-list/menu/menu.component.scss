@@ -4,10 +4,6 @@ $color-white: #ffffff;
 $width: 1089px;
 
 .toolbox {
-  // position: absolute;
-  // top: 30%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   width: $width;
@@ -28,21 +24,19 @@ $width: 1089px;
   }
 
   li.link {
+    cursor: pointer;
+
     &:link,
     &:visited {
       color: $color-black;
-      text-transform: lowercase;
       text-decoration: none;
       display: inline-block;
-      // transition: all 0.2s;
     }
 
-    &:hover,
-    &:active {
+    &:hover:not(.inactive),
+    &:active:not(.inactive) {
       text-decoration: underline;
-      // animation: shakeit 0.2s;
       color: $color-black;
-      // box-shadow: 0 1rem 2rem rgba($color-black, 0.3);
     }
   }
 
@@ -51,24 +45,12 @@ $width: 1089px;
   }
 }
 
-// button {
-//     margin-left: auto;
-//     margin-right: 1rem;
-// }
+.active {
+  text-decoration: none;
+  cursor: pointer;
+}
 
-// mat-icon {
-//     margin-right: 1rem;
-//     cursor: pointer;
-// }
-
-@keyframes shakeit {
-  0% {
-    transform: rotate(3deg);
-  }
-  50% {
-    transform: rotate(-2deg);
-  }
-  100% {
-    transform: rotate(1deg);
-  }
+.inactive {
+  text-decoration: none;
+  cursor: pointer;
 }

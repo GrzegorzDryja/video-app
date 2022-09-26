@@ -23,9 +23,18 @@ export class StickyMenuComponent implements OnDestroy {
     );
   }
 
+  public onShowAllSort(): void {
+    if(this.showLovedVideosSwitch){
+      this.showLovedVideosSwitch = !this.showLovedVideosSwitch;
+      this.store.showLovedVideos({ showLovedVideos: this.showLovedVideosSwitch })
+    }
+  }
+
   public onFavoriteSort(): void {
-    this.showLovedVideosSwitch = !this.showLovedVideosSwitch;
-    this.store.showLovedVideos({ showLovedVideos: this.showLovedVideosSwitch })
+    if(!this.showLovedVideosSwitch){
+      this.showLovedVideosSwitch = !this.showLovedVideosSwitch;
+      this.store.showLovedVideos({ showLovedVideos: this.showLovedVideosSwitch })
+    }
   }
 
   public ngOnDestroy(): void {

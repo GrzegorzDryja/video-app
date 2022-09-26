@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { VideosFacade } from '@store/videos.facade';
 
 import { Videos } from '@models/video.model';
-import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-video-list',
@@ -15,21 +14,19 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
+
   private videosListSubsription: Subscription;
   private showFavoriteSubsription: Subscription;
 
   protected videosList: Videos = [];
-  protected colsNumber = 4;
-  protected rowHeightRatio = '1:1';
-  protected showFavorite = false;
-  protected sortSwitch = true;
-  protected pageIndex = 0;
-  protected pageSize = 20;
-  protected firstPage = this.pageIndex * this.pageSize;
-  protected secondPage = (this.pageIndex + 1) * this.pageSize;
-  protected pageSizeOptions = [10, 20, 40];
-  protected listHeart = MaterialIcons.favorite;
-  protected listBucket = MaterialIcons.delete_forever;
+  protected showFavorite: boolean = false;
+  protected sortSwitch: boolean = true;
+  protected gridSwitch: boolean = true;
+  protected pageIndex: number = 0;
+  protected pageSize: number = 20;
+  protected firstPage: number = this.pageIndex * this.pageSize;
+  protected secondPage: number = (this.pageIndex + 1) * this.pageSize;
+  protected pageSizeOptions: number[] = [10, 20, 40];
   protected pageEvent: PageEvent;
 
   constructor(private store: VideosFacade) {
@@ -44,8 +41,8 @@ export class VideoListComponent implements OnDestroy {
     };
   }
 
-  public onChangeGridStyle(colsNum: number): void {
-    this.colsNumber = colsNum;
+  public onChangeGridStyle(gridSwitch: boolean): void {
+    this.gridSwitch = gridSwitch;
   }
 
   public onSortSwitch(sortSwitch: boolean): void {
@@ -63,6 +60,7 @@ export class VideoListComponent implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.showFavoriteSubsription.unsubscribe();
     this.videosListSubsription.unsubscribe();
   }
 }

@@ -1,23 +1,16 @@
 <section>
   <app-input></app-input>
   <app-menu
-    (colsNumber)="onChangeGridStyle($event)"
     (sortSwitch)="onSortSwitch($event)"
+    (gridSwitch)="onChangeGridStyle($event)"
   ></app-menu>
 
-  <div class="video_list_grid">
+  <div class="video_list">
     <div class="video_tile" *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage">
-      <app-item [video]="video"></app-item>
+      <app-grid-item [video]="video" [gridSwitch]="gridSwitch"></app-grid-item>
     </div>
   </div>
 
-  <!-- <mat-grid-list [cols]="colsNumber" [rowHeight]="rowHeightRatio">
-    <mat-grid-tile
-      *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage"
-    >
-      <app-item [video]="video"></app-item>
-    </mat-grid-tile>
-  </mat-grid-list> -->
   <mat-paginator
     #pagintor
     [length]="videosList.length"

@@ -1,30 +1,23 @@
 <div class="toolbox">
-    <div class="toolbox__actions">
-      <ul>
-        <li>Akcje:</li>
-        <li class="link" (click)="onDeleteList()">Wyczyść</li>
-        <li class="link" (click)="loadDemo()">Wgraj demo</li>
-      </ul>
-    </div>
-    <div class="toolbox__sort">
-      <ul>
-        <li>Kolejność:</li>
-        <li class="link" (click)="onDateSort()">Od najnowszych</li>
-        <li class="link" (click)="onDateSort()">Od najstarszych</li>
-      </ul>
-    </div>
-    <div class="toolbox__view">
-      <ul>
-        <li>Widok:</li>
-        <li class="link" (click)="onGridChange()">Lista</li>
-        <li class="link" (click)="onGridChange()">Kafelki</li>
-      </ul>
-    </div>
+  <div class="toolbox__actions">
+    <ul>
+      <li>{{ toolboxActionTitle }}</li>
+      <li class="link" (click)="onDeleteList()">{{ toolboxActionClearAll }}</li>
+      <li class="link" (click)="loadDemo()" [ngClass]="demoSwitch ? 'active' : 'inactive'">{{ toolboxActionLoadDemo }}</li>
+    </ul>
   </div>
-
-<!-- <button type="button" mat-raised-button color="primary" (click)="loadDemo()" [disabled]="demoSwitch">Demo</button>
-
-<mat-icon (click)="onGridChange()" [matTooltip]="tooltipGridChange">{{ gridSwitch }}</mat-icon>
-<mat-icon (click)="onFavoriteSort()" [matTooltip]="tooltipLoved">{{ favoriteSwitch }}</mat-icon>
-<mat-icon (click)="onDateSort()" [matTooltip]="tooltipSort"> {{ sortDirection }}</mat-icon>
-<mat-icon (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">{{ delete_sweep }}</mat-icon> -->
+  <div class="toolbox__sort">
+    <ul>
+      <li>{{ toolboxSortTitle }}</li>
+      <li class="link" (click)="onDateSort()">{{ toolboxSortFromNew }}</li>
+      <li class="link" (click)="onDateSort()">{{ toolboxSortFromOld }}</li>
+    </ul>
+  </div>
+  <div class="toolbox__view">
+    <ul>
+      <li>{{ toolboxLayoutTitle }}</li>
+      <li class="link" (click)="onGridChange()">{{ toolboxLayoutList }}</li>
+      <li class="link" (click)="onGridChange()">{{ toolboxLayoutGrid }}</li>
+    </ul>
+  </div>
+</div>
