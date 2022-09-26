@@ -6,11 +6,11 @@ import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
 
 @Component({
-  selector: 'app-grid-item',
-  templateUrl: './grid-item.component.html',
+  selector: 'app-item',
+  templateUrl: './item.component.html',
   styleUrls: ['./grid-item.component.scss'],
 })
-export class GridItemComponent implements OnInit {
+export class ItemComponent implements OnInit {
   @Input() video!: Video;
   @Input() gridSwitch: boolean = true;
 

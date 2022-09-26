@@ -7,7 +7,7 @@
 
   <div class="video_list">
     <div class="video_tile" *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage">
-      <app-grid-item [video]="video" [gridSwitch]="gridSwitch"></app-grid-item>
+      <app-item [video]="video" [gridSwitch]="gridSwitch"></app-item>
     </div>
   </div>
 

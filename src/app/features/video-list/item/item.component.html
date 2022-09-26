@@ -8,10 +8,7 @@
     </div>
   </div>
   <div class="video_tile_grid__footer">
-    <div class="video_tile_grid__info">
-      {{ likes | thousand }} 👍 {{ viewCount | thousand }}
-      👀
-    </div>
+    <div class="video_tile_grid__info">{{ likes | thousand }} 👍 {{ viewCount | thousand }} 👀</div>
     <div class="video_tile_grid__actions">
       <app-actions [videoId]="videoId"></app-actions>
     </div>

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
@@ -22,7 +21,6 @@ export class MenuComponent implements OnDestroy {
   private videosSubscription: Subscription;
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
-  private favoriteSortSwith = true;
 
   protected demoSwitch!: boolean;
   protected videosLenght = 0;
