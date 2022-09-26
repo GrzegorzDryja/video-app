@@ -41,9 +41,12 @@ export class ItemComponent implements OnInit {
     this.favorite = this.video.favorite;
   }
 
-  public play(playLink: string): void {
+  public play(path: string, videoId: string): void {
     this.dialog.open(PlayerComponent, {
-      data: playLink,
+      data: {
+        path,
+        videoId,
+      },
     });
   }
 }

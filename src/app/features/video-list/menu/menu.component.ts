@@ -17,9 +17,10 @@ import { Subscription } from 'rxjs';
 export class MenuComponent implements OnDestroy {
   @Output() sortSwitch = new EventEmitter<boolean>();
   @Output() gridSwitch = new EventEmitter<boolean>();
-
+  
   private videosSubscription: Subscription;
-
+  
+  protected addToLovedSwtich = false;
   protected dateSortSwitch = true;
   protected gridChangeSwitch = false;
   protected demoSwitch!: boolean;

@@ -1,4 +1,7 @@
 <h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-actions align="end">
+  <app-actions [videoId]="videoId" (isVideoDeleted)="isVideoDeleted($event)" ></app-actions>
+</div>
 <div mat-dialog-content>
   <iframe
     [src]="link"
@@ -12,6 +15,6 @@
   >
   </iframe>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{ close }}</button>
 </div>

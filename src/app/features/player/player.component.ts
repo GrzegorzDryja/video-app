@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Content } from '@shared/content.model';
 
 @Component({
@@ -10,10 +11,25 @@ import { Content } from '@shared/content.model';
 })
 export class PlayerComponent {
   protected link;
-  protected close = Content.close
-  protected title = Content.title
+  protected videoId;
+  protected close = Content.close;
+  protected title = Content.title;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private path: string, private sanitizer: DomSanitizer) {
-    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(this.path);
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: { path: string; videoId: string },
+    private router: Router,
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private dialogRef: MatDialogRef<PlayerComponent>
+  ) {
+    this.link = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.path);
+    this.videoId = this.data.videoId;
+  }
+
+  public isVideoDeleted(isVideoDeleted: boolean): void {
+    if (isVideoDeleted) {
+      this.router.navigate([''], { relativeTo: this.route });
+      this.dialogRef.close();
+    }
   }
 }
