@@ -8,7 +8,7 @@ import { Video } from '@models/video.model';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./grid-item.component.scss'],
+  styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent implements OnInit {
   @Input() video!: Video;

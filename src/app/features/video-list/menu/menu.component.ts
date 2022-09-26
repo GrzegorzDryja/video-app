@@ -19,9 +19,9 @@ export class MenuComponent implements OnDestroy {
   @Output() gridSwitch = new EventEmitter<boolean>();
 
   private videosSubscription: Subscription;
-  private dateSortSwitch = true;
-  private gridChangeSwitch = true;
 
+  protected dateSortSwitch = true;
+  protected gridChangeSwitch = false;
   protected demoSwitch!: boolean;
   protected videosLenght = 0;
   protected toolboxActionTitle = Content.toolboxActionTitle;
@@ -44,28 +44,40 @@ export class MenuComponent implements OnDestroy {
     }
   }
 
-  public onGridChange(): void {
-    this.gridChangeSwitch = !this.gridChangeSwitch;
+  public onGridChangeToList(): void {
+    this.gridChangeSwitch = true;
     this.gridSwitch.emit(this.gridChangeSwitch);
   }
 
-  public onDateSort(): void {
-    this.dateSortSwitch = !this.dateSortSwitch;
+  public onListChangeToGrid(): void {
+    this.gridChangeSwitch = false;
+    this.gridSwitch.emit(this.gridChangeSwitch);
+  }
+
+  public onDateSortNew(): void {
+    this.dateSortSwitch = false;
+    this.sortSwitch.emit(this.dateSortSwitch);
+  }
+
+  public onDateSortOld(): void {
+    this.dateSortSwitch = true;
     this.sortSwitch.emit(this.dateSortSwitch);
   }
 
   public onDeleteList(): void {
-    this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
-    this.dialog.afterClosed().subscribe((result) => {
-      if (!result) {
-        this.dialog.closeAll();
-        return;
-      }
-      this.store.deleteVideosList();
-      this.snackBar.open(Messages.video_list_deleted, Messages.close, {
-        duration: SnackBar.duration,
+    if (!this.demoSwitch) {
+      this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
+      this.dialog.afterClosed().subscribe((result) => {
+        if (!result) {
+          this.dialog.closeAll();
+          return;
+        }
+        this.store.deleteVideosList();
+        this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+          duration: SnackBar.duration,
+        });
       });
-    });
+    }
   }
 
   public ngOnDestroy(): void {

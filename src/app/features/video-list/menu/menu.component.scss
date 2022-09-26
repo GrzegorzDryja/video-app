@@ -1,7 +1,4 @@
-$color-grey-light-1: #c4c4c4;
-$color-black: #000000;
-$color-white: #ffffff;
-$width: 1089px;
+@import 'styles.scss';
 
 .toolbox {
   display: flex;
@@ -24,7 +21,6 @@ $width: 1089px;
   }
 
   li.link {
-    cursor: pointer;
 
     &:link,
     &:visited {
@@ -33,8 +29,11 @@ $width: 1089px;
       display: inline-block;
     }
 
-    &:hover:not(.inactive),
-    &:active:not(.inactive) {
+    &:hover:not(.inactive) {
+      text-decoration: underline;
+    }
+
+    &:active {
       text-decoration: underline;
       color: $color-black;
     }
@@ -46,8 +45,8 @@ $width: 1089px;
 }
 
 .active {
-  text-decoration: none;
-  cursor: pointer;
+  text-decoration: underline;
+  cursor: default;
 }
 
 .inactive {

@@ -2,22 +2,22 @@
   <div class="toolbox__actions">
     <ul>
       <li>{{ toolboxActionTitle }}</li>
-      <li class="link" (click)="onDeleteList()">{{ toolboxActionClearAll }}</li>
-      <li class="link" (click)="loadDemo()" [ngClass]="demoSwitch ? 'active' : 'inactive'">{{ toolboxActionLoadDemo }}</li>
+      <li class="link" (click)="onDeleteList()"[ngClass]="demoSwitch ? 'active' : 'inactive'">{{ toolboxActionClearAll }}</li>
+      <li class="link" (click)="loadDemo()" [ngClass]="!demoSwitch ? 'active' : 'inactive'">{{ toolboxActionLoadDemo }}</li>
     </ul>
   </div>
   <div class="toolbox__sort">
     <ul>
       <li>{{ toolboxSortTitle }}</li>
-      <li class="link" (click)="onDateSort()">{{ toolboxSortFromNew }}</li>
-      <li class="link" (click)="onDateSort()">{{ toolboxSortFromOld }}</li>
+      <li class="link" (click)="onDateSortNew()" [ngClass]="!dateSortSwitch ? 'active' : 'inactive'">{{ toolboxSortFromNew }}</li>
+      <li class="link" (click)="onDateSortOld()" [ngClass]="dateSortSwitch ? 'active' : 'inactive'">{{ toolboxSortFromOld }}</li>
     </ul>
   </div>
   <div class="toolbox__view">
     <ul>
       <li>{{ toolboxLayoutTitle }}</li>
-      <li class="link" (click)="onGridChange()">{{ toolboxLayoutList }}</li>
-      <li class="link" (click)="onGridChange()">{{ toolboxLayoutGrid }}</li>
+      <li class="link" (click)="onGridChangeToList()" [ngClass]="gridChangeSwitch ? 'active' : 'inactive'">{{ toolboxLayoutList }}</li>
+      <li class="link" (click)="onListChangeToGrid()"[ngClass]="!gridChangeSwitch ? 'active' : 'inactive'">{{ toolboxLayoutGrid }}</li>
     </ul>
   </div>
 </div>
