@@ -7,6 +7,7 @@ import { VideosFacade } from '@store/videos.facade';
 
 import { Content } from '@shared/content.model';
 import { Video, Videos } from '@core/models/video.model';
+import { PlayerOptions } from '@shared/player.model';
 
 @Component({
   selector: 'app-video-page',
@@ -28,6 +29,8 @@ export class VideoPageComponent implements OnInit, OnDestroy {
   protected contentDisplays: string = Content.displays;
   protected contentLikes: string = Content.likes;
   protected contentDate: string = Content.dateOfAddingVideo;
+  protected playerHeight: string = PlayerOptions.playerHeight;
+  protected playerWidth: string = PlayerOptions.playerWidth;
 
   constructor(
     private router: Router,

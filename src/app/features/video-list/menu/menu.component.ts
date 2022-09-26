@@ -17,9 +17,9 @@ import { Subscription } from 'rxjs';
 export class MenuComponent implements OnDestroy {
   @Output() sortSwitch = new EventEmitter<boolean>();
   @Output() gridSwitch = new EventEmitter<boolean>();
-  
+
   private videosSubscription: Subscription;
-  
+
   protected addToLovedSwtich = false;
   protected dateSortSwitch = true;
   protected gridChangeSwitch = false;
@@ -66,19 +66,20 @@ export class MenuComponent implements OnDestroy {
   }
 
   public onDeleteList(): void {
-    if (!this.demoSwitch) {
-      this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
-      this.dialog.afterClosed().subscribe((result) => {
-        if (!result) {
-          this.dialog.closeAll();
-          return;
-        }
-        this.store.deleteVideosList();
-        this.snackBar.open(Messages.video_list_deleted, Messages.close, {
-          duration: SnackBar.duration,
-        });
-      });
+    if (this.demoSwitch) {
+      return;
     }
+    this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
+    this.dialog.afterClosed().subscribe((result) => {
+      if (!result) {
+        this.dialog.closeAll();
+        return;
+      }
+      this.store.deleteVideosList();
+      this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+        duration: SnackBar.duration,
+      });
+    });
   }
 
   public ngOnDestroy(): void {

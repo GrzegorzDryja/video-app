@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Content } from '@shared/content.model';
+import { PlayerOptions } from '@shared/player.model';
 
 @Component({
   selector: 'app-player',
@@ -14,6 +15,8 @@ export class PlayerComponent {
   protected videoId;
   protected close = Content.close;
   protected title = Content.title;
+  protected playerHeight: string = PlayerOptions.playerHeight;
+  protected playerWidth: string = PlayerOptions.playerWidth;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { path: string; videoId: string },

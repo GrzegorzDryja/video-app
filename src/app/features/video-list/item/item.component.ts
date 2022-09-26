@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MaterialIcons } from '@shared/material-icons.model';
 import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
+import { Content } from '@shared/content.model';
 
 @Component({
   selector: 'app-item',
@@ -23,10 +24,11 @@ export class ItemComponent implements OnInit {
   protected likes!: string;
   protected favorite!: boolean;
 
-  protected deleteIcon = MaterialIcons.delete_forever;
-  protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected contentLikesText = MaterialIcons.check_circle;
-  protected contentViewsText = MaterialIcons.visibility;
+  protected contentLikes = Content.likes
+  protected contentViews = Content.displays
+
+  protected contentLikesIcon = MaterialIcons.check_circle;
+  protected contentViewsIcon = MaterialIcons.visibility;
 
   constructor(private dialog: MatDialog) {}
 
