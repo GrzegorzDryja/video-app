@@ -1,0 +1,6 @@
+<div mat-dialog-content>{{ content }}?</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close *ngIf="acstionStatus">{{ no }}</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial *ngIf="acstionStatus">{{ yes }}</button>
+  <button mat-button mat-dialog-close *ngIf="!acstionStatus">{{ close }}</button>
+</div>

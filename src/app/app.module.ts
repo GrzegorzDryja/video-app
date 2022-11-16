@@ -1,16 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import { VideosStore } from '@store/videos.store';
+import { VideosFacade } from '@store/videos.facade';
+import { reducers } from '@store/videos.reducers'
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { InputComponent } from './input/input.component';
-import { VideoListComponent } from './video-list/video-list.component';
-import { MenuComponent } from './video-list/menu/menu.component';
-import { PlayerComponent } from './video-list/player/player.component';
+import { AppComponent } from './app.component';
+import { VideoListComponent, MenuComponent, PlayerComponent, ItemComponent, InputComponent } from '@features/index';
+import { DialogComponent } from '@shared/dialog/dialog.component';
+import { environment } from '@environments/environment';
+import { FavoritePipe } from '@features/video-list/list/pipe/favorite.pipe';
+import { SortPipe } from '@features/video-list/list/pipe/sort.pipe';
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ keys: ['videos'], rehydrate: true })(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
@@ -18,18 +32,26 @@ import { PlayerComponent } from './video-list/player/player.component';
     InputComponent,
     VideoListComponent,
     MenuComponent,
-    PlayerComponent
+    PlayerComponent,
+    ItemComponent,
+    DialogComponent,
+    FavoritePipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    FormsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    VideosStore,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
-  providers: [],
+  providers: [VideosFacade],
   bootstrap: [AppComponent],
-  entryComponents: [PlayerComponent]
+  entryComponents: [PlayerComponent],
 })
 export class AppModule { }
