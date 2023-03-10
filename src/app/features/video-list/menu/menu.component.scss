@@ -1,9 +1,55 @@
-button {
-    margin-left: auto;
-    margin-right: 1rem;
+@import 'styles.scss';
+
+.toolbox {
+  display: flex;
+  justify-content: space-between;
+  width: $width;
+  margin-bottom: 1rem;
+
+  li,
+  ul {
+    display: inline-block;
+  }
+  li {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    list-style: none;
+    padding-right: 3rem;
+  }
+
+  li.link {
+
+    &:link,
+    &:visited {
+      color: $color-black;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    &:hover:not(.inactive) {
+      text-decoration: underline;
+    }
+
+    &:active {
+      text-decoration: underline;
+      color: $color-black;
+    }
+  }
+
+  &__actions {
+    flex-grow: 2;
+  }
 }
 
-mat-icon {
-    margin-right: 1rem;
-    cursor: pointer;
+.active {
+  text-decoration: underline;
+  cursor: default;
+}
+
+.inactive {
+  text-decoration: none;
+  cursor: pointer;
 }

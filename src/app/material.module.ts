@@ -21,19 +21,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  exports: [
-    MatInputModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatIconModule,
-    MatCardModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatSnackBarModule
-  ],
+  exports: [MatInputModule, MatButtonModule, MatPaginatorModule, MatDialogModule, MatSnackBarModule, MatIconModule],
 })
 export class MaterialModule {}

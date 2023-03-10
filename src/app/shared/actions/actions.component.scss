@@ -1,0 +1,15 @@
+.red {
+  color: red;
+}
+
+ul {
+  :last-of-type {
+    padding-left: 1rem;
+  }
+}
+
+li.actions {
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}

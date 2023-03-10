@@ -1,17 +1,16 @@
 <section>
+  <app-input></app-input>
   <app-menu
-    (colsNumber)="onChangeGridStyle($event)"
-    (showFavorite)="onShowFavoriteSwitch($event)"
     (sortSwitch)="onSortSwitch($event)"
+    (gridSwitch)="onChangeGridStyle($event)"
   ></app-menu>
 
-  <mat-grid-list [cols]="colsNumber" [rowHeight]="rowHeightRatio">
-    <mat-grid-tile
-      *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage"
-    >
-      <app-item [video]="video"></app-item>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <div class="video_list">
+    <div class="video_tile" *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage">
+      <app-item [video]="video" [gridSwitch]="gridSwitch"></app-item>
+    </div>
+  </div>
+
   <mat-paginator
     #pagintor
     [length]="videosList.length"

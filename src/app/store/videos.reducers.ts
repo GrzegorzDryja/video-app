@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import * as _ from 'lodash';
 
 import { VideosStateInterface } from '@core/models/videosState.interface';
 import * as VideosActions from 'app/store/videos.actions';
@@ -11,15 +12,21 @@ const initialState: VideosStateInterface = {
   videos: [],
   lastDeletedVideo: [],
   error: null,
+  showLovedVideos: false,
 };
 
 export const reducers = createReducer(
   initialState,
 
+  on(VideosActions.showLovedVideos, (state, action) => ({
+    ...state,
+    showLovedVideos: action.showLovedVideos,
+  })),
+
   on(VideosActions.loadDemoVideos, (state) => ({
     ...state,
     isLoading: false,
-    videos: [ ...DEMO_VIDEOS ],
+    videos: [...DEMO_VIDEOS],
   })),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
@@ -44,7 +51,7 @@ export const reducers = createReducer(
   })),
 
   on(VideosActions.deleteVideo, (state, action) => {
-    const videos: Videos = [...state.videos];
+    const videos: Videos = _.clone(state.videos);
 
     return {
       ...state,
@@ -59,7 +66,7 @@ export const reducers = createReducer(
   }),
 
   on(VideosActions.loveVideo, (state, action) => {
-    const videos: Videos = [...state.videos];
+    const videos: Videos = _.clone(state.videos);;
     const videoToLoveIndex: number = state.videos.findIndex((video) => video.videoId === action.videoId);
     const videoToLove: Video = Object.assign({}, state.videos[videoToLoveIndex]);
     videoToLove.favorite = !videoToLove.favorite;

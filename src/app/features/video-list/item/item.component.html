@@ -1,19 +1,34 @@
-<div class="item">
-  <div class="thumbnail">
-    <img [src]="thumnbnailPath" (click)="playRightPlatform(platform, videoId)" />
-  </div>
-  <div class="info">
-    <div class="title">
-      {{ title }}
+<div class="video_tile_grid" *ngIf="!gridSwitch">
+  <div class="video_tile_grid__header">
+    <div class="video_tile_grid__header__image">
+      <img [src]="thumnbnailPath" (click)="play(video.playLink, video.videoId)" />
     </div>
-    <div class="data">
-      <mat-icon>{{ check_circle }}</mat-icon>{{ dateObj | date: 'mediumDate' }}<mat-icon>{{ visibility }}</mat-icon>{{ viewCount }}
+    <div class="video_tile_grid__header__title">
+      <a [routerLink]="['video', videoId]" href="#">{{ title | short }}</a>
     </div>
   </div>
-  <div class="menu">
-    <mat-icon (click)="onFavoriteClick(videoId)">
-      {{ favoriteSwitch }}
-    </mat-icon>
-    <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
+  <div class="video_tile_grid__footer">
+    <div class="video_tile_grid__info">
+      {{ likes | thousand }} <mat-icon>{{contentLikesIcon }}</mat-icon>{{ viewCount | thousand }}
+      <mat-icon>{{contentViewsIcon}}</mat-icon>
+    </div>
+    <div class="video_tile_grid__actions">
+      <app-actions [videoId]="videoId"></app-actions>
+    </div>
+  </div>
+</div>
+
+<div class="video_tile_list" *ngIf="gridSwitch">
+  <div class="video_tile_list__image"><img [src]="thumnbnailPath" (click)="play(video.playLink, video.videoId)" /></div>
+  <div class="video_tile_list__content">
+    <div class="video_tile_list__content__title">
+      <a [routerLink]="['video', videoId]" href="#">{{ title | short }}</a>
+    </div>
+    <div class="video_tile_list__content__info">
+      {{ likes | thousand }} {{ contentLikes }}, {{ viewCount | thousand }} {{ contentViews }}
+    </div>
+  </div>
+  <div class="video_tile_list__actions">
+    <app-actions [videoId]="videoId"></app-actions>
   </div>
 </div>

@@ -10,11 +10,16 @@ export class VideosFacade {
   public loading$ = this.store.select(selectors.isLoadingSelector);
   public videos$ = this.store.select(selectors.videosSelector);
   public error$ = this.store.select(selectors.errorSelector);
+  public showLovedVideosSwitch$ = this.store.select(selectors.showLovedVideos);
 
   constructor(private store: Store<AppStateInterface>) {}
 
+  public showLovedVideos(payload: { showLovedVideos: boolean }): void {
+    this.store.dispatch(actions.showLovedVideos(payload));
+  }
+
   public loadDemoVideos(): void {
-    this.store.dispatch(actions.loadDemoVideos())
+    this.store.dispatch(actions.loadDemoVideos());
   }
 
   public addYouTubeVideo(payload: { videoPlatform: string; videoId: string }): void {

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
@@ -16,59 +15,60 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnDestroy {
-  @Output() colsNumber = new EventEmitter<number>();
-  @Output() showFavorite = new EventEmitter<boolean>()
-  @Output() sortSwitch = new EventEmitter<boolean>()
+  @Output() sortSwitch = new EventEmitter<boolean>();
+  @Output() gridSwitch = new EventEmitter<boolean>();
 
   private videosSubscription: Subscription;
-  private dateSortSwitch = true;
-  private gridChangeSwitch = true;
-  private favoriteSortSwith = true;
-  private oneColumnGrid = 1;
-  private moreColumnGrid = 3;
 
-  protected demoSwitch = true;
+  protected addToLovedSwtich = false;
+  protected dateSortSwitch = true;
+  protected gridChangeSwitch = false;
+  protected demoSwitch!: boolean;
   protected videosLenght = 0;
-  protected gridSwitch = MaterialIcons.grid_on;
-  protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected delete_sweep = MaterialIcons.delete_sweep;
-  protected sortDirection = MaterialIcons.arrow_downward;
-  protected tooltipGridChange = Content.tooltipGridChange;
-  protected tooltipLoved = Content.tooltipLoved;
-  protected tooltipSort = Content.tooltipSort;
-  protected tooltipDeleteAll = Content.tooltipDeleteAll;
+  protected toolboxActionTitle = Content.toolboxActionTitle;
+  protected toolboxActionClearAll = Content.toolboxActionClearAll;
+  protected toolboxActionLoadDemo = Content.toolboxActionLoadDemo;
+  protected toolboxSortTitle = Content.toolboxSortTitle;
+  protected toolboxSortFromNew = Content.toolboxSortFromNew;
+  protected toolboxSortFromOld = Content.toolboxSortFromOld;
+  protected toolboxLayoutTitle = Content.toolboxLayoutTitle;
+  protected toolboxLayoutList = Content.toolboxLayoutList;
+  protected toolboxLayoutGrid = Content.toolboxLayoutGrid;
 
-  constructor(
-    public dialog: MatDialogService,
-    private snackBar: MatSnackBar,
-    private store: VideosFacade
-  ) {
-    this.videosSubscription = this.store.videos$.subscribe(videos => this.demoSwitch = videos.length !== 0)
+  constructor(public dialog: MatDialogService, private snackBar: MatSnackBar, private store: VideosFacade) {
+    this.videosSubscription = this.store.videos$.subscribe((videos) => (this.demoSwitch = videos.length === 0));
   }
 
   public loadDemo(): void {
-    this.store.loadDemoVideos()
+    if (this.demoSwitch) {
+      this.store.loadDemoVideos();
+    }
   }
 
-  public onGridChange(): void {
-    this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
-    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
+  public onGridChangeToList(): void {
+    this.gridChangeSwitch = true;
+    this.gridSwitch.emit(this.gridChangeSwitch);
   }
 
-  public onFavoriteSort(): void {
-    this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-    this.showFavorite.emit(this.favoriteSortSwith)
+  public onListChangeToGrid(): void {
+    this.gridChangeSwitch = false;
+    this.gridSwitch.emit(this.gridChangeSwitch);
   }
 
-  public onDateSort(): void {
-    this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_downward : MaterialIcons.arrow_upward;
-    this.sortSwitch.emit(this.dateSortSwitch)
+  public onDateSortNew(): void {
+    this.dateSortSwitch = false;
+    this.sortSwitch.emit(this.dateSortSwitch);
+  }
+
+  public onDateSortOld(): void {
+    this.dateSortSwitch = true;
+    this.sortSwitch.emit(this.dateSortSwitch);
   }
 
   public onDeleteList(): void {
+    if (this.demoSwitch) {
+      return;
+    }
     this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {
@@ -82,7 +82,7 @@ export class MenuComponent implements OnDestroy {
     });
   }
 
-  public ngOnDestroy(): void {    
-    this.videosSubscription.unsubscribe()
+  public ngOnDestroy(): void {
+    this.videosSubscription.unsubscribe();
   }
 }

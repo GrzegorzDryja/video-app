@@ -1,0 +1,35 @@
+$color-grey-light-1: #c4c4c4;
+$color-black: #000000;
+$color-white: #ffffff;
+$width: 1089px;
+
+.video_page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $color-white;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    &__likes {
+      flex-grow: 2;
+    }
+  }
+
+  .video_page_content {
+    height: 539px;
+    width: 860px;
+    margin: 2rem 0 2rem 0;
+    border-radius: 0px;
+    background-color: $color-grey-light-1;
+  }
+}

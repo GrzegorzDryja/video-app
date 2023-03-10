@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { VideosFacade } from '@store/videos.facade';
 
 import { Videos } from '@models/video.model';
-import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-video-list',
@@ -15,24 +14,26 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
+
   private videosListSubsription: Subscription;
-  
+  private showFavoriteSubsription: Subscription;
+
   protected videosList: Videos = [];
-  protected colsNumber = 1;
-  protected rowHeightRatio = "7rem";
-  protected showFavorite = false;
-  protected sortSwitch = true;
-  protected pageIndex = 0;
-  protected pageSize = 9;
-  protected firstPage = this.pageIndex * this.pageSize;
-  protected secondPage = (this.pageIndex + 1) * this.pageSize;
-  protected pageSizeOptions = [9, 18, 27];  
-  protected listHeart = MaterialIcons.favorite;
-  protected listBucket = MaterialIcons.delete_forever;  
+  protected showFavorite: boolean = false;
+  protected sortSwitch: boolean = true;
+  protected gridSwitch: boolean = false;
+  protected pageIndex: number = 0;
+  protected pageSize: number = 20;
+  protected firstPage: number = this.pageIndex * this.pageSize;
+  protected secondPage: number = (this.pageIndex + 1) * this.pageSize;
+  protected pageSizeOptions: number[] = [10, 20, 40];
   protected pageEvent: PageEvent;
 
   constructor(private store: VideosFacade) {
     this.videosListSubsription = this.store.videos$.subscribe((el) => (this.videosList = el));
+    this.showFavoriteSubsription = this.store.showLovedVideosSwitch$.subscribe(
+      (showLoved) => (this.showFavorite = showLoved)
+    );
     this.pageEvent = {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
@@ -40,12 +41,8 @@ export class VideoListComponent implements OnDestroy {
     };
   }
 
-  public onChangeGridStyle(colsNum: number): void {
-    this.colsNumber = colsNum;
-  }
-
-  public onShowFavoriteSwitch(showFavorite: boolean): void {
-    this.showFavorite = showFavorite;
+  public onChangeGridStyle(gridSwitch: boolean): void {
+    this.gridSwitch = gridSwitch;
   }
 
   public onSortSwitch(sortSwitch: boolean): void {
@@ -63,6 +60,7 @@ export class VideoListComponent implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.showFavoriteSubsription.unsubscribe();
     this.videosListSubsription.unsubscribe();
   }
 }
