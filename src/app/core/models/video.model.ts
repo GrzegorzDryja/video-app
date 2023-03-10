@@ -1,4 +1,4 @@
-export type Video = {
+export interface Video {
   platform: string;
   favorite: boolean;
   date: Date | string;

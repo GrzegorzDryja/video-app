@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import * as VideosActions from 'app/store/videos.actions';
-
+import * as VideosActions from '@store/videos.actions';
 import { YoutubeService } from '@core/services/youtube.service';
 import { VimeoService } from '@core/services/vimeo.service';
 import { MatDialogService } from '@core/services/mat-dialog.service';
@@ -28,7 +27,7 @@ export class VideosEffects {
         return this.youtubeService.fetchVideo(action.videoId).pipe(
           map((video: YouTubeResponse) => {
             const videos = this.parseYouTubeResponse(video);
-            return VideosActions.addVideoSucces({ videos });
+            return VideosActions.addVideoSuccess({ videos });
           }),
           catchError((error) => [VideosActions.addVideoFailure({ error })])
         );
@@ -43,7 +42,7 @@ export class VideosEffects {
         this.vimeoService.fetchVideo(action.videoId).pipe(
           map((video: VimeoResponse) => {
             const videos = this.parseVimeoResponse(video);
-            return VideosActions.addVideoSucces({ videos });
+            return VideosActions.addVideoSuccess({ videos });
           }),
           catchError((error) => of(VideosActions.addVideoFailure({ error })))
         )

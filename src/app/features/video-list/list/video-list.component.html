@@ -13,10 +13,10 @@
     </mat-grid-tile>
   </mat-grid-list>
   <mat-paginator
-    #pagintor
+    #paginator
     [length]="videosList.length"
     [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions"
-    (page)="pageEvent = setPaginaotor($event)"
+    (page)="pageEvent = setPaginator($event)"
   ></mat-paginator>
 </section>

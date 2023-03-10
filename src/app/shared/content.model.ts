@@ -5,7 +5,7 @@ export enum Content {
   tooltipLoved = 'Pokaż ulubione',
   tooltipSort = 'Sortuj',
   questionDefault = 'Czy na pewno?',
-  questionDeletAll = 'Czy na pewno chcesz usunąć wszystkie filmy?',
+  questionDeleteAll = 'Czy na pewno chcesz usunąć wszystkie filmy?',
   addButton = 'Dodaj',
   inputLabel = 'Tutaj wklej link do filmu',
   close = 'Zamknij',

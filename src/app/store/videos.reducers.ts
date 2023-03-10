@@ -1,8 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
+import * as VideosActions from '@store/videos.actions';
 import { VideosStateInterface } from '@core/models/videosState.interface';
-import * as VideosActions from 'app/store/videos.actions';
-
 import { Video, Videos } from '@core/models/video.model';
 import { DEMO_VIDEOS } from '@core/models/demo.model';
 
@@ -32,7 +31,7 @@ export const reducers = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(VideosActions.addVideoSucces, (state, action) => ({
+  on(VideosActions.addVideoSuccess, (state, action) => ({
     ...state,
     isLoading: false,
     videos: [...state.videos, ...action.videos],
