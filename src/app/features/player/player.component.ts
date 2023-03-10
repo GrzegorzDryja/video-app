@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component,  OnInit, Inject } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
+
 import { Content } from '@shared/content.model';
 
 @Component({
@@ -9,7 +10,7 @@ import { Content } from '@shared/content.model';
   styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent {
-  protected link;
+  protected link: SafeResourceUrl;
   protected close = Content.close
   protected title = Content.title
 

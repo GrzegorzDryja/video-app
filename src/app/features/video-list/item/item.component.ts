@@ -18,16 +18,15 @@ import { SnackBar } from '@shared/snack-bar.model';
   styleUrls: ['./item.component.scss'],
 })
 export class ItemComponent implements OnInit {
-  @Input() video!: Video;
+  @Input() video: Video;
 
-  protected platform!: string;
-  protected thumnbnailPath!: string;
-  protected videoId!: string;
-  protected title!: string;
-  protected dateObj!: Date | string;
-  protected viewCount!: string;
-  protected favorite!: boolean;
-
+  protected platform: string;
+  protected thumbnailPath: string;
+  protected videoId: string;
+  protected title: string;
+  protected dateObj: Date | string;
+  protected viewCount: string;
+  protected favorite: boolean;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected check_circle = MaterialIcons.check_circle;
@@ -37,7 +36,7 @@ export class ItemComponent implements OnInit {
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
-    this.thumnbnailPath = this.video.img;
+    this.thumbnailPath = this.video.img;
     this.videoId = this.video.videoId;
     this.title = this.video.title;
     this.dateObj = this.video.date;

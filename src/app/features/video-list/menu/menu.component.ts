@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MaterialIcons } from '@shared/material-icons.model';
@@ -15,20 +21,20 @@ import { Subscription } from 'rxjs';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnDestroy {
+export class MenuComponent implements OnInit, OnDestroy {
   @Output() colsNumber = new EventEmitter<number>();
-  @Output() showFavorite = new EventEmitter<boolean>()
-  @Output() sortSwitch = new EventEmitter<boolean>()
+  @Output() showFavorite = new EventEmitter<boolean>();
+  @Output() sortSwitch = new EventEmitter<boolean>();
 
   private videosSubscription: Subscription;
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
-  private favoriteSortSwith = true;
+  private favoriteSortSwitch = true;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
 
   protected demoSwitch = true;
-  protected videosLenght = 0;
+  protected videosLength = 0;
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected delete_sweep = MaterialIcons.delete_sweep;
@@ -42,34 +48,46 @@ export class MenuComponent implements OnDestroy {
     public dialog: MatDialogService,
     private snackBar: MatSnackBar,
     private store: VideosFacade
-  ) {
-    this.videosSubscription = this.store.videos$.subscribe(videos => this.demoSwitch = videos.length !== 0)
+  ) {}
+
+  public ngOnInit(): void {
+    this.videosSubscription = this.store.videos$.subscribe(
+      (videos) => (this.demoSwitch = videos.length !== 0)
+    );
   }
 
   public loadDemo(): void {
-    this.store.loadDemoVideos()
+    this.store.loadDemoVideos();
   }
 
   public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
-    this.gridSwitch = this.gridChangeSwitch ? MaterialIcons.grid_on : MaterialIcons.reorder;
-    this.colsNumber.emit(this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid);
+    this.gridSwitch = this.gridChangeSwitch
+      ? MaterialIcons.grid_on
+      : MaterialIcons.reorder;
+    this.colsNumber.emit(
+      this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid
+    );
   }
 
   public onFavoriteSort(): void {
-    this.favoriteSortSwith = !this.favoriteSortSwith;
-    this.favoriteSwitch = this.favoriteSortSwith ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
-    this.showFavorite.emit(this.favoriteSortSwith)
+    this.favoriteSortSwitch = !this.favoriteSortSwitch;
+    this.favoriteSwitch = this.favoriteSortSwitch
+      ? MaterialIcons.favorite
+      : MaterialIcons.favorite_outline;
+    this.showFavorite.emit(this.favoriteSortSwitch);
   }
 
   public onDateSort(): void {
     this.dateSortSwitch = !this.dateSortSwitch;
-    this.sortDirection = this.dateSortSwitch ? MaterialIcons.arrow_downward : MaterialIcons.arrow_upward;
-    this.sortSwitch.emit(this.dateSortSwitch)
+    this.sortDirection = this.dateSortSwitch
+      ? MaterialIcons.arrow_downward
+      : MaterialIcons.arrow_upward;
+    this.sortSwitch.emit(this.dateSortSwitch);
   }
 
   public onDeleteList(): void {
-    this.dialog.open(Content.questionDeletAll, MAT_DIALOG.actionRequiredTrue);
+    this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {
         this.dialog.closeAll();
@@ -82,7 +100,7 @@ export class MenuComponent implements OnDestroy {
     });
   }
 
-  public ngOnDestroy(): void {    
-    this.videosSubscription.unsubscribe()
+  public ngOnDestroy(): void {
+    this.videosSubscription.unsubscribe();
   }
 }

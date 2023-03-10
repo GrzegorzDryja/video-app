@@ -29,29 +29,28 @@ export class InputComponent implements OnInit, OnDestroy {
   protected inputLabel = Content.inputLabel;
   protected isLoading$: Observable<boolean>;
 
-  private videosSubsription: Subscription;
+  private videosSubscription: Subscription;
   private videosList!: Videos;
 
   public inputForm!: FormGroup;
 
-  constructor(
+  constructor (
     private formBuilder: FormBuilder,
     private userInput: UserInputService,
     private snackBar: MatSnackBar,
     private store: VideosFacade
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.isLoading$ = this.store.loading$;
-    this.videosSubsription = this.store.videos$.subscribe((videosList) => this.videosList = videosList)
+    this.videosSubscription = this.store.videos$.subscribe((videosList) => this.videosList = videosList)
+    this.inputForm = this.formBuilder.group({
+      video: ['', [Validators.minLength(ID_LENGTH), Validators.maxLength(MAX_LINK_LENGTH), inputMatchValidator()]],
+    });
   }
 
   private checkIsVideoIdIsOnTheList(videoId: string): boolean {
     return this.videosList.every((video) => video.videoId !== videoId)
-  }
-
-  public ngOnInit(): void {
-    this.inputForm = this.formBuilder.group({
-      video: ['', [Validators.minLength(ID_LENGTH), Validators.maxLength(MAX_LINK_LENGTH), inputMatchValidator()]],
-    });
   }
 
   public onAddVideo(): void {
@@ -82,6 +81,6 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.videosSubsription.unsubscribe()
+    this.videosSubscription.unsubscribe()
   }
 }
