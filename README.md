@@ -1,14 +1,17 @@
 # VideoApp
+
 This is demo app.
 
 ## Environment
 
-Angular CLI: 14.0.0
-Node: 16.15.1
-Package Manager: npm 8.12.1 
+Angular: 15
+Node: 18.12.1
+Package Manager: npm 9.5.1 
 
 ## Production server
+
 This is local app only
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
