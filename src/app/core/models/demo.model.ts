@@ -1,4 +1,4 @@
-import { Videos } from "./video.model";
+import { Videos } from './video.model';
 
 export const DEMO_VIDEOS: Videos = [
   {
@@ -15,7 +15,8 @@ export const DEMO_VIDEOS: Videos = [
     favorite: false,
     date: '2022-09-22T12:12:38.554Z',
     videoId: '8aGhZQkoFbQ',
-    title: 'What the heck is the event loop anyway? | Philip Roberts | JSConf EU',
+    title:
+      'What the heck is the event loop anyway? | Philip Roberts | JSConf EU',
     img: 'https://i.ytimg.com/vi/8aGhZQkoFbQ/default.jpg',
     viewCount: '2615289',
   },
@@ -51,7 +52,8 @@ export const DEMO_VIDEOS: Videos = [
     favorite: false,
     date: '2022-09-22T12:13:56.828Z',
     videoId: '65inQohxeO8',
-    title: '💥 New Advanced Angular Course - The Angular Library Laboratory - Build Your Own Library',
+    title:
+      '💥 New Advanced Angular Course - The Angular Library Laboratory - Build Your Own Library',
     img: 'https://i.ytimg.com/vi/65inQohxeO8/default.jpg',
     viewCount: '13035',
   },
