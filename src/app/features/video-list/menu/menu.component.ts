@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 import { MaterialIcons } from '@shared/material-icons.model';
 import { Content } from '@shared/content.model';
@@ -14,7 +15,6 @@ import { SnackBar } from '@shared/snack-bar.model';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
 import { VideosFacade } from '@store/videos.facade';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -30,10 +30,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
   private favoriteSortSwitch = true;
+  private favoriteSortSwitch = true;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
 
   protected demoSwitch = true;
+  protected videosLength = 0;
   protected videosLength = 0;
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
@@ -87,6 +89,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteList(): void {
+    this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {

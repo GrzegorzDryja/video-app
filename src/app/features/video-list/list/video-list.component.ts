@@ -3,7 +3,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
-
 import { Videos } from '@models/video.model';
 import { MaterialIcons } from '@shared/material-icons.model';
 
@@ -56,6 +55,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.sortSwitch = sortSwitch;
   }
 
+  public setPaginator(pageEvent: PageEvent): PageEvent {
   public setPaginator(pageEvent: PageEvent): PageEvent {
     this.firstPage = pageEvent.pageIndex * pageEvent.pageSize;
     this.secondPage = (pageEvent.pageIndex + 1) * pageEvent.pageSize;

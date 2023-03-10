@@ -1,20 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
-
+import { Videos } from '@core/models/video.model';
+import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { UserInputService } from '@services/user-input.service';
-import { ErrorTypes } from '@shared/errorsTypes.model';
 import { inputMatchValidator } from '@features/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
-import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
+import { ErrorTypes } from '@shared/errorsTypes.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { Messages } from '@shared/messages.model';
 import { Content } from '@shared/content.model';
-import { Videos } from '@core/models/video.model';
 
 @Component({
   selector: 'app-input',
@@ -30,7 +28,7 @@ export class InputComponent implements OnInit, OnDestroy {
   protected isLoading$: Observable<boolean>;
 
   private videosSubscription: Subscription;
-  private videosList!: Videos;
+  private videosList: Videos;
 
   public inputForm!: FormGroup;
 

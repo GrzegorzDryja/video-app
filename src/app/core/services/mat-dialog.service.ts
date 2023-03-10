@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 import { DialogComponent } from '@shared/dialog/dialog.component';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MatDialogService {
-  constructor(private matDialog: MatDialog) {}
+  private dialog!: MatDialogRef<DialogComponent>;
 
-  private dialog: MatDialogRef<DialogComponent>;
+  constructor(private matDialog: MatDialog) {}
 
   public open(content: string, actionStatus: boolean): void {
     this.dialog = this.matDialog.open(DialogComponent, {

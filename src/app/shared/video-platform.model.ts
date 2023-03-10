@@ -1,5 +1,5 @@
 export enum VideoPlatform {
   youtube = 'youtube',
   vimeo = 'vimeo',
-  notSupported = 'not_suported'
+  notSupported = 'not_supported'
 }

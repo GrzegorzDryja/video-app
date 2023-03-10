@@ -3,12 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { VideosFacade } from '@store/videos.facade';
-
 import { environment } from '@environments/environment';
-import { MaterialIcons } from '@shared/material-icons.model';
-import { PlayerComponent } from '@features/player/player.component';
 import { Video } from '@models/video.model';
-import { VideoPlatform } from 'app/shared/video-platform.model';
+import { PlayerComponent } from '@features/player/player.component';
+import { MaterialIcons } from '@shared/material-icons.model';
+import { VideoPlatform } from '@shared/video-platform.model';
 import { Messages } from '@shared/messages.model';
 import { SnackBar } from '@shared/snack-bar.model';
 

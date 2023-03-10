@@ -2,10 +2,9 @@ import { createAction, props } from '@ngrx/store';
 
 import { Videos } from '@models/video.model';
 
-
 export const getVideosFromLocalStorage = createAction('[Videos] Get Videos From Local Storage');
-export const getVideosFromLocalStorageSucces = createAction(
-  '[Videos] Get Videos From Local Storage succes',
+export const getVideosFromLocalStorageSuccess = createAction(
+  '[Videos] Get Videos From Local Storage success',
   props<{ videos: Videos }>()
 );
 export const getVideosFromLocalStorageFailure = createAction(
@@ -14,7 +13,7 @@ export const getVideosFromLocalStorageFailure = createAction(
 );
 
 export const loadDemoVideos = createAction('[Videos] Load Demo');
-export const loadDemoVideosSucces = createAction('[Videos] Load Demo succes', props<{ videos: Videos }>());
+export const loadDemoVideosSuccess = createAction('[Videos] Load Demo success', props<{ videos: Videos }>());
 export const loadDemoVideosFailure = createAction('[Videos] Load Demo error', props<{ error: string }>());
 
 export const sortVideosByDate = createAction('[Videos] Sort Videos By Date', props<{ sortVideos: boolean}>());
@@ -29,7 +28,7 @@ export const addVimeoVideo = createAction(
   '[Videos] Add Vimeo Video',
   props<{ videoPlatform: string; videoId: string }>());
 
-export const addVideoSucces = createAction('[Videos] Add Video succes', props<{ videos: Videos }>());
+export const addVideoSuccess = createAction('[Videos] Add Video success', props<{ videos: Videos }>());
 export const addVideoFailure = createAction('[Videos] Add Video error', props<{ error: string }>());
 
 export const deleteVideo = createAction('[Videos] Delete Video', props<{ videoId: string }>());
