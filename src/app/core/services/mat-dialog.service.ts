@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class MatDialogService {
   constructor(private matDialog: MatDialog) {}
 
-  private dialog!: MatDialogRef<DialogComponent>;
+  private dialog: MatDialogRef<DialogComponent>;
 
   public open(content: string, actionStatus: boolean): void {
     this.dialog = this.matDialog.open(DialogComponent, {
