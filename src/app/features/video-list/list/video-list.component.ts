@@ -3,7 +3,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
-
 import { Videos } from '@models/video.model';
 import { MaterialIcons } from '@shared/material-icons.model';
 
@@ -15,7 +14,8 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
-  private videosListSubsription: Subscription;
+  
+  private videosListSubscription: Subscription;
   
   protected videosList: Videos = [];
   protected colsNumber = 1;
@@ -32,7 +32,7 @@ export class VideoListComponent implements OnDestroy {
   protected pageEvent: PageEvent;
 
   constructor(private store: VideosFacade) {
-    this.videosListSubsription = this.store.videos$.subscribe((el) => (this.videosList = el));
+    this.videosListSubscription = this.store.videos$.subscribe((el) => (this.videosList = el));
     this.pageEvent = {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
@@ -52,7 +52,7 @@ export class VideoListComponent implements OnDestroy {
     this.sortSwitch = sortSwitch;
   }
 
-  public setPaginaotor(pageEvent: PageEvent): PageEvent {
+  public setPaginator(pageEvent: PageEvent): PageEvent {
     this.firstPage = pageEvent.pageIndex * pageEvent.pageSize;
     this.secondPage = (pageEvent.pageIndex + 1) * pageEvent.pageSize;
     return pageEvent;
@@ -63,6 +63,6 @@ export class VideoListComponent implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.videosListSubsription.unsubscribe();
+    this.videosListSubscription.unsubscribe();
   }
 }

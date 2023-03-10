@@ -1,20 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
-
+import { Videos } from '@core/models/video.model';
+import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { UserInputService } from '@services/user-input.service';
-import { ErrorTypes } from '@shared/errorsTypes.model';
 import { inputMatchValidator } from '@features/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
-import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
+import { ErrorTypes } from '@shared/errorsTypes.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { Messages } from '@shared/messages.model';
 import { Content } from '@shared/content.model';
-import { Videos } from '@core/models/video.model';
 
 @Component({
   selector: 'app-input',
@@ -29,7 +27,7 @@ export class InputComponent implements OnInit, OnDestroy {
   protected inputLabel = Content.inputLabel;
   protected isLoading$: Observable<boolean>;
 
-  private videosSubsription: Subscription;
+  private videosSubscription: Subscription;
   private videosList!: Videos;
 
   public inputForm!: FormGroup;
@@ -41,17 +39,17 @@ export class InputComponent implements OnInit, OnDestroy {
     private store: VideosFacade
   ) {
     this.isLoading$ = this.store.loading$;
-    this.videosSubsription = this.store.videos$.subscribe((videosList) => this.videosList = videosList)
-  }
-
-  private checkIsVideoIdIsOnTheList(videoId: string): boolean {
-    return this.videosList.every((video) => video.videoId !== videoId)
+    this.videosSubscription = this.store.videos$.subscribe((videosList) => this.videosList = videosList)
   }
 
   public ngOnInit(): void {
     this.inputForm = this.formBuilder.group({
       video: ['', [Validators.minLength(ID_LENGTH), Validators.maxLength(MAX_LINK_LENGTH), inputMatchValidator()]],
     });
+  }
+
+  private checkIsVideoIdIsOnTheList(videoId: string): boolean {
+    return this.videosList.every((video) => video.videoId !== videoId)
   }
 
   public onAddVideo(): void {
@@ -82,6 +80,6 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.videosSubsription.unsubscribe()
+    this.videosSubscription.unsubscribe()
   }
 }

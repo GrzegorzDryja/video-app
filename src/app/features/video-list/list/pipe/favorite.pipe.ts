@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
 import { Videos } from '@core/models/video.model';
 
 @Pipe({

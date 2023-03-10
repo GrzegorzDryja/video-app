@@ -1,8 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
+import * as VideosActions from '@store/videos.actions';
 import { VideosStateInterface } from '@core/models/videosState.interface';
-import * as VideosActions from 'app/store/videos.actions';
-
 import { Video, Videos } from '@core/models/video.model';
 import { DEMO_VIDEOS } from '@core/models/demo.model';
 
@@ -19,7 +18,7 @@ export const reducers = createReducer(
   on(VideosActions.loadDemoVideos, (state) => ({
     ...state,
     isLoading: false,
-    videos: [ ...DEMO_VIDEOS ],
+    videos: [...DEMO_VIDEOS],
   })),
 
   on(VideosActions.deleteVideosList, (state) => ({ ...state, videos: [] })),
@@ -32,10 +31,10 @@ export const reducers = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(VideosActions.addVideoSucces, (state, action) => ({
+  on(VideosActions.addVideoSuccess, (state, action) => ({
     ...state,
     isLoading: false,
-    videos: [...state.videos, ...action.videos],
+    videos: [...structuredClone(state.videos), ...structuredClone(action.videos)],
   })),
   on(VideosActions.addVideoFailure, (state, action) => ({
     ...state,
@@ -44,7 +43,7 @@ export const reducers = createReducer(
   })),
 
   on(VideosActions.deleteVideo, (state, action) => {
-    const videos: Videos = [...state.videos];
+    const videos: Videos = structuredClone(state.videos);
 
     return {
       ...state,
@@ -59,9 +58,14 @@ export const reducers = createReducer(
   }),
 
   on(VideosActions.loveVideo, (state, action) => {
-    const videos: Videos = [...state.videos];
-    const videoToLoveIndex: number = state.videos.findIndex((video) => video.videoId === action.videoId);
-    const videoToLove: Video = Object.assign({}, state.videos[videoToLoveIndex]);
+    const videos: Videos = structuredClone(state.videos);
+    const videoToLoveIndex: number = state.videos.findIndex(
+      (video) => video.videoId === action.videoId
+    );
+    const videoToLove: Video = Object.assign(
+      {},
+      state.videos[videoToLoveIndex]
+    );
     videoToLove.favorite = !videoToLove.favorite;
     videos.splice(videoToLoveIndex, 1, videoToLove);
 
@@ -73,7 +77,7 @@ export const reducers = createReducer(
 
   on(VideosActions.undoLastVideo, (state) => ({
     ...state,
-    videos: [...state.videos, ...state.lastDeletedVideo],
+    videos: [...structuredClone(state.videos), ...structuredClone(state.lastDeletedVideo)],
     lastDeletedVideo: [],
   }))
 );

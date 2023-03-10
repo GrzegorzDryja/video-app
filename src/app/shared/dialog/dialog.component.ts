@@ -14,7 +14,7 @@ export class DialogComponent implements OnInit {
   protected yes = Content.yes;
   protected no = Content.no;
   protected close = Content.close;
-  protected acstionStatus = Boolean(MAT_DIALOG.actionRequiredFalse);
+  protected actionStatus = Boolean(MAT_DIALOG.actionRequiredFalse);
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -23,6 +23,6 @@ export class DialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.content = this.data.content;
-    this.acstionStatus = this.data.actionStatus;
+    this.actionStatus = this.data.actionStatus;
   }
 }
