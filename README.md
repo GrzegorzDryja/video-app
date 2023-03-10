@@ -1,13 +1,11 @@
 # VideoApp
-This is demo app
-
+This is demo app.
 
 ## Environment
 
 Angular CLI: 14.0.0
 Node: 16.15.1
 Package Manager: npm 8.12.1 
-OS: linux x64
 
 ## Production server
 This is local app only
