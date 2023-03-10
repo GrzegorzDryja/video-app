@@ -33,7 +33,8 @@
       "@environments/*": ["environments/*"],
       "@store/*": ["app/store/*"]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
