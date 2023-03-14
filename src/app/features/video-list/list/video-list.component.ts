@@ -14,7 +14,7 @@ import { MaterialIcons } from '@shared/material-icons.model';
 export class VideoListComponent implements OnInit, OnDestroy {
   @ViewChild('paginator') paginator!: MatPaginator;
   @ViewChild('paginatorPageSize') paginatorPageSize!: MatPaginator;
-  private videosListSubscription: Subscription;
+  private videosListSubscription!: Subscription;
 
   protected videosList: Videos = [];
   protected colsNumber = 1;
@@ -28,7 +28,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
   protected pageSizeOptions = [9, 18, 27];
   protected listHeart = MaterialIcons.favorite;
   protected listBucket = MaterialIcons.delete_forever;
-  protected pageEvent: PageEvent;
+  protected pageEvent!: PageEvent;
 
   constructor(private store: VideosFacade) {}
 
@@ -55,7 +55,6 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.sortSwitch = sortSwitch;
   }
 
-  public setPaginator(pageEvent: PageEvent): PageEvent {
   public setPaginator(pageEvent: PageEvent): PageEvent {
     this.firstPage = pageEvent.pageIndex * pageEvent.pageSize;
     this.secondPage = (pageEvent.pageIndex + 1) * pageEvent.pageSize;
