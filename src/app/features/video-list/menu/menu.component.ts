@@ -30,12 +30,10 @@ export class MenuComponent implements OnInit, OnDestroy {
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
   private favoriteSortSwitch = true;
-  private favoriteSortSwitch = true;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
 
   protected demoSwitch = true;
-  protected videosLength = 0;
   protected videosLength = 0;
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
