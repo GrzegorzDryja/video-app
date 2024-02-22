@@ -30,7 +30,7 @@ export class InputComponent implements OnInit, OnDestroy {
   private videosSubscription: Subscription;
   private videosList: Videos;
 
-  public inputForm!: FormGroup;
+  public inputForm: FormGroup;
 
   constructor (
     private formBuilder: FormBuilder,
@@ -48,6 +48,8 @@ export class InputComponent implements OnInit, OnDestroy {
   }
 
   private checkIsVideoIdIsOnTheList(videoId: string): boolean {
+    console.dir(this.videosList);
+    
     return this.videosList.every((video) => video.videoId !== videoId)
   }
 
@@ -67,7 +69,7 @@ export class InputComponent implements OnInit, OnDestroy {
     if (!this.checkIsVideoIdIsOnTheList(dataToFetch.videoId)) {
       this.snackBar.open(Messages.video_is_on_the_list, Messages.close, {
         duration: SnackBar.duration,
-      });
+      });   
       return;
     }
 

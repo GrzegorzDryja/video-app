@@ -1,6 +1,9 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-import { YOUTUBE_ID_VALIDATION, VIMEO_ID_VALIDATION } from '@core/models/validation.model';
+import {
+  YOUTUBE_ID_VALIDATION,
+  VIMEO_ID_VALIDATION,
+} from '@core/models/validation.model';
 import { VideoPlatform } from '@shared/video-platform.model';
 
 export function inputMatchValidator(): ValidatorFn {
@@ -10,7 +13,10 @@ export function inputMatchValidator(): ValidatorFn {
     if (!value) {
       return null;
     }
-    if (value.includes(VideoPlatform.vimeo) || value.includes(VideoPlatform.youtube)) {
+    if (
+      value.includes(VideoPlatform.vimeo) ||
+      value.includes(VideoPlatform.youtube)
+    ) {
       return null;
     }
     if (YOUTUBE_ID_VALIDATION.test(value) || VIMEO_ID_VALIDATION.test(value)) {
