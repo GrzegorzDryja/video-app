@@ -24,8 +24,8 @@
       "dom"
     ],
     "paths": {
-      "@core/*": [   "app/core/*"
-      ],
+      "@app/*": ["app/*"],
+      "@core/*": ["app/core/*"],
       "@credentials/*": ["app/core/credentials/*"],
       "@services/*": ["app/core/services/*"],
       "@models/*": ["app/core/models/*"],
