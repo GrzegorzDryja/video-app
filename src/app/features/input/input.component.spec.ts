@@ -1,16 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { VideosFacade } from '@store/videos.facade';
 import { MaterialModule } from '@app/material.module';
+import { AppStateInterface } from '@core/models/appState.interface';
 import { InputComponent } from './input.component';
-import { AppStateInterface } from '@app/core/models/appState.interface';
 
 describe('InputComponent', () => {
-  let component: InputComponent;
-  let fixture: ComponentFixture<InputComponent>;
   const STORE_MOCK = {
     initialState: {
       videos: {
@@ -32,6 +30,16 @@ describe('InputComponent', () => {
     },
   };
 
+  const createVideo = (value: string): AbstractControl => {
+    const video = component.inputForm.controls['video'];
+    video.setValue(value);
+    video.markAsTouched();
+    return video;
+  };
+
+  let component: InputComponent;
+  let fixture: ComponentFixture<InputComponent>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MaterialModule, ReactiveFormsModule, BrowserAnimationsModule],
@@ -51,47 +59,35 @@ describe('InputComponent', () => {
   });
 
   it('Full youtube link should be validated correctly', () => {
-    const video = component.inputForm.controls['video'];
-    video.setValue('https://www.youtube.com/watch?v=c57llB8QA2E');
-    video.markAsTouched();
+    const video = createVideo('https://www.youtube.com/watch?v=c57llB8QA2E')
 
     expect(video.errors).toBeFalsy();
   });
 
   it('Broken youtube link should be validated correctly', () => {
-    const video = component.inputForm.controls['video'];
-    video.setValue('https://www.yeuetube.com/watch?v=c57llB8QA2E');
-    video.markAsTouched();
+    const video = createVideo('https://www.yeuetube.com/watch?v=c57llB8QA2E');
 
     expect(video.errors).toBeTruthy();
   });
 
   it('Full vimeo link should be validated correctly', () => {
-    const video = component.inputForm.controls['video'];
-    video.setValue('https://vimeo.com/286686563');
-    video.markAsTouched();
+    const video = createVideo('https://vimeo.com/286686563');
 
     expect(video.errors).toBeFalsy();
   });
 
   it('Broken vimeo link should be validated correctly', () => {
-    const video = component.inputForm.controls['video'];
-    video.setValue('https://vimea.com/286686563');
-    video.markAsTouched();
+    const video = createVideo('https://vimea.com/286686563');
 
     expect(video.errors).toBeTruthy();
   });
 
   it('Should not add video if it is already in the data', () => {
-    const video = component.inputForm.controls['video'];
-    video.setValue('https://www.youtube.com/watch?v=c57llB8QA2E');
-    video.markAsTouched();
+    const LINK = 'https://www.youtube.com/watch?v=c57llB8QA2E';
+    const video = createVideo(LINK);
     component.onAddVideo();
-    console.log(video.value);
 
-    //If video will bee add form will be reset
-    expect(
-      video.value === 'https://www.youtube.com/watch?v=c57llB8QA2E'
-    ).toBeTruthy();
+    //If video will bee added, form will be reset
+    expect(video.value === LINK).toBeTruthy();
   });
 });
