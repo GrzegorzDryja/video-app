@@ -24,7 +24,7 @@ import { SortPipe } from '@features/video-list/list/pipe/sort.pipe';
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({ keys: ['videos'], rehydrate: true })(reducer);
 }
-const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+export const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
 @NgModule({
   declarations: [
