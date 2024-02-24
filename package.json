@@ -9,7 +9,7 @@
     "test": "ng test",
     "update": "ng update @angular/core@15 @angular/cli@15",
     "material": "ng update @angular/material@15",
-    "ngrx_update":  "ng update @ngrx/store"
+    "ngrx_update": "ng update @ngrx/store"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +36,7 @@
     "@angular/cli": "~15.2.2",
     "@angular/compiler-cli": "^15.2.2",
     "@types/jasmine": "~4.0.0",
+    "cypress": "^13.6.6",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
