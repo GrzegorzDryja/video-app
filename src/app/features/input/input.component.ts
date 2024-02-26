@@ -9,7 +9,7 @@ import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { UserInputService } from '@services/user-input.service';
 import { inputMatchValidator } from '@features/input/validators/match.validator';
 import { VideoPlatform } from '@shared/video-platform.model';
-import { ErrorTypes } from '@shared/errorsTypes.model';
+import { ErrorTypes } from '@app/shared/errors-types.model';
 import { SnackBar } from '@shared/snack-bar.model';
 import { Messages } from '@shared/messages.model';
 import { Content } from '@shared/content.model';

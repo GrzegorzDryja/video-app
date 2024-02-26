@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { AppStateInterface } from '@core/models/appState.interface';
+import { AppStateInterface } from '@app/core/models/app-state.interface';
 import * as actions from '@store/videos.actions';
 import * as selectors from '@store/videos.selectors';
 

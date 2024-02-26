@@ -5,7 +5,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 
 import { VideosFacade } from '@store/videos.facade';
 import { MaterialModule } from '@app/material.module';
-import { AppStateInterface } from '@core/models/appState.interface';
+import { AppStateInterface } from '@app/core/models/app-state.interface';
 import { InputComponent } from './input.component';
 
 describe('InputComponent', () => {

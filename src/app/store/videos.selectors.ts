@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
-import { AppStateInterface } from '@core/models/appState.interface';
+import { AppStateInterface } from '@app/core/models/app-state.interface';
 
 export const selectFeature = (state: AppStateInterface) => state.videos;
 
