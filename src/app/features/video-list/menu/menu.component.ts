@@ -87,7 +87,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   public onDeleteList(): void {
     this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
-    this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {
         this.dialog.closeAll();
