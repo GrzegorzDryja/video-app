@@ -31,7 +31,11 @@ export class ItemComponent implements OnInit {
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private store: VideosFacade) {}
+  constructor(
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private store: VideosFacade
+  ) {}
 
   public ngOnInit(): void {
     this.platform = this.video.platform;
@@ -41,16 +45,24 @@ export class ItemComponent implements OnInit {
     this.dateObj = this.video.date;
     this.viewCount = this.video.viewCount;
     this.favorite = this.video.favorite;
-    this.favoriteSwitch = this.video.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
+    this.favoriteSwitch = this.video.favorite
+      ? MaterialIcons.favorite
+      : MaterialIcons.favorite_outline;
   }
 
   public onFavoriteClick(videoId: string): void {
     this.favorite = !this.favorite;
-    this.favoriteSwitch = this.favorite ? MaterialIcons.favorite : MaterialIcons.favorite_outline;
+    this.favoriteSwitch = this.favorite
+      ? MaterialIcons.favorite
+      : MaterialIcons.favorite_outline;
     this.store.loveVideo({ videoId });
-    this.snackBar.open(this.favorite ? Messages.video_loved : Messages.video_unloved, Messages.close, {
-      duration: SnackBar.duration,
-    });
+    this.snackBar.open(
+      this.favorite ? Messages.video_loved : Messages.video_unloved,
+      Messages.close,
+      {
+        duration: SnackBar.duration,
+      }
+    );
   }
 
   public onDeleteClick(videoId: string): void {
@@ -66,7 +78,11 @@ export class ItemComponent implements OnInit {
 
   public playRightPlatform(source: string, id: string): void {
     this.dialog.open(PlayerComponent, {
-      data: `${source === VideoPlatform.youtube ? environment.youTubePlayerURL : environment.vimeoPlayerURL}${id}`,
+      data: `${
+        source === VideoPlatform.youtube
+          ? environment.youTubePlayerURL
+          : environment.vimeoPlayerURL
+      }${id}`,
     });
   }
 }

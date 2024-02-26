@@ -44,7 +44,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.colsNumber = colsNum;
   }
 
-  public onShowFavoriteSwitch(showFavorite: boolean): void {  
+  public onShowFavoriteSwitch(showFavorite: boolean): void {
     this.showFavorite = showFavorite;
   }
 
