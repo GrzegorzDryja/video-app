@@ -47,9 +47,7 @@ export class InputComponent implements OnInit, OnDestroy {
     });
   }
 
-  private checkIsVideoIdIsOnTheList(videoId: string): boolean {
-    console.dir(this.videosList);
-    
+  private checkIsVideoIdIsOnTheList(videoId: string): boolean { 
     return this.videosList.every((video) => video.videoId !== videoId)
   }
 

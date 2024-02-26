@@ -34,7 +34,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   private moreColumnGrid = 3;
 
   protected demoSwitch = true;
-  protected videosLength = 0;
   protected gridSwitch = MaterialIcons.grid_on;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected delete_sweep = MaterialIcons.delete_sweep;
