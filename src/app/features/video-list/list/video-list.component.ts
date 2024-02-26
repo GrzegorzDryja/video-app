@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
 import { Videos } from '@models/video.model';
-import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-video-list',
@@ -45,7 +44,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
     this.colsNumber = colsNum;
   }
 
-  public onShowFavoriteSwitch(showFavorite: boolean): void {
+  public onShowFavoriteSwitch(showFavorite: boolean): void {  
     this.showFavorite = showFavorite;
   }
 

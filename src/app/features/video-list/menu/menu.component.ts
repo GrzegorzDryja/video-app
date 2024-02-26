@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   private videosSubscription: Subscription;
   private dateSortSwitch = true;
   private gridChangeSwitch = true;
-  private favoriteSortSwitch = true;
+  private favoriteSortSwitch = false;
   private oneColumnGrid = 1;
   private moreColumnGrid = 3;
 
