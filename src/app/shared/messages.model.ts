@@ -5,7 +5,7 @@ export enum Messages {
   video_added = 'Dodałeś film do listy.',
   video_list_deleted = 'Usunąłeś listę',
   video_is_on_the_list = 'Film jest już na Twojej liście',
-  video_not_supported = 'Nieobsłguję tego linku',
+  video_not_supported = 'Nie obsługuję tego linku',
   close = 'Zamknij',
   undo = 'Cofnij',
 }
