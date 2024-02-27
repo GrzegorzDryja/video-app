@@ -25,13 +25,11 @@ const MATERIAL_MODULES = [
   MatSnackBarModule,
 ];
 
-const FEATURE_COMPONENTS = [
-  DialogComponent
-]
+const SHARED_COMPONENTS = [DialogComponent];
 
 @NgModule({
-  declarations: [...FEATURE_COMPONENTS],
+  declarations: [...SHARED_COMPONENTS],
   imports: [...MATERIAL_MODULES, CommonModule],
-  exports: [...MATERIAL_MODULES],
+  exports: [...MATERIAL_MODULES, ...SHARED_COMPONENTS],
 })
 export class SharedModule {}

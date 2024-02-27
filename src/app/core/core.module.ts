@@ -32,6 +32,6 @@ const CORE_PIPES = [
     HttpClientModule,
     SharedModule
   ],
-  exports: [...CORE_COMPONENTS]
+  exports: [InputComponent, VideoListComponent]
 })
 export class CoreModule {}
