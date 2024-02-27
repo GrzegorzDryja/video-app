@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 
 import { VideosFacade } from '@store/videos.facade';
 import { Videos } from '@models/video.model';
-import { MaterialIcons } from '@shared/material-icons.model';
 
 @Component({
   selector: 'app-video-list',
@@ -26,8 +25,6 @@ export class VideoListComponent implements OnInit, OnDestroy {
   protected firstPage = this.pageIndex * this.pageSize;
   protected secondPage = (this.pageIndex + 1) * this.pageSize;
   protected pageSizeOptions = [9, 18, 27];
-  protected listHeart = MaterialIcons.favorite;
-  protected listBucket = MaterialIcons.delete_forever;
   protected pageEvent!: PageEvent;
 
   constructor(private store: VideosFacade) {}

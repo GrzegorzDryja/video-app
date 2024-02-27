@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { YOUTUBE_ID, VIMEO_ID, VIMEO_ID_VALIDATION, YOUTUBE_ID_VALIDATION } from '@models/validation.model';
-import { VideoPlatform } from '@shared/video-platform.model';
+import { VideoPlatform } from '@app/shared/models/video-platform.model';
 
 @Injectable({
   providedIn: 'root',
