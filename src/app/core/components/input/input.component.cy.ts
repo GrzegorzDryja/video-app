@@ -1,3 +1,5 @@
+import {cy, expect, describe, it} from 'local-cypress'
+
 import { AppModule } from '@app/app.module';
 import { InputComponent } from './input.component';
 

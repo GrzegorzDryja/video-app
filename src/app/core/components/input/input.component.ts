@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, Observable } from 'rxjs';
@@ -7,17 +7,18 @@ import { VideosFacade } from '@store/videos.facade';
 import { Videos } from '@core/models/video.model';
 import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { UserInputService } from '@services/user-input.service';
-import { inputMatchValidator } from '@features/input/validators/match.validator';
-import { VideoPlatform } from '@shared/video-platform.model';
-import { ErrorTypes } from '@shared/errorsTypes.model';
-import { SnackBar } from '@shared/snack-bar.model';
-import { Messages } from '@shared/messages.model';
-import { Content } from '@shared/content.model';
+import { VideoPlatform } from '@app/shared/models/video-platform.model';
+import { ErrorTypes } from '@app/shared/models/errors-types.model';
+import { SnackBar } from '@app/shared/material/snack-bar.model';
+import { Messages } from '@app/shared/models/messages.model';
+import { Content } from '@app/shared/models/content.model';
+import { inputMatchValidator } from './validators/match.validator';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements OnInit, OnDestroy {
   protected errorMessageMinLength = ErrorTypes.errorMinLength;
@@ -47,9 +48,7 @@ export class InputComponent implements OnInit, OnDestroy {
     });
   }
 
-  private checkIsVideoIdIsOnTheList(videoId: string): boolean {
-    console.dir(this.videosList);
-    
+  private checkIsVideoIdIsOnTheList(videoId: string): boolean { 
     return this.videosList.every((video) => video.videoId !== videoId)
   }
 
