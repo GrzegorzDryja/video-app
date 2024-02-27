@@ -9,6 +9,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogComponent } from './dialog/dialog.component';
+import { CommonModule } from '@angular/common';
 
 const MATERIAL_MODULES = [
   MatInputModule,
@@ -23,8 +25,13 @@ const MATERIAL_MODULES = [
   MatSnackBarModule,
 ];
 
+const FEATURE_COMPONENTS = [
+  DialogComponent
+]
+
 @NgModule({
-  imports: [...MATERIAL_MODULES],
+  declarations: [...FEATURE_COMPONENTS],
+  imports: [...MATERIAL_MODULES, CommonModule],
   exports: [...MATERIAL_MODULES],
 })
-export class MaterialModule {}
+export class SharedModule {}

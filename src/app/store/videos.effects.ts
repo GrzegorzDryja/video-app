@@ -8,7 +8,7 @@ import { VimeoService } from '@core/services/vimeo.service';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { YouTubeResponse } from '@core/models/youtube.model';
 import { Videos } from '@core/models/video.model';
-import { VideoPlatform } from '@shared/video-platform.model';
+import { VideoPlatform } from '@app/shared/models/video-platform.model';
 import { VimeoResponse } from '@core/models/vimeo.model';
 
 @Injectable()

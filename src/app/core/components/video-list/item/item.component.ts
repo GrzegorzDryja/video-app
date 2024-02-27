@@ -6,10 +6,10 @@ import { VideosFacade } from '@store/videos.facade';
 import { environment } from '@environments/environment';
 import { Video } from '@models/video.model';
 import { PlayerComponent } from '@features/player/player.component';
-import { MaterialIcons } from '@shared/material-icons.model';
-import { VideoPlatform } from '@shared/video-platform.model';
-import { Messages } from '@shared/messages.model';
-import { SnackBar } from '@shared/snack-bar.model';
+import { MaterialIcons } from '@app/shared/material/material-icons.model';
+import { VideoPlatform } from '@app/shared/models/video-platform.model';
+import { Messages } from '@app/shared/models/messages.model';
+import { SnackBar } from '@app/shared/material/snack-bar.model';
 
 @Component({
   selector: 'app-item',

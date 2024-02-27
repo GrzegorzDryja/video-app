@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Content } from '@shared/content.model';
+import { Content } from '@app/shared/models/content.model';
 import { MAT_DIALOG } from './dialog.model';
 
 @Component({

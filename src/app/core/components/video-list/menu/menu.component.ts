@@ -9,10 +9,10 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
-import { MaterialIcons } from '@shared/material-icons.model';
-import { Content } from '@shared/content.model';
-import { Messages } from '@shared/messages.model';
-import { SnackBar } from '@shared/snack-bar.model';
+import { MaterialIcons } from '@app/shared/material/material-icons.model';
+import { Content } from '@app/shared/models/content.model';
+import { Messages } from '@app/shared/models/messages.model';
+import { SnackBar } from '@app/shared/material/snack-bar.model';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
 import { VideosFacade } from '@store/videos.facade';

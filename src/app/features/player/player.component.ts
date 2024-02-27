@@ -2,7 +2,7 @@ import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Content } from '@shared/content.model';
+import { Content } from '@app/shared/models/content.model';
 
 @Component({
   selector: 'app-player',
