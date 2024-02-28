@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '@app/shared/shared.module';
 import { InputComponent } from './components/input/input.component';
-import { MenuComponent } from './components/video-list/menu/menu.component';
+import { MenuComponent } from './components/video-list/list/menu/menu.component';
 import { VideoListComponent } from './components/video-list/list/video-list.component';
 import { ItemComponent } from './components/video-list/item/item.component';
 import { FavoritePipe } from './components/video-list/list/pipe/favorite.pipe';
