@@ -17,7 +17,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
 
   protected videosList: Videos = [];
   protected colsNumber = 1;
-  protected rowHeightRatio = '7rem';
+  protected rowHeightRatio = '9rem';
   protected showFavorite = false;
   protected sortSwitch = true;
   protected pageIndex = 0;
@@ -31,7 +31,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.videosListSubscription = this.store.videos$.subscribe(
-      (el) => (this.videosList = el)
+      (videos) => (this.videosList = videos)
     );
     this.pageEvent = {
       pageIndex: this.pageIndex,

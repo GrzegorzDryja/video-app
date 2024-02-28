@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, Observable } from 'rxjs';
 
@@ -36,6 +36,7 @@ export class InputComponent implements OnInit, OnDestroy {
   protected isLoading$: Observable<boolean>;
 
   private videosSubscription: Subscription;
+  private breakpointSubscription: Subscription;
   private videosList: Videos;
 
   public inputForm: FormGroup;
@@ -51,9 +52,18 @@ export class InputComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.isLoading$ = this.store.loading$;
+    this.setVideos();
+    this.buildInputForm();
+    this.setBreakpointObserver();
+  }
+
+  private setVideos(): void {
     this.videosSubscription = this.store.videos$.subscribe(
       (videosList) => (this.videosList = videosList)
     );
+  }
+
+  private buildInputForm(): void {
     this.inputForm = this.formBuilder.group({
       video: [
         '',
@@ -64,7 +74,10 @@ export class InputComponent implements OnInit, OnDestroy {
         ],
       ],
     });
-    this.breakpointObserver
+  }
+
+  private setBreakpointObserver(): void {
+    this.breakpointSubscription = this.breakpointObserver
       .observe(['(max-width: 700px)'])
       .subscribe((result) => {
         result.matches
@@ -114,5 +127,6 @@ export class InputComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.videosSubscription.unsubscribe();
+    this.breakpointSubscription.unsubscribe();
   }
 }
