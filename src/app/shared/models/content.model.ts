@@ -7,6 +7,7 @@ export enum Content {
   questionDefault = 'Czy na pewno?',
   questionDeleteAll = 'Czy na pewno chcesz usunąć wszystkie filmy?',
   addButton = 'Dodaj',
+  plusSign = '+',
   inputLabel = 'Tutaj wklej link do filmu',
   close = 'Zamknij',
   yes = 'Tak',

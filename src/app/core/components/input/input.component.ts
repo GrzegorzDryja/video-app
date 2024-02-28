@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, Observable } from 'rxjs';
 
@@ -33,23 +40,43 @@ export class InputComponent implements OnInit, OnDestroy {
 
   public inputForm: FormGroup;
 
-  constructor (
+  constructor(
     private formBuilder: FormBuilder,
     private userInput: UserInputService,
     private snackBar: MatSnackBar,
-    private store: VideosFacade
+    private store: VideosFacade,
+    private breakpointObserver: BreakpointObserver,
+    private cr: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
     this.isLoading$ = this.store.loading$;
-    this.videosSubscription = this.store.videos$.subscribe((videosList) => this.videosList = videosList)
+    this.videosSubscription = this.store.videos$.subscribe(
+      (videosList) => (this.videosList = videosList)
+    );
     this.inputForm = this.formBuilder.group({
-      video: ['', [Validators.minLength(ID_LENGTH), Validators.maxLength(MAX_LINK_LENGTH), inputMatchValidator()]],
+      video: [
+        '',
+        [
+          Validators.minLength(ID_LENGTH),
+          Validators.maxLength(MAX_LINK_LENGTH),
+          inputMatchValidator(),
+        ],
+      ],
     });
+    this.breakpointObserver
+      .observe(['(max-width: 700px)'])
+      .subscribe((result) => {
+        result.matches
+          ? (this.addButton = Content.plusSign)
+          : (this.addButton = Content.addButton);
+
+        this.cr.markForCheck();
+      });
   }
 
-  private checkIsVideoIdIsOnTheList(videoId: string): boolean { 
-    return this.videosList.every((video) => video.videoId !== videoId)
+  private checkIsVideoIdIsOnTheList(videoId: string): boolean {
+    return this.videosList.every((video) => video.videoId !== videoId);
   }
 
   public onAddVideo(): void {
@@ -68,18 +95,24 @@ export class InputComponent implements OnInit, OnDestroy {
     if (!this.checkIsVideoIdIsOnTheList(dataToFetch.videoId)) {
       this.snackBar.open(Messages.video_is_on_the_list, Messages.close, {
         duration: SnackBar.duration,
-      });   
+      });
       return;
     }
 
     dataToFetch.platform === VideoPlatform.vimeo
-      ? this.store.addVimeoVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId })
-      : this.store.addYouTubeVideo({ videoPlatform: dataToFetch.platform, videoId: dataToFetch.videoId });
+      ? this.store.addVimeoVideo({
+          videoPlatform: dataToFetch.platform,
+          videoId: dataToFetch.videoId,
+        })
+      : this.store.addYouTubeVideo({
+          videoPlatform: dataToFetch.platform,
+          videoId: dataToFetch.videoId,
+        });
 
     this.inputForm.reset();
   }
 
   public ngOnDestroy(): void {
-    this.videosSubscription.unsubscribe()
+    this.videosSubscription.unsubscribe();
   }
 }
