@@ -1,29 +1,30 @@
-<div class="item">
-  <div
-    class="item__image"
-    (click)="playRightPlatform(platform, videoId)"
-    [ngStyle]="{'backgroundImage': 'url(' + thumbnailPath + ')'}"
-  >
-  </div>
-  <div class="item__info">
-    <div class="item__title">
-      {{ title }}
-    </div>
-    <div class="data">
-      <div class="data__item">
-        <mat-icon>{{ check_circle }}</mat-icon
-        >{{ dateObj | date : "mediumDate" }}
+<div class="container">
+  <div class="item">
+    <div
+      class="item__image"
+      (click)="playRightPlatform(platform, videoId)"
+      [ngStyle]="{ backgroundImage: 'url(' + thumbnailPath + ')' }"
+    ></div>
+    <div class="item__info">
+      <div class="item__title">
+        {{ title }}
       </div>
-      <div class="data__item">
-        <mat-icon>{{ visibility }}</mat-icon
-        >{{ viewCount }}
+      <div class="data">
+        <div class="data__item">
+          <mat-icon>{{ check_circle }}</mat-icon
+          >{{ dateObj | date : "mediumDate" }}
+        </div>
+        <div class="data__item">
+          <mat-icon>{{ visibility }}</mat-icon
+          >{{ viewCount }}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="item__menu">
-    <mat-icon (click)="onFavoriteClick(videoId)">
-      {{ favoriteSwitch }}
-    </mat-icon>
-    <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
+    <div class="item__menu">
+      <mat-icon (click)="onFavoriteClick(videoId)">
+        {{ favoriteSwitch }}
+      </mat-icon>
+      <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
+    </div>
   </div>
 </div>
