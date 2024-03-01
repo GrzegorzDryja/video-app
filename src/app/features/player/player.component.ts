@@ -7,6 +7,7 @@ import { Content } from '@app/shared/models/content.model';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
+  styleUrls: ['./player.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerComponent {

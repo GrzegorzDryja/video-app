@@ -94,6 +94,10 @@ export class ItemComponent implements OnInit {
           ? environment.youTubePlayerURL
           : environment.vimeoPlayerURL
       }${id}`,
+      maxWidth: '90dvw',
+      maxHeight: '90dvh',
+      minWidth: '50dvw',
+      minHeight: '50dvh',
     });
   }
 
