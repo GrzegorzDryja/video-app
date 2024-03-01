@@ -28,7 +28,6 @@ export const metaReducers: Array<MetaReducer<any, any>> = [
   imports: [
     CoreModule,
     FeatureModule,
-    SharedModule,
     VideosStore,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(),

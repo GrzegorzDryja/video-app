@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from '@app/shared/shared.module';
-import { InputComponent } from './components/input/input.component';
-import { MenuComponent } from './components/video-list/menu/menu.component';
-import { VideoListComponent } from './components/video-list/list/video-list.component';
-import { ItemComponent } from './components/video-list/item/item.component';
-import { FavoritePipe } from './components/video-list/list/pipe/favorite.pipe';
-import { SortPipe } from './components/video-list/list/pipe/sort.pipe';
+
+import { SharedModule } from '@shared/shared.module';
+import { InputComponent } from '@core/components/input/input.component';
+import { MenuComponent } from '@core/components/video-list/menu/menu.component';
+import { VideoListComponent } from '@core/components/video-list/video-list.component';
+import { ItemComponent } from '@core/components/video-list/item/item.component';
+import { FavoritePipe } from '@core/components/video-list/pipe/favorite.pipe';
+import { SortPipe } from '@core/components/video-list/pipe/sort.pipe';
 
 const CORE_COMPONENTS = [
   InputComponent,
@@ -18,10 +19,9 @@ const CORE_COMPONENTS = [
   ItemComponent,
 ];
 
-const CORE_PIPES = [
-  FavoritePipe,
-  SortPipe
-]
+const EXPORT_COMPONENTS = [InputComponent, VideoListComponent];
+
+const CORE_PIPES = [FavoritePipe, SortPipe];
 
 @NgModule({
   declarations: [...CORE_COMPONENTS, ...CORE_PIPES],
@@ -30,8 +30,8 @@ const CORE_PIPES = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
-  exports: [InputComponent, VideoListComponent]
+  exports: [...EXPORT_COMPONENTS],
 })
 export class CoreModule {}

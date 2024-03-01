@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -26,11 +31,13 @@ export class ItemComponent implements OnInit {
   protected title: string;
   protected dateObj: Date | string;
   protected viewCount: string;
-  protected favorite: boolean;
+  protected isFavorite: boolean;
+  protected isInfo = false;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
+  protected infoIcon = MaterialIcons.info;
 
   constructor(
     private dialog: MatDialog,
@@ -45,20 +52,20 @@ export class ItemComponent implements OnInit {
     this.title = this.video.title;
     this.dateObj = this.video.date;
     this.viewCount = this.video.viewCount;
-    this.favorite = this.video.favorite;
+    this.isFavorite = this.video.favorite;
     this.favoriteSwitch = this.video.favorite
       ? MaterialIcons.favorite
       : MaterialIcons.favorite_outline;
   }
 
   public onFavoriteClick(videoId: string): void {
-    this.favorite = !this.favorite;
-    this.favoriteSwitch = this.favorite
+    this.isFavorite = !this.isFavorite;
+    this.favoriteSwitch = this.isFavorite
       ? MaterialIcons.favorite
       : MaterialIcons.favorite_outline;
     this.store.loveVideo({ videoId });
     this.snackBar.open(
-      this.favorite ? Messages.video_loved : Messages.video_unloved,
+      this.isFavorite ? Messages.video_loved : Messages.video_unloved,
       Messages.close,
       {
         duration: SnackBar.duration,
@@ -84,6 +91,14 @@ export class ItemComponent implements OnInit {
           ? environment.youTubePlayerURL
           : environment.vimeoPlayerURL
       }${id}`,
+      maxWidth: '90dvw',
+      maxHeight: '90dvh',
+      minWidth: '50dvw',
+      minHeight: '50dvh',
     });
+  }
+
+  public onShowInfoClick(): void {
+    this.isInfo = !this.isInfo;
   }
 }
