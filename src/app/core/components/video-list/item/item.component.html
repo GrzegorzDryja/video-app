@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="item">
+  <div class="item" #item>
     <div
       class="item__image"
       (click)="playRightPlatform(platform, videoId)"
       [ngStyle]="{ backgroundImage: 'url(' + thumbnailPath + ')' }"
     ></div>
-    <div class="item__info">
+    <div class="item__info" [ngClass]="{ 'show-me': isInfo }" (click)="isInfo ? onShowInfoClick() : null">
       <div class="item__title">
         {{ title }}
       </div>
@@ -25,6 +25,9 @@
         {{ favoriteSwitch }}
       </mat-icon>
       <mat-icon (click)="onDeleteClick(videoId)">{{ deleteIcon }}</mat-icon>
+      <mat-icon (click)="onShowInfoClick()" [ngClass]="'show-me'">{{
+        infoIcon
+      }}</mat-icon>
     </div>
   </div>
 </div>

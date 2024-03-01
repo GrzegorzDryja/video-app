@@ -8,5 +8,6 @@ export enum MaterialIcons {
   arrow_downward = 'arrow_downward',
   delete_sweep = 'delete_sweep',
   check_circle = 'check_circle',
-  visibility = 'visibility'
+  visibility = 'visibility',
+  info = 'info',
 }

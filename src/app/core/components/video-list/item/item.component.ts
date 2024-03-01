@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,7 +23,7 @@ import { SnackBar } from '@app/shared/material/snack-bar.model';
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent implements OnInit {
   @Input() video: Video;
@@ -27,10 +35,12 @@ export class ItemComponent implements OnInit {
   protected dateObj: Date | string;
   protected viewCount: string;
   protected isFavorite: boolean;
+  protected isInfo = false;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected check_circle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
+  protected infoIcon = MaterialIcons.info;
 
   constructor(
     private dialog: MatDialog,
@@ -85,5 +95,9 @@ export class ItemComponent implements OnInit {
           : environment.vimeoPlayerURL
       }${id}`,
     });
+  }
+
+  public onShowInfoClick(): void {
+    this.isInfo = !this.isInfo;
   }
 }
