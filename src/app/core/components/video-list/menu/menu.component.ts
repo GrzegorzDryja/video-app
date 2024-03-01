@@ -36,9 +36,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   private moreColumnGrid = 3;
 
   protected demoSwitch = true;
-  protected gridSwitch = MaterialIcons.grid_on;
+  protected gridSwitch = MaterialIcons.reorder;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected delete_sweep = MaterialIcons.delete_sweep;
+  protected deleteSweep = MaterialIcons.delete_sweep;
   protected sortDirection = MaterialIcons.arrow_downward;
   protected tooltipGridChange = Content.tooltipGridChange;
   protected tooltipLoved = Content.tooltipLoved;
@@ -64,8 +64,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   public onGridChange(): void {
     this.gridChangeSwitch = !this.gridChangeSwitch;
     this.gridSwitch = this.gridChangeSwitch
-      ? MaterialIcons.grid_on
-      : MaterialIcons.reorder;
+      ? MaterialIcons.reorder
+      : MaterialIcons.grid_on;
     this.colsNumber.emit(
       this.gridChangeSwitch ? this.oneColumnGrid : this.moreColumnGrid
     );

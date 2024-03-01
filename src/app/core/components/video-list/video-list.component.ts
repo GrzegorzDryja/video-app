@@ -16,8 +16,8 @@ export class VideoListComponent implements OnInit, OnDestroy {
   private videosListSubscription!: Subscription;
 
   protected videosList: Videos = [];
-  protected colsNumber = 1;
-  protected rowHeightRatio = '7rem';
+  protected isLineView = false;
+  protected rowHeightRatio = '9rem';
   protected showFavorite = false;
   protected sortSwitch = true;
   protected pageIndex = 0;
@@ -31,7 +31,7 @@ export class VideoListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.videosListSubscription = this.store.videos$.subscribe(
-      (el) => (this.videosList = el)
+      (videos) => (this.videosList = videos)
     );
     this.pageEvent = {
       pageIndex: this.pageIndex,
@@ -41,7 +41,12 @@ export class VideoListComponent implements OnInit, OnDestroy {
   }
 
   public onChangeGridStyle(colsNum: number): void {
-    this.colsNumber = colsNum;
+    if (colsNum === 3) {
+      this.isLineView = true;
+      return;
+    }
+
+    this.isLineView = false;
   }
 
   public onShowFavoriteSwitch(showFavorite: boolean): void {

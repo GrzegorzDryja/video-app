@@ -1,17 +1,23 @@
-<section>
+<section class='container'>
   <app-menu
     (colsNumber)="onChangeGridStyle($event)"
     (showFavorite)="onShowFavoriteSwitch($event)"
     (sortSwitch)="onSortSwitch($event)"
   ></app-menu>
-
-  <mat-grid-list [cols]="colsNumber" [rowHeight]="rowHeightRatio">
-    <mat-grid-tile
-      *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage"
+  <div class="video-list">
+    <div
+      class="video-list__item"
+      [ngStyle]="{'min-width': isLineView ? '100%' : 'calc(calc(100% - 2rem) / 3)'}"
+      *ngFor="
+        let video of videosList
+          | sort : sortSwitch
+          | showFavorite : showFavorite
+          | slice : firstPage : secondPage
+      "
     >
       <app-item [video]="video"></app-item>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>  
   <mat-paginator
     #paginator
     [length]="videosList.length"

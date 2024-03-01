@@ -1,0 +1,16 @@
+.container {
+  margin: auto;
+  max-width: 100rem;
+}
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &__item {
+    @media (orientation: portrait) {
+      min-width: 50%;
+    }
+  }
+}
