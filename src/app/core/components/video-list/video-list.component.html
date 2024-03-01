@@ -4,14 +4,6 @@
     (showFavorite)="onShowFavoriteSwitch($event)"
     (sortSwitch)="onSortSwitch($event)"
   ></app-menu>
-
-  <!-- <mat-grid-list [cols]="colsNumber" [rowHeight]="rowHeightRatio">
-    <mat-grid-tile
-      *ngFor="let video of videosList | sort: sortSwitch | showFavorite: showFavorite | slice: firstPage:secondPage"
-    >
-      <app-item [video]="video"></app-item>
-    </mat-grid-tile>
-  </mat-grid-list> -->
   <div class="video-list">
     <div
       class="video-list__item"
@@ -25,8 +17,7 @@
     >
       <app-item [video]="video"></app-item>
     </div>
-  </div>
-  
+  </div>  
   <mat-paginator
     #paginator
     [length]="videosList.length"

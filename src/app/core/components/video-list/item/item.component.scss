@@ -65,30 +65,30 @@
 @container (max-width: 399px) {
   .item {
     grid-template-columns: 1fr 3rem;
-  }
+    
+    &__info {
+      display: none;
+      position: absolute;
+      background-color: #272727;
+      opacity: 0.88;
+      margin-right: 3rem;
+      height: 8rem;
+      width: 100%;
+    }
 
-  .item__info {
-    display: none;
-    position: absolute;
-    background-color: #272727;
-    opacity: 0.88;
-    margin-right: 3rem;
-    height: 8rem;
-    width: 100%;
+    &__menu {
+      flex-direction: column-reverse;
+      gap: 1rem;
+      justify-content: center;
+
+      mat-icon {
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+      }
+    }
   }
 
   .show-me {
     display: flex;
-  }
-
-  .item__menu {
-    flex-direction: column-reverse;
-    gap: 1rem;
-    justify-content: center;
-
-    mat-icon {
-      font-size: 1.5rem;
-      margin-left: 0.5rem;
-    }
   }
 }
