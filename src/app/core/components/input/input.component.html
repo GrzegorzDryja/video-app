@@ -1,12 +1,13 @@
 <section>
   <form [formGroup]="inputForm" (submit)="onAddVideo()">
     <mat-form-field appearance="fill">
-      <mat-label>{{ inputLabel }}</mat-label>
+      <mat-label>{{ 'CONTENT.INPUT_LABEL' | translate }}</mat-label>
       <input matInput placeholder="https://youtube..." formControlName="video" />
-      <mat-error *ngIf="inputForm.controls['video'].hasError('minlength')">{{ errorMessageMinLength }}</mat-error>
-      <mat-error *ngIf="inputForm.controls['video'].hasError('maxlength')">{{ errorMessageMaxLength }}</mat-error>
-      <mat-error *ngIf="inputForm.controls['video'].hasError('matchValid')">{{ errorMessageURL }}</mat-error>
+      <mat-error *ngIf="inputForm.controls['video'].hasError('minlength')">{{ 'ERROR.MIN_LENGTH' | translate }}</mat-error>
+      <mat-error *ngIf="inputForm.controls['video'].hasError('maxlength')">{{ 'ERROR.MAX_LENGTH' | translate }}</mat-error>
+      <mat-error *ngIf="inputForm.controls['video'].hasError('matchValid')">{{ 'ERROR.NOT_SUPPORTED' | translate }}</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="!inputForm.valid">{{ addButton }}</button>
+    <button *ngIf="buttonBreakpoint" type="submit" mat-raised-button color="primary" [disabled]="!inputForm.valid">{{ 'CONTENT.ADD' | translate }}</button>
+    <button *ngIf="!buttonBreakpoint" type="submit" mat-raised-button color="primary" [disabled]="!inputForm.valid">{{ 'CONTENT.PLUS' | translate }}</button>
   </form>
 </section>

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 
-import { VideosFacade } from '@store/videos.facade';
+import { VideosFacade } from '@app/store/videos/videos.facade';
 import { Videos } from '@models/video.model';
 
 @Component({

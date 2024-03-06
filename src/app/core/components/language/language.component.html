@@ -1,0 +1,12 @@
+<label class="language">
+  {{ "LANGUAGE" | translate }}
+  <select #langSelect (change)="changeLanguage(langSelect.value)">
+    <option
+      *ngFor="let lang of langs"
+      [value]="lang"
+      [selected]="lang === translate.currentLang"
+    >
+      {{ lang }}
+    </option>
+  </select>
+</label>

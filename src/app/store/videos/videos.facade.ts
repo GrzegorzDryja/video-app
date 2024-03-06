@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppStateInterface } from '@app/core/models/app-state.interface';
-import * as actions from '@store/videos.actions';
-import * as selectors from '@store/videos.selectors';
+import * as actions from '@store/videos/videos.actions';
+import * as selectors from '@app/store/videos/videos.selectors';
 
 @Injectable()
 export class VideosFacade {

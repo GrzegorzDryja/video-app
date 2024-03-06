@@ -14,14 +14,13 @@
   "TOOLTIP": {
     "DELETE_ALL": "Usuń wszystko",
     "GRID_CHANGE": "Zmień widok",
-    "LOVE": "Pokaż ulubione",
+    "LOVED": "Pokaż ulubione",
     "SORT": "Sortuj"
   },
   "ERRORS": {
     "MIN_LENGTH": "Link jest za krótki",
     "MAX_LENGTH": "Link jest za długi",
     "VIDEO_EXIST": "Ten film już jest dodany",
-    "URL": "Nie obsługuję tego linku",
     "DEFAULT": "Coś poszło nie tak",
     "NOT_SUPPORTED": "Nie obsługuję tego linku"
   },

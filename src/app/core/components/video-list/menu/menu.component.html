@@ -9,16 +9,16 @@
     Demo
   </button>
 
-  <mat-icon (click)="onGridChange()" [matTooltip]="tooltipGridChange">{{
+  <mat-icon (click)="onGridChange()" matTooltip="{{ 'TOOLTIP.GRID_CHANGE' | translate }}">{{
     gridSwitch
   }}</mat-icon>
-  <mat-icon (click)="onFavoriteSort()" [matTooltip]="tooltipLoved">{{
+  <mat-icon (click)="onFavoriteSort()" matTooltip="{{ 'TOOLTIP.LOVED' | translate }}">{{
     favoriteSwitch
   }}</mat-icon>
-  <mat-icon (click)="onDateSort()" [matTooltip]="tooltipSort">
+  <mat-icon (click)="onDateSort()" matTooltip="{{ 'TOOLTIP.SORT' | translate }}">
     {{ sortDirection }}</mat-icon
   >
-  <mat-icon (click)="onDeleteList()" [matTooltip]="tooltipDeleteAll">{{
+  <mat-icon (click)="onDeleteList()" matTooltip="{{ 'TOOLTIP.DELETE_ALL' | translate }}">{{
     deleteSweep
   }}</mat-icon>
 </nav>

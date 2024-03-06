@@ -1,24 +1,29 @@
 import { NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { VideosStore } from '@store/videos.store';
-import { VideosFacade } from '@store/videos.facade';
-import { reducers } from '@store/videos.reducers';
+import { VideosStore } from '@app/store/videos/videos.store';
+import { VideosFacade } from '@app/store/videos/videos.facade';
+import { reducers } from '@app/store/videos/videos.reducers';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from '@core/core.module';
 import { FeatureModule } from '@features/features.module';
-import { SharedModule } from '@shared/shared.module';
 import { environment } from '@environments/environment';
+import { SettingsStateFacade } from './store/settings/settings.facade';
+import { SettingsStore } from './store/settings/settings.store';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({ keys: ['videos'], rehydrate: true })(reducer);
 }
+
 export const metaReducers: Array<MetaReducer<any, any>> = [
   localStorageSyncReducer,
 ];
@@ -27,16 +32,18 @@ export const metaReducers: Array<MetaReducer<any, any>> = [
   declarations: [AppComponent],
   imports: [
     CoreModule,
+    HttpClientModule,
     FeatureModule,
     VideosStore,
+    SettingsStore,
+    EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
   ],
-  providers: [VideosFacade],
+  providers: [VideosFacade, SettingsStateFacade],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
