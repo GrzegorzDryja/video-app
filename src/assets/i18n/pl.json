@@ -1,0 +1,35 @@
+{
+  "CONTENT": {
+    "TITLE": "Video-App",
+    "QUESTION": "Czy na pewno?",
+    "QUESTION_DELETE_ALL": "Czy na pewno chcesz usunąć wszystkie filmy?",
+    "ADD": "Dodaj",
+    "PLUS": "+",
+    "INPUT_LABEL": "Tutaj wklej link do filmu",
+    "CLOSE": "Zamknij",
+    "YES": "Tak",
+    "NO": "Nie",
+    "UNDO": "Cofnij"
+  },
+  "TOOLTIP": {
+    "DELETE_ALL": "Usuń wszystko",
+    "GRID_CHANGE": "Zmień widok",
+    "LOVE": "Pokaż ulubione",
+    "SORT": "Sortuj"
+  },
+  "ERRORS": {
+    "MIN_LENGTH": "Link jest za krótki",
+    "MAX_LENGTH": "Link jest za długi",
+    "VIDEO_EXIST": "Ten film już jest dodany",
+    "URL": "Nie obsługuję tego linku",
+    "DEFAULT": "Coś poszło nie tak",
+    "NOT_SUPPORTED": "Nie obsługuję tego linku"
+  },
+  "MESSAGES": {
+    "LOVED": "Dodałeś film do ulubionych.",
+    "UNLOVED": "Usunąłeś film z ulubionych",
+    "DELETED": "Usunąłeś film!",
+    "ADDED": "Dodałeś film do listy.",
+    "LIST_DELETED": "Usunąłeś listę"
+  }
+}

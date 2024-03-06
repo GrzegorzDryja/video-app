@@ -1,0 +1,35 @@
+{
+  "CONTENT": {
+    "TITLE": "Video-App",
+    "QUESTION": "Are you sure?",
+    "QUESTION_DELETE_ALL": "Do you really want to delete all videos?",
+    "ADD": "Add",
+    "PLUS": "+",
+    "INPUT_LABEL": "Paste link here",
+    "CLOSE": "Close",
+    "YES": "Yes",
+    "NO": "No",
+    "UNDO": "Cofnij"
+  },
+  "TOOLTIP": {
+    "DELETE_ALL": "Delete all",
+    "GRID_CHANGE": "Change view",
+    "LOVE": "Show favourite",
+    "SORT": "Sort"
+  },
+  "ERRORS": {
+    "MIN_LENGTH": "Link is to short",
+    "MAX_LENGTH": "Link is to long",
+    "VIDEO_EXIST": "This video is already on your list",
+    "URL": "Can't handle this type of link",
+    "DEFAULT": "Something goes wrong",
+    "NOT_SUPPORTED": "Nie obsługuję tego linku"
+  },
+  "MESSAGES": {
+    "LOVED": "Video loved!",
+    "UNLOVED": "Video deleted from favourite list",
+    "DELETED": "Video deleted!",
+    "ADDED": "Video added to the list",
+    "LIST_DELETED": "Video list deleted"
+  }
+}
