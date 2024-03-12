@@ -6,15 +6,15 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
-import { VideosFacade } from '@store/videos.facade';
+import { VideosFacade } from '@store/videos/videos.facade';
 import { environment } from '@environments/environment';
 import { Video } from '@models/video.model';
 import { PlayerComponent } from '@features/player/player.component';
-import { MaterialIcons } from '@app/shared/material/material-icons.model';
-import { VideoPlatform } from '@app/shared/models/video-platform.model';
-import { Messages } from '@app/shared/models/messages.model';
-import { SnackBar } from '@app/shared/material/snack-bar.model';
+import { MaterialIcons } from '@shared/material/material-icons.model';
+import { VideoPlatform } from '@shared/models/video-platform.model';
+import { SnackBar } from '@shared/material/snack-bar.model';
 
 @Component({
   selector: 'app-item',
@@ -35,14 +35,15 @@ export class ItemComponent implements OnInit {
   protected isInfo = false;
   protected deleteIcon = MaterialIcons.delete_forever;
   protected favoriteSwitch = MaterialIcons.favorite_outline;
-  protected check_circle = MaterialIcons.check_circle;
+  protected checkCircle = MaterialIcons.check_circle;
   protected visibility = MaterialIcons.visibility;
   protected infoIcon = MaterialIcons.info;
 
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private store: VideosFacade
+    private store: VideosFacade,
+    public translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -65,8 +66,8 @@ export class ItemComponent implements OnInit {
       : MaterialIcons.favorite_outline;
     this.store.loveVideo({ videoId });
     this.snackBar.open(
-      this.isFavorite ? Messages.video_loved : Messages.video_unloved,
-      Messages.close,
+      this.isFavorite ? this.translate.instant('MESSAGES.LOVED') : this.translate.instant('MESSAGES.UNLOVED'),
+      this.translate.instant('CONTENT.CLOSE'),
       {
         duration: SnackBar.duration,
       }
@@ -77,7 +78,7 @@ export class ItemComponent implements OnInit {
     this.store.deleteVideo({ videoId });
 
     this.snackBar
-      .open(Messages.video_deleted, Messages.undo, {
+      .open(this.translate.instant('MESSAGES.DELETED'), this.translate.instant('CONTENT.UNDO'), {
         duration: SnackBar.duration,
       })
       .onAction()

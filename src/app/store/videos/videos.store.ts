@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducers } from '@store/videos.reducers';
-import { VideosEffects } from '@store/videos.effects';
+import { reducers } from '@store/videos/videos.reducers';
+import { VideosEffects } from '@store/videos/videos.effects';
 
 @NgModule({
   declarations: [],

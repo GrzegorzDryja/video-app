@@ -1,15 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStoreConfig, provideMockStore } from '@ngrx/store/testing';
 
-import { VideosFacade } from '@store/videos.facade';
-import { MaterialModule } from '@app/shared/shared.module';
-import { AppStateInterface } from '@app/core/models/app-state.interface';
+import { VideosFacade } from '@store/videos/videos.facade';
+import { AppStateInterface } from '@core/models/app-state.interface';
 import { InputComponent } from './input.component';
+import { AppLanguages } from '../language/language.model';
+import { SharedModule } from '@shared/shared.module';
 
 describe('InputComponent', () => {
-  const STORE_MOCK = {
+  const STORE_MOCK: MockStoreConfig<AppStateInterface> = {
     initialState: {
       videos: {
         error: '',
@@ -27,6 +28,9 @@ describe('InputComponent', () => {
           },
         ],
       },
+      settings: {
+        language: AppLanguages.PL,
+      },
     },
   };
 
@@ -42,7 +46,7 @@ describe('InputComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, ReactiveFormsModule, BrowserAnimationsModule],
+      imports: [SharedModule, ReactiveFormsModule, BrowserAnimationsModule],
       declarations: [InputComponent],
       providers: [
         VideosFacade,
@@ -59,7 +63,7 @@ describe('InputComponent', () => {
   });
 
   it('Full youtube link should be validated correctly', () => {
-    const video = createVideo('https://www.youtube.com/watch?v=c57llB8QA2E')
+    const video = createVideo('https://www.youtube.com/watch?v=c57llB8QA2E');
 
     expect(video.errors).toBeFalsy();
   });

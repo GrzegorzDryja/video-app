@@ -2,8 +2,6 @@ import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Content } from '@app/shared/models/content.model';
-
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -12,8 +10,6 @@ import { Content } from '@app/shared/models/content.model';
 })
 export class PlayerComponent {
   protected link: SafeResourceUrl;
-  protected close = Content.close;
-  protected title = Content.title;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private path: string,
