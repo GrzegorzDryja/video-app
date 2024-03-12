@@ -1,4 +1,8 @@
 import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -10,16 +14,14 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription, Observable } from 'rxjs';
 
-import { VideosFacade } from '@store/videos.facade';
+import { VideosFacade } from '@store/videos/videos.facade';
 import { Videos } from '@core/models/video.model';
 import { ID_LENGTH, MAX_LINK_LENGTH } from '@core/models/validation.model';
 import { UserInputService } from '@services/user-input.service';
-import { VideoPlatform } from '@app/shared/models/video-platform.model';
-import { ErrorTypes } from '@app/shared/models/errors-types.model';
-import { SnackBar } from '@app/shared/material/snack-bar.model';
-import { Messages } from '@app/shared/models/messages.model';
-import { Content } from '@app/shared/models/content.model';
+import { VideoPlatform } from '@shared/models/video-platform.model';
 import { inputMatchValidator } from './validators/match.validator';
+import { SnackBar } from '@shared/material/snack-bar.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-input',
@@ -28,11 +30,7 @@ import { inputMatchValidator } from './validators/match.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements OnInit, OnDestroy {
-  protected errorMessageMinLength = ErrorTypes.errorMinLength;
-  protected errorMessageMaxLength = ErrorTypes.errorMaxLength;
-  protected errorMessageURL = ErrorTypes.errorUrl;
-  protected addButton = Content.addButton;
-  protected inputLabel = Content.inputLabel;
+  protected buttonBreakpoint = true;
   protected isLoading$: Observable<boolean>;
 
   private videosSubscription: Subscription;
@@ -47,7 +45,8 @@ export class InputComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private store: VideosFacade,
     private breakpointObserver: BreakpointObserver,
-    private cr: ChangeDetectorRef
+    private cr: ChangeDetectorRef,
+    public translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -81,8 +80,8 @@ export class InputComponent implements OnInit, OnDestroy {
       .observe(['(max-width: 700px)'])
       .subscribe((result) => {
         result.matches
-          ? (this.addButton = Content.plusSign)
-          : (this.addButton = Content.addButton);
+          ? (this.buttonBreakpoint = false)
+          : (this.buttonBreakpoint = true);
 
         this.cr.markForCheck();
       });
@@ -99,16 +98,24 @@ export class InputComponent implements OnInit, OnDestroy {
     };
 
     if (dataToFetch?.platform === VideoPlatform.notSupported) {
-      this.snackBar.open(Messages.video_not_supported, Messages.close, {
-        duration: SnackBar.duration,
-      });
+      this.snackBar.open(
+        this.translate.instant('ERRORS.NOT_SUPPORTED'),
+        this.translate.instant('CONTENT.CLOSE'),
+        {
+          duration: SnackBar.duration,
+        }
+      );
       return;
     }
 
     if (!this.checkIsVideoIdIsOnTheList(dataToFetch.videoId)) {
-      this.snackBar.open(Messages.video_is_on_the_list, Messages.close, {
-        duration: SnackBar.duration,
-      });
+      this.snackBar.open(
+        this.translate.instant('ERRORS.VIDEO_EXIST'),
+        this.translate.instant('CONTENT.CLOSE'),
+        {
+          duration: SnackBar.duration,
+        }
+      );
       return;
     }
 

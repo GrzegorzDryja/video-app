@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { AppStateInterface } from '@app/core/models/app-state.interface';
-import * as actions from '@store/videos.actions';
-import * as selectors from '@store/videos.selectors';
+import * as actions from '@store/videos/videos.actions';
+import * as selectors from '@store/videos/videos.selectors';
 
 @Injectable()
 export class VideosFacade {
@@ -14,14 +14,20 @@ export class VideosFacade {
   constructor(private store: Store<AppStateInterface>) {}
 
   public loadDemoVideos(): void {
-    this.store.dispatch(actions.loadDemoVideos())
+    this.store.dispatch(actions.loadDemoVideos());
   }
 
-  public addYouTubeVideo(payload: { videoPlatform: string; videoId: string }): void {
+  public addYouTubeVideo(payload: {
+    videoPlatform: string;
+    videoId: string;
+  }): void {
     this.store.dispatch(actions.addYouTubeVideo(payload));
   }
 
-  public addVimeoVideo(payload: { videoPlatform: string; videoId: string }): void {
+  public addVimeoVideo(payload: {
+    videoPlatform: string;
+    videoId: string;
+  }): void {
     this.store.dispatch(actions.addVimeoVideo(payload));
   }
 

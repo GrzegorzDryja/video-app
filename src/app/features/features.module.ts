@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { PlayerComponent } from './player/player.component';
-import { SharedModule } from '@app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { PlayerComponent } from '@features/player/player.component';
+import { SharedModule } from '@shared/shared.module';
 
 const FEATURES_COMPONENTS = [PlayerComponent];
 
 @NgModule({
   declarations: [...FEATURES_COMPONENTS],
-  imports: [SharedModule],
+  imports: [SharedModule, TranslateModule],
 })
 export class FeatureModule {}

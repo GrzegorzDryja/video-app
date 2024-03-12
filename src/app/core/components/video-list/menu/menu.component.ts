@@ -8,14 +8,13 @@ import {
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
-import { MaterialIcons } from '@app/shared/material/material-icons.model';
-import { Content } from '@app/shared/models/content.model';
-import { Messages } from '@app/shared/models/messages.model';
-import { SnackBar } from '@app/shared/material/snack-bar.model';
+import { MaterialIcons } from '@shared/material/material-icons.model';
+import { SnackBar } from '@shared/material/snack-bar.model';
 import { MatDialogService } from '@core/services/mat-dialog.service';
 import { MAT_DIALOG } from '@shared/dialog/dialog.model';
-import { VideosFacade } from '@store/videos.facade';
+import { VideosFacade } from '@store/videos/videos.facade';
 
 @Component({
   selector: 'app-menu',
@@ -40,15 +39,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   protected favoriteSwitch = MaterialIcons.favorite_outline;
   protected deleteSweep = MaterialIcons.delete_sweep;
   protected sortDirection = MaterialIcons.arrow_downward;
-  protected tooltipGridChange = Content.tooltipGridChange;
-  protected tooltipLoved = Content.tooltipLoved;
-  protected tooltipSort = Content.tooltipSort;
-  protected tooltipDeleteAll = Content.tooltipDeleteAll;
 
   constructor(
     public dialog: MatDialogService,
     private snackBar: MatSnackBar,
-    private store: VideosFacade
+    private store: VideosFacade,
+    public translate: TranslateService
   ) {}
 
   public ngOnInit(): void {
@@ -88,14 +84,17 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteList(): void {
-    this.dialog.open(Content.questionDeleteAll, MAT_DIALOG.actionRequiredTrue);
+    this.dialog.open(
+      this.translate.instant('CONTENT.QUESTION_DELETE_ALL'),
+      MAT_DIALOG.actionRequiredTrue
+    );
     this.dialog.afterClosed().subscribe((result) => {
       if (!result) {
         this.dialog.closeAll();
         return;
       }
       this.store.deleteVideosList();
-      this.snackBar.open(Messages.video_list_deleted, Messages.close, {
+      this.snackBar.open(this.translate.instant('MESSAGES.LIST_DELETED'), this.translate.instant('CONTENT.CLOSE'), {
         duration: SnackBar.duration,
       });
     });

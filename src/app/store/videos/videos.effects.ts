@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import * as VideosActions from '@store/videos.actions';
+import * as VideosActions from '@store/videos/videos.actions';
 import { YoutubeService } from '@core/services/youtube.service';
 import { VimeoService } from '@core/services/vimeo.service';
 import { MatDialogService } from '@core/services/mat-dialog.service';
