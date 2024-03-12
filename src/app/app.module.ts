@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { VideosStore } from '@app/store/videos/videos.store';
-import { VideosFacade } from '@app/store/videos/videos.facade';
-import { reducers } from '@app/store/videos/videos.reducers';
+import { VideosStore } from '@store/videos/videos.store';
+import { VideosFacade } from '@store/videos/videos.facade';
+import { reducers } from '@store/videos/videos.reducers';
+import { SettingsStateFacade } from '@store/settings/settings.facade';
+import { SettingsStore } from '@store/settings/settings.store';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from '@app/app.component';
 import { CoreModule } from '@core/core.module';
 import { FeatureModule } from '@features/features.module';
 import { environment } from '@environments/environment';
-import { SettingsStateFacade } from './store/settings/settings.facade';
-import { SettingsStore } from './store/settings/settings.store';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>

@@ -5,4 +5,7 @@ import { SettingsStateInterface } from '@app/core/models/settings-state.interfac
 
 export const selectFeature = (state: AppStateInterface) => state.settings;
 
-export const language = createSelector(selectFeature, (state: SettingsStateInterface) => state.language);
+export const language = createSelector(
+  selectFeature,
+  (state: SettingsStateInterface) => state.language
+);
